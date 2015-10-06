@@ -4,8 +4,14 @@ Welcome to hamburgo repository
 
 Folder structure
 
-- app -> Android skeleton
-- providers -> Integration folders 
+ANDROID API 21
+
+- mobile -> Android app
+- shared -> General libs for Android and AndroidWear app.
+- wear   -> AndroidWear app
+
+
+
 
 #### App folder
 Skeleton Android/Android Wear app
