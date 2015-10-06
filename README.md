@@ -4,7 +4,7 @@ Welcome to hamburgo repository
 
 Folder structure
 
-ANDROID API 21
+ANDROID API 22
 
 - mobile -> Android app
 - shared -> General libs for Android and AndroidWear app.
