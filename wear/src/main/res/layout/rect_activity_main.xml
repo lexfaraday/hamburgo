@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" tools:deviceIds="wear_square"
+    android:weightSum="1"
+    android:orientation="vertical">
+
+    <TextView android:id="@+id/text" android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:text="@string/please_say"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.5"
+        android:paddingTop="20dp"
+        android:password="false"
+        android:phoneNumber="false"
+        android:textColor="#f80c0c"
+        android:textStyle="bold"
+        android:typeface="normal"
+        android:visibility="visible"
+        android:textSize="20dp"
+        android:textIsSelectable="false" />
+
+    <Button
+        style="@android:style/Widget.Material.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Try Again?"
+        android:id="@+id/button2"
+        android:onClick="btnSimpleClick"
+        android:layout_gravity="center_horizontal"
+        android:textSize="20dp" />
+
+</LinearLayout>

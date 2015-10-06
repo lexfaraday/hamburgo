@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wearable.hotelbeds.traveler.WearableListItemLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.wearable.view.CardFrame xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/cardFrameItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="2dp">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="Example"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/textView_Content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:text="Text"
+                android:textColor="@color/black"
+                android:textSize="10sp"
+                android:alpha="0" />
+        </LinearLayout>
+
+    </android.support.wearable.view.CardFrame>
+
+</wearable.hotelbeds.traveler.WearableListItemLayout>
