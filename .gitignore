@@ -38,3 +38,4 @@ Thumbs.db
 /.idea/inspectionProfiles
 /.idea
 /app/.idea
+/app/local.properties
