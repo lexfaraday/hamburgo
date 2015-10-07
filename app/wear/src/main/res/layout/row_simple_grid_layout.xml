@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="1">
+
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageprice"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center"
+            android:background="#ffffff"
+            android:src="@drawable/price" />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_toEndOf="@+id/imageprice"
+            android:text="20 €"
+            android:textColor="#404040"
+            android:textSize="14sp" />
+
+
+        <ImageView
+            android:id="@+id/imagecalendar"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_below="@+id/price"
+            android:layout_gravity="center"
+            android:background="#ffffff"
+            android:src="@drawable/calendar" />
+
+        <TextView
+            android:id="@+id/calendario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/price"
+            android:layout_marginLeft="2dp"
+            android:layout_toEndOf="@+id/imagecalendar"
+            android:text="16/10/2015 - 17/10/2015"
+            android:textColor="#404040"
+            android:textSize="14sp" />
+
+
+        <ImageView
+            android:id="@+id/imagestars"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_below="@+id/calendario"
+            android:layout_gravity="center"
+            android:background="#ffffff"
+            android:src="@drawable/hotel" />
+
+        <TextView
+            android:id="@+id/hotel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/calendario"
+            android:layout_marginLeft="2dp"
+            android:layout_toEndOf="@+id/imagestars"
+            android:text="Hilton Palas DBL-ST *****"
+            android:textColor="#404040"
+            android:textSize="14sp" />
+
+
+        <ImageView
+            android:id="@+id/imagetakein"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_below="@+id/hotel"
+            android:layout_gravity="center"
+            android:background="#ffffff"
+            android:src="@drawable/airplane_takeoff" />
+
+        <TextView
+            android:id="@+id/takein"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hotel"
+            android:layout_marginLeft="2dp"
+            android:layout_toRightOf="@+id/imagetakein"
+            android:text="Air Berlin 16/10/2015 06:40"
+            android:textColor="#404040"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/imagetakeout"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_below="@+id/takein"
+            android:layout_gravity="center"
+            android:background="#ffffff"
+            android:src="@drawable/airplane_takein" />
+
+        <TextView
+            android:id="@+id/takeout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/takein"
+            android:layout_marginLeft="2dp"
+            android:layout_toEndOf="@+id/imagetakeout"
+            android:text="Vueling 17/10/2015 20:10"
+            android:textColor="#404040"
+            android:textSize="14sp" />
+
+
+    </RelativeLayout>
+</LinearLayout>

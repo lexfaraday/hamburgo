@@ -50,6 +50,6 @@ public class WearableListItemLayout extends LinearLayout implements WearableList
     @Override
     public void onNonCenterPosition(boolean animate) {
         mName.setTypeface(null, Typeface.NORMAL);
-        mDescription.animate().alpha(0);
+        mDescription.animate().alpha(0.5f);
     }
 }

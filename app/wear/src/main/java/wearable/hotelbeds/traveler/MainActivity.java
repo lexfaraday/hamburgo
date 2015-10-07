@@ -69,7 +69,7 @@ public class MainActivity extends Activity {
                                 id.add(event.getId());
                                 nameList.add(event.getName());
                                 description.add(EventUtils.DATE_FORMATER.format(event.getTimeStart()) + " to " + EventUtils.DATE_FORMATER.format(event.getTimeEnd()));
-                                price.add(event.getPrice().setScale(2, BigDecimal.ROUND_UP).toString());
+                                price.add(event.getPrice().setScale(1, BigDecimal.ROUND_UP).toString());
                             }
                             b.putStringArrayList("id", id);
                             b.putStringArrayList("name", nameList);

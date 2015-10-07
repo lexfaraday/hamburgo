@@ -36,10 +36,12 @@ public class SimpleListActivity extends Activity implements WearableListView.Cli
 
     @Override
     public void onClick(WearableListView.ViewHolder viewHolder) {
-        Intent intent = new Intent(this, ConfirmActivity.class);
+       /* Intent intent = new Intent(this, ConfirmActivity.class);
         Bundle b = new Bundle();
         b.putString("price", params.getStringArrayList("name").get(viewHolder.getAdapterPosition()));
         intent.putExtras(b);
+        startActivityForResult(intent, CONFIM_ACTIVITY_ID);*/
+        Intent intent = new Intent(this, GridActivity.class);
         startActivityForResult(intent, CONFIM_ACTIVITY_ID);
     }
 
@@ -86,15 +88,31 @@ public class SimpleListActivity extends Activity implements WearableListView.Cli
         @Override
         public void onBindViewHolder(WearableListView.ViewHolder holder, int position) {
             ItemViewHolder itemHolder = (ItemViewHolder) holder;
-            itemHolder.textViewTitle.setText(params.getStringArrayList("name").get(position));
-            itemHolder.textViewDescription.setText(params.getStringArrayList("description").get(position));
+
+            itemHolder.textViewTitle.setText(buildName(params.getStringArrayList("name").get(position)));
+            itemHolder.textViewDescription.setText(buildDescription(params.getStringArrayList("description").get(position),
+                    params.getStringArrayList("price").get(position)));
             holder.itemView.setTag(position);
 
         }
 
+        private String buildDescription(String desc, String price) {
+            StringBuilder description = new StringBuilder();
+            description.append(price).append("€ ").append(desc);
+            return description.toString();
+        }
+
+        private String buildName(String name) {
+            if (name.length() > 27) {
+                return name.substring(0, 26);
+            } else {
+                return name;
+            }
+        }
+
         @Override
         public int getItemCount() {
-            return params.getStringArrayList("name").size();
+            return params.getStringArrayList("id").size();
         }
 
     }
