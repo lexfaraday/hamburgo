@@ -1,5 +1,6 @@
 package wearable.hotelbeds.shared.event;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -7,14 +8,22 @@ import java.util.Date;
  */
 public class EventInfo {
 
+    private String id;
     private String name;
     private Date timeStart;
     private Date timeEnd;
+    private BigDecimal price;
 
-    public EventInfo(String name, Date timeStart, Date timeEnd) {
+    public EventInfo() {
+
+    }
+
+    public EventInfo(String id, String name, Date timeStart, Date timeEnd, BigDecimal price) {
+        this.id = id;
         this.name = name;
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
+        this.price = price;
     }
 
     public String getName() {
@@ -39,5 +48,21 @@ public class EventInfo {
 
     public void setTimeEnd(Date timeEnd) {
         this.timeEnd = timeEnd;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 }

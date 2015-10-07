@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 public class SimpleListActivity extends Activity implements WearableListView.ClickListener {
 
+    private static final int CONFIM_ACTIVITY_ID = 0;
+
     private WearableListView mListView;
     private Bundle params;
 
@@ -28,7 +30,6 @@ public class SimpleListActivity extends Activity implements WearableListView.Cli
                 mListView = (WearableListView) stub.findViewById(R.id.listView1);
                 mListView.setAdapter(new MyAdapter(SimpleListActivity.this));
                 mListView.setClickListener(SimpleListActivity.this);
-                mListView.setMaximizeSingleItem(true);
             }
         });
     }
@@ -39,12 +40,17 @@ public class SimpleListActivity extends Activity implements WearableListView.Cli
         Bundle b = new Bundle();
         b.putString("price", params.getStringArrayList("name").get(viewHolder.getAdapterPosition()));
         intent.putExtras(b);
-        startActivityForResult(intent, 0);
+        startActivityForResult(intent, CONFIM_ACTIVITY_ID);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        finish();
+        if (requestCode == CONFIM_ACTIVITY_ID && resultCode == Activity.RESULT_OK) {
+            if (data != null && data.getExtras() != null && data.getExtras().getBoolean("confirmed")) {
+                setResult(Activity.RESULT_OK, data);
+                finish();
+            }
+        }
     }
 
     @Override

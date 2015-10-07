@@ -44,6 +44,11 @@ public class ConfirmActivity extends Activity implements
             mDelayedView.reset();
             mRunning = false;
         } else {
+            Intent resultIntent = new Intent();
+            Bundle b = new Bundle();
+            b.putBoolean("confirmed", false);
+            resultIntent.putExtras(b);
+            setResult(Activity.RESULT_OK, resultIntent);
             finish();
         }
     }
@@ -77,7 +82,12 @@ public class ConfirmActivity extends Activity implements
     }
 
     @Override
-       protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Intent resultIntent = new Intent();
+        Bundle b = new Bundle();
+        b.putBoolean("confirmed", true);
+        resultIntent.putExtras(b);
+        setResult(Activity.RESULT_OK, resultIntent);
         finish();
     }
 

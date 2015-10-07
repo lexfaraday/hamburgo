@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,14 +61,20 @@ public class MainActivity extends Activity {
                             eventFound = true;
                             Intent intent = new Intent(this, SimpleListActivity.class);
                             Bundle b = new Bundle();
+                            ArrayList<String> id = new ArrayList<>();
                             ArrayList<String> nameList = new ArrayList<>();
                             ArrayList<String> description = new ArrayList<>();
+                            ArrayList<String> price = new ArrayList<>();
                             for (EventInfo event : events) {
+                                id.add(event.getId());
                                 nameList.add(event.getName());
                                 description.add(EventUtils.DATE_FORMATER.format(event.getTimeStart()) + " to " + EventUtils.DATE_FORMATER.format(event.getTimeEnd()));
+                                price.add(event.getPrice().setScale(2, BigDecimal.ROUND_UP).toString());
                             }
+                            b.putStringArrayList("id", id);
                             b.putStringArrayList("name", nameList);
                             b.putStringArrayList("description", description);
+                            b.putStringArrayList("price", price);
                             intent.putExtras(b);
                             startActivityForResult(intent, LIST_REQUEST_CODE);
                         }
@@ -76,16 +83,20 @@ public class MainActivity extends Activity {
                     }
                 }
                 if (!eventFound) {
-                    mTextView.setText("No results for " + results.get(0));
+                    mTextView.setText("No result");
                 } else {
                     mTextView.setText("");
                 }
             } else {
                 mTextView.setText(getErrorText(resultCode));
             }
-        } else if (requestCode == LIST_REQUEST_CODE) {
-            finish();
+        } else if (requestCode == LIST_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            if (data != null && data.getExtras() != null && data.getExtras().getBoolean("confirmed")) {
+                setResult(Activity.RESULT_OK, data);
+                finish();
+            }
         }
+
         super.onActivityResult(requestCode, resultCode, data);
     }
 

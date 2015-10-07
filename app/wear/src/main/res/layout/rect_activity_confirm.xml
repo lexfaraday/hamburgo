@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#878787"
     tools:context=".MainActivity"
     tools:deviceIds="wear_square">
 
@@ -46,8 +45,8 @@
         app:circle_color="@color/grey"
         app:circle_radius="38dip"
         app:circle_radius_pressed="38dip"
-        android:layout_marginLeft="2dp"
-        android:layout_marginBottom="5dp"/>
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="4dp" />
 
     <ImageButton
         style="@android:style/Widget.Material.Light.Button.Borderless"
