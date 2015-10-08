@@ -10,6 +10,11 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import java.math.BigDecimal;
+
+import wearable.hotelbeds.shared.price.PriceInfoBean;
+import wearable.hotelbeds.shared.price.PriceUtils;
+
 public class ConfirmActivity extends Activity implements
         DelayedConfirmationView.DelayedConfirmationListener {
     private TextView mTextView;
@@ -18,6 +23,7 @@ public class ConfirmActivity extends Activity implements
     private boolean mRunning;
     private ConfirmActivity context;
     private Bundle params;
+    private PriceInfoBean price;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,12 +31,14 @@ public class ConfirmActivity extends Activity implements
         setContentView(R.layout.activity_confirm);
         context = this;
         params = getIntent().getExtras();
+        price = (PriceInfoBean) params.getSerializable("key");
         final WatchViewStub stub = (WatchViewStub) findViewById(R.id.confirm_panel);
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
             public void onLayoutInflated(WatchViewStub stub) {
                 mTextView = (TextView) stub.findViewById(R.id.textView2);
-                mTextView.setText(getResources().getString(R.string.total_amount) + " " + params.get("price"));
+
+                mTextView.setText(getResources().getString(R.string.total_amount) + " " + price.getTotalAmount().setScale(2, BigDecimal.ROUND_UP));
                 mDelayedView = (DelayedConfirmationView) stub.findViewById(R.id.delayed_confirm);
                 mDelayedView.setListener(context);
                 mCancelButton = (ImageButton) stub.findViewById(R.id.cancel_button);
@@ -77,7 +85,7 @@ public class ConfirmActivity extends Activity implements
     private void performConfirmAction() {
         Intent intent = new Intent(this, ConfirmationActivity.class);
         intent.putExtra(ConfirmationActivity.EXTRA_ANIMATION_TYPE, ConfirmationActivity.SUCCESS_ANIMATION);
-        intent.putExtra(ConfirmationActivity.EXTRA_MESSAGE, "Booking 1-541164 confirmed");
+        intent.putExtra(ConfirmationActivity.EXTRA_MESSAGE, "Booking " + PriceUtils.confirmBooking(price).getToken() + " confirmed");
         startActivityForResult(intent, 0);
     }
 

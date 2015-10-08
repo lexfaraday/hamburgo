@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 public class SimpleListActivity extends Activity implements WearableListView.ClickListener {
 
-    private static final int CONFIM_ACTIVITY_ID = 0;
+    private static final int PRICE_ACTIVITY_ID = 0;
 
     private WearableListView mListView;
     private Bundle params;
@@ -36,18 +36,16 @@ public class SimpleListActivity extends Activity implements WearableListView.Cli
 
     @Override
     public void onClick(WearableListView.ViewHolder viewHolder) {
-       /* Intent intent = new Intent(this, ConfirmActivity.class);
-        Bundle b = new Bundle();
-        b.putString("price", params.getStringArrayList("name").get(viewHolder.getAdapterPosition()));
-        intent.putExtras(b);
-        startActivityForResult(intent, CONFIM_ACTIVITY_ID);*/
         Intent intent = new Intent(this, GridActivity.class);
-        startActivityForResult(intent, CONFIM_ACTIVITY_ID);
+        Bundle b = new Bundle();
+        b.putString("eventId", params.getStringArrayList("id").get(viewHolder.getAdapterPosition()));
+        intent.putExtras(b);
+        startActivityForResult(intent, PRICE_ACTIVITY_ID);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CONFIM_ACTIVITY_ID && resultCode == Activity.RESULT_OK) {
+        if (requestCode == PRICE_ACTIVITY_ID && resultCode == Activity.RESULT_OK) {
             if (data != null && data.getExtras() != null && data.getExtras().getBoolean("confirmed")) {
                 setResult(Activity.RESULT_OK, data);
                 finish();

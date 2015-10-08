@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import wearable.hotelbeds.shared.event.EventInfo;
+import wearable.hotelbeds.shared.event.EventInfoBean;
 import wearable.hotelbeds.shared.event.EventUtils;
 
 public class MainActivity extends Activity {
@@ -56,7 +56,7 @@ public class MainActivity extends Activity {
                 boolean eventFound = false;
                 for (String recognized : results) {
                     try {
-                        List<EventInfo> events = EventUtils.searchEventByName(recognized);
+                        List<EventInfoBean> events = EventUtils.searchEventByName(recognized);
                         if (events != null && events.size() > 0) {
                             eventFound = true;
                             Intent intent = new Intent(this, SimpleListActivity.class);
@@ -65,7 +65,7 @@ public class MainActivity extends Activity {
                             ArrayList<String> nameList = new ArrayList<>();
                             ArrayList<String> description = new ArrayList<>();
                             ArrayList<String> price = new ArrayList<>();
-                            for (EventInfo event : events) {
+                            for (EventInfoBean event : events) {
                                 id.add(event.getId());
                                 nameList.add(event.getName());
                                 description.add(EventUtils.DATE_FORMATER.format(event.getTimeStart()) + " to " + EventUtils.DATE_FORMATER.format(event.getTimeEnd()));

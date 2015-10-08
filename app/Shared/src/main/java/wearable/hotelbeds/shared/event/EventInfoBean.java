@@ -6,7 +6,7 @@ import java.util.Date;
 /**
  * Created by Zavierazo on 06/10/2015.
  */
-public class EventInfo {
+public class EventInfoBean {
 
     private String id;
     private String name;
@@ -14,11 +14,11 @@ public class EventInfo {
     private Date timeEnd;
     private BigDecimal price;
 
-    public EventInfo() {
+    public EventInfoBean() {
 
     }
 
-    public EventInfo(String id, String name, Date timeStart, Date timeEnd, BigDecimal price) {
+    public EventInfoBean(String id, String name, Date timeStart, Date timeEnd, BigDecimal price) {
         this.id = id;
         this.name = name;
         this.timeStart = timeStart;

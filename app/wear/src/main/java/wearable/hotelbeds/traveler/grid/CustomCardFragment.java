@@ -7,15 +7,25 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import wearable.hotelbeds.traveler.GridActivity;
 import wearable.hotelbeds.traveler.R;
 
 /**
  * Created by Zavierazo on 07/10/2015.
  */
 public class CustomCardFragment extends CardFragment {
+    private SimplePage page;
+    private GridActivity gridActivity;
+
     @Override
     public View onCreateContentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.row_simple_grid_layout, container, false);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                gridActivity.clicked(page);
+            }
+        });
         Bundle args = this.getArguments();
         if (args != null) {
             if (args.containsKey("mPrice")) {
@@ -52,6 +62,21 @@ public class CustomCardFragment extends CardFragment {
         return view;
     }
 
+    public SimplePage getPage() {
+        return page;
+    }
+
+    public void setPage(SimplePage page) {
+        this.page = page;
+    }
+
+    public GridActivity getGridActivity() {
+        return gridActivity;
+    }
+
+    public void setGridActivity(GridActivity gridActivity) {
+        this.gridActivity = gridActivity;
+    }
 
     public static CustomCardFragment create(SimplePage page) {
         CustomCardFragment fragment = new CustomCardFragment();
@@ -72,6 +97,7 @@ public class CustomCardFragment extends CardFragment {
             args.putCharSequence("mFlyIn", page.mFlyIn);
         }
         fragment.setArguments(args);
+        fragment.setPage(page);
         return fragment;
     }
 }
