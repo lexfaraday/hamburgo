@@ -7,7 +7,13 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
+import com.squareup.picasso.Picasso;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
+
+import wearable.hotelbeds.shared.event.EventInfoBean;
 
 public class MainActivity extends Activity {
 
@@ -25,7 +31,7 @@ public class MainActivity extends Activity {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new MyRecyclerViewAdapter(getDataSet());
+        mAdapter = new EventRecyclerViewAdapter(loadEvents());
         mRecyclerView.setAdapter(mAdapter);
         RecyclerView.ItemDecoration itemDecoration =
                 new DividerItemDecorator(this, LinearLayoutManager.VERTICAL);
@@ -41,8 +47,8 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        ((MyRecyclerViewAdapter) mAdapter).setOnItemClickListener(new
-                                                                          MyRecyclerViewAdapter.MyClickListener() {
+        ((EventRecyclerViewAdapter) mAdapter).setOnItemClickListener(new
+                                                                             EventRecyclerViewAdapter.MyClickListener() {
                                                                               @Override
                                                                               public void onItemClick(int position, View v) {
                                                                                   Log.i(LOG_TAG, " Clicked on Item " + position);
@@ -50,11 +56,10 @@ public class MainActivity extends Activity {
                                                                           });
     }
 
-    private ArrayList<Event> getDataSet() {
-        ArrayList results = new ArrayList<Event>();
+    private ArrayList<EventInfoBean> loadEvents() {
+        ArrayList<EventInfoBean> results = new ArrayList<>();
         for (int index = 0; index < 20; index++) {
-            Event obj = new Event("Some Primary Text " + index,
-                    "Secondary " + index, "dd");
+            EventInfoBean obj = new EventInfoBean("232dd", "worldt", new Date(), new Date(), new BigDecimal("21"), "http://www.wtmlondon.com/RXUK/RXUK_WTMLondon/2015/images/Footer/wtm-big.png?v=635766940904059113");
             results.add(index, obj);
         }
         return results;

@@ -13,17 +13,19 @@ public class EventInfoBean {
     private Date timeStart;
     private Date timeEnd;
     private BigDecimal price;
+    private String imageUrl;
 
     public EventInfoBean() {
 
     }
 
-    public EventInfoBean(String id, String name, Date timeStart, Date timeEnd, BigDecimal price) {
+    public EventInfoBean(String id, String name, Date timeStart, Date timeEnd, BigDecimal price, String imageUrl) {
         this.id = id;
         this.name = name;
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
         this.price = price;
+        this.imageUrl = imageUrl;
     }
 
     public String getName() {
@@ -64,5 +66,13 @@ public class EventInfoBean {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
