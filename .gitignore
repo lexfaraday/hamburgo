@@ -39,3 +39,9 @@ Thumbs.db
 /.idea
 /app/.idea
 /app/local.properties
+*.classpath
+providers/travel-api/.factorypath
+*.project
+providers/travel-api/.settings/oracle.eclipse.tools.webtier.ui.prefs
+*.prefs
+providers/travel-api/.settings/org.eclipse.wst.common.project.facet.core.xml
