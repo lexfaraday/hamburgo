@@ -1,0 +1,37 @@
+.tray-bin {
+  min-height: 65px;
+  padding: 7px;
+  margin: 0 -15px 15px;
+  border: 1px dashed #CCC;
+  background: #eee;
+}
+
+.mb10 {
+  margin-bottom: 10px !important;
+}
+.pl10 {
+  padding-left: 10px !important;
+}
+
+.text-muted {
+  color: #999999;
+}
+
+.mt10 {
+  margin-top: 10px !important;
+}
+
+.fw600 {
+  font-weight: 600 !important;
+}
+
+.dropzone.dz-clickable {
+  cursor: pointer;
+}
+.dropzone {
+  min-height: 200px;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  padding: 15px;
+}
