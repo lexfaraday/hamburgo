@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventUtils {
-    public static final DateFormat DATE_FORMATER = new SimpleDateFormat("dd/mm/yyyy");
-    public static final DateFormat DATE_FORMATER_HOUR = new SimpleDateFormat("dd/mm/yyyy hh:mm");
+    public static final DateFormat DATE_FORMATER = new SimpleDateFormat("dd/MM/yyyy");
+    public static final DateFormat DATE_FORMATER_HOUR = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 
     public static List<EventInfoBean> obtainAllEvent() {
         List<EventInfoBean> events = generateDummy();

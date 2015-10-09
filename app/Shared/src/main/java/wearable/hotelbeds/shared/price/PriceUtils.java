@@ -12,8 +12,8 @@ import java.util.List;
  * Created by Zavierazo on 08/10/2015.
  */
 public class PriceUtils {
-    public static final DateFormat DATE_FORMATER = new SimpleDateFormat("dd/mm/yyyy");
-    public static final DateFormat DATE_FORMATER_HOUR = new SimpleDateFormat("dd/mm/yyyy hh:mm");
+    public static final DateFormat DATE_FORMATER = new SimpleDateFormat("dd/MM/yyyy");
+    public static final DateFormat DATE_FORMATER_HOUR = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 
     public static List<PriceInfoBean> searchPrices(String eventId) {
         List<PriceInfoBean> prices = new ArrayList<>();
