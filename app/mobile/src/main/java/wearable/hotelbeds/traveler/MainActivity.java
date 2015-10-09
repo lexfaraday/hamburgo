@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import wearable.hotelbeds.shared.event.EventInfoBean;
+import wearable.hotelbeds.shared.event.EventUtils;
 
 public class MainActivity extends Activity {
 
@@ -31,7 +32,7 @@ public class MainActivity extends Activity {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new EventRecyclerViewAdapter(loadEvents());
+        mAdapter = new EventRecyclerViewAdapter(EventUtils.obtainAllEvent());
         mRecyclerView.setAdapter(mAdapter);
         RecyclerView.ItemDecoration itemDecoration =
                 new DividerItemDecorator(this, LinearLayoutManager.VERTICAL);
@@ -49,20 +50,11 @@ public class MainActivity extends Activity {
         super.onResume();
         ((EventRecyclerViewAdapter) mAdapter).setOnItemClickListener(new
                                                                              EventRecyclerViewAdapter.MyClickListener() {
-                                                                              @Override
-                                                                              public void onItemClick(int position, View v) {
-                                                                                  Log.i(LOG_TAG, " Clicked on Item " + position);
-                                                                              }
-                                                                          });
-    }
-
-    private ArrayList<EventInfoBean> loadEvents() {
-        ArrayList<EventInfoBean> results = new ArrayList<>();
-        for (int index = 0; index < 20; index++) {
-            EventInfoBean obj = new EventInfoBean("232dd", "worldt", new Date(), new Date(), new BigDecimal("21"), "http://www.wtmlondon.com/RXUK/RXUK_WTMLondon/2015/images/Footer/wtm-big.png?v=635766940904059113");
-            results.add(index, obj);
-        }
-        return results;
+                                                                                 @Override
+                                                                                 public void onItemClick(int position, View v) {
+                                                                                     Log.i(LOG_TAG, " Clicked on Item " + position);
+                                                                                 }
+                                                                             });
     }
 }
 

@@ -73,6 +73,7 @@ public class EventRecyclerViewAdapter extends RecyclerView
         Uri uri = Uri.parse(mDataset.get(position).getImageUrl());
         Picasso.with(holder.imageView.getContext())
                 .load(uri)
+                .fit()
                         //.placeholder(R.drawable.user_placeholder)
                         //.error(R.drawable.user_placeholder_error)
                 .into(holder.imageView);
