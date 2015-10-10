@@ -8,20 +8,19 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="40dp"
         android:text="@string/total_amount"
-        android:textSize="15dp"
-        android:textStyle="bold" />
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_marginTop="40dp" />
 
     <TextView
         android:id="@+id/text"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="top|center_horizontal"
         android:layout_marginTop="5dp"
         android:password="false"
         android:phoneNumber="false"
@@ -30,7 +29,8 @@
         android:textSize="20dp"
         android:textStyle="bold"
         android:typeface="normal"
-        android:visibility="visible" />
+        android:visibility="visible"
+        android:textAlignment="center" />
 
 
     <android.support.wearable.view.DelayedConfirmationView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -42,7 +42,7 @@
         android:src="@drawable/ok"
         app:circle_border_color="@color/blue"
         app:circle_border_width="4dip"
-        app:circle_color="@color/grey"
+        app:circle_color="#76eacd"
         app:circle_radius="38dip"
         app:circle_radius_pressed="38dip"
         android:layout_marginBottom="5dp"
@@ -56,8 +56,7 @@
         android:layout_gravity="bottom|end"
         android:focusable="false"
         android:onClick="btnCancel"
-        android:src="@drawable/cancel"
-        />
+        android:src="@drawable/cancel" />
 
 
 </FrameLayout>

@@ -42,7 +42,7 @@
         android:src="@drawable/ok"
         app:circle_border_color="@color/blue"
         app:circle_border_width="4dip"
-        app:circle_color="@color/green"
+        app:circle_color="#76eacd"
         app:circle_radius="38dip"
         app:circle_radius_pressed="38dip"
         android:layout_marginLeft="10dp"

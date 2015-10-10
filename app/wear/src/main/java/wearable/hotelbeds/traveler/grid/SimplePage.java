@@ -29,7 +29,12 @@ public class SimplePage {
     public SimplePage(PriceInfoBean infoBean) {
         this.infoBean = infoBean;
         if (infoBean != null) {
-            mPrice = infoBean.getTotalAmount().setScale(2, BigDecimal.ROUND_UP).toString()+" €";
+
+            if (infoBean.getTotalAmount().stripTrailingZeros().scale() <= 0) {
+                mPrice = infoBean.getTotalAmount().toString() + " €";
+            } else {
+                mPrice = infoBean.getTotalAmount().setScale(2, BigDecimal.ROUND_UP).toString() + " €";
+            }
             mCalendar = PriceUtils.DATE_FORMATER.format(infoBean.getFlyOut()) + " - " + PriceUtils.DATE_FORMATER.format(infoBean.getFlyIn());
             mHotel = infoBean.getHotelName() + " " + infoBean.getRoomInfo() + " ";
             for (int i = 0; i < infoBean.getHotelStars(); i++) {

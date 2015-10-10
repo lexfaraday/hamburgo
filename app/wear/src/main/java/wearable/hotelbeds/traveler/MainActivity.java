@@ -2,6 +2,7 @@ package wearable.hotelbeds.traveler;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
@@ -10,6 +11,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.wearable.Wearable;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,14 +24,24 @@ import java.util.List;
 import wearable.hotelbeds.shared.event.EventInfoBean;
 import wearable.hotelbeds.shared.event.EventUtils;
 
-public class MainActivity extends Activity {
-    private static final int SPEECH_RECOGNIZER_REQUEST_CODE = 0;
-    private static final int LIST_REQUEST_CODE = 1;
+public class MainActivity extends Activity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
+    private static final String TAG = "Traveler";
+    private static final int ACTIVITY_ID_SPEECH_RECOGNIZER = 0;
+    private static final int ACTIVITY_ID_LIST = 1;
+    private static final int ACTIVITY_ID_PRICE = 2;
+    private static final long UPDATE_INTERVAL_IN_MILLISECONDS = 10000;
+    private static final long FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS = UPDATE_INTERVAL_IN_MILLISECONDS / 2;
+
+
+    private GoogleApiClient mGoogleApiClient;
+    private Location mCurrentLocation;
     private TextView mTextView;
+    private int reconectTrys = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        buildGoogleApiClient();
         setContentView(R.layout.activity_main);
         final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
@@ -37,7 +54,7 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         // Start the Activity
-        startActivityForResult(intent, SPEECH_RECOGNIZER_REQUEST_CODE);
+        startActivityForResult(intent, ACTIVITY_ID_SPEECH_RECOGNIZER);
     }
 
     public void btnSimpleClick(View view) {
@@ -45,43 +62,52 @@ public class MainActivity extends Activity {
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 10);
         // Start the Activity
-        startActivityForResult(intent, SPEECH_RECOGNIZER_REQUEST_CODE);
+        startActivityForResult(intent, ACTIVITY_ID_SPEECH_RECOGNIZER);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == SPEECH_RECOGNIZER_REQUEST_CODE) {
+        if (requestCode == ACTIVITY_ID_SPEECH_RECOGNIZER) {
             if (resultCode == RESULT_OK) {
                 List<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                 boolean eventFound = false;
-                for (String recognized : results) {
+                if (results != null && results.size() > 0) {
+                    String recognized = results.get(0);
                     try {
                         List<EventInfoBean> events = EventUtils.searchEventByName(recognized);
-                        if (events != null && events.size() > 0) {
+                        if (events != null && events.size() > 1) {
                             eventFound = true;
                             Intent intent = new Intent(this, SimpleListActivity.class);
                             Bundle b = new Bundle();
                             ArrayList<String> id = new ArrayList<>();
                             ArrayList<String> nameList = new ArrayList<>();
-                            ArrayList<String> description = new ArrayList<>();
                             ArrayList<String> price = new ArrayList<>();
                             for (EventInfoBean event : events) {
                                 id.add(event.getId());
                                 nameList.add(event.getName());
-                                description.add(EventUtils.DATE_FORMATER.format(event.getTimeStart()) + " to " + EventUtils.DATE_FORMATER.format(event.getTimeEnd()));
+                                //Si es un int pasamos directamente el valor sin decimales.
                                 if (event.getPrice().stripTrailingZeros().scale() <= 0) {
-                                    price.add(event.getPrice().setScale(0, BigDecimal.ROUND_DOWN).toString());
-                                }else{
+                                    price.add(event.getPrice().toString());
+                                } else {
                                     price.add(event.getPrice().setScale(1, BigDecimal.ROUND_UP).toString());
                                 }
                             }
                             b.putStringArrayList("id", id);
                             b.putStringArrayList("name", nameList);
-                            b.putStringArrayList("description", description);
                             b.putStringArrayList("price", price);
-
+                            b.putParcelable("location", mCurrentLocation);
                             intent.putExtras(b);
-                            startActivityForResult(intent, LIST_REQUEST_CODE);
+                            mGoogleApiClient.disconnect();
+                            startActivityForResult(intent, ACTIVITY_ID_LIST);
+                        } else if (events != null && events.size() == 1) {
+                            //Podemos pasar directamente a mostrar precios
+                            Intent intent = new Intent(this, GridActivity.class);
+                            Bundle b = new Bundle();
+                            b.putString("eventId", events.get(0).getId());
+                            b.putParcelable("location", mCurrentLocation);
+                            intent.putExtras(b);
+                            mGoogleApiClient.disconnect();
+                            startActivityForResult(intent, ACTIVITY_ID_PRICE);
                         }
                     } catch (Exception e) {
                         Log.e("Traveler", e.getMessage());
@@ -95,13 +121,19 @@ public class MainActivity extends Activity {
             } else {
                 mTextView.setText(getErrorText(resultCode));
             }
-        } else if (requestCode == LIST_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            if (data != null && data.getExtras() != null && data.getExtras().getBoolean("confirmed")) {
-                setResult(Activity.RESULT_OK, data);
-                finish();
+        } else if ((requestCode == ACTIVITY_ID_LIST || requestCode == ACTIVITY_ID_PRICE)) {
+            if (resultCode == Activity.RESULT_OK) {
+                if (data != null && data.getExtras() != null && data.getExtras().getBoolean("confirmed")) {
+                    setResult(Activity.RESULT_OK, data);
+                    mGoogleApiClient.disconnect();
+                    finish();
+                } else {
+                    mGoogleApiClient.connect();
+                }
+            } else {
+                mGoogleApiClient.connect();
             }
         }
-
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -140,6 +172,69 @@ public class MainActivity extends Activity {
                 break;
         }
         return message;
+    }
+
+
+    protected synchronized void buildGoogleApiClient() {
+        Log.i(TAG, "Building GoogleApiClient");
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .addApi(Wearable.API)
+                .build();
+        mGoogleApiClient.connect();
+    }
+
+
+    @Override
+    public void onConnected(Bundle connectionHint) {
+        Log.i(TAG, "Connected to GoogleApiClient");
+        reconectTrys = 0;
+        LocationRequest locationRequest = LocationRequest.create()
+                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                .setInterval(UPDATE_INTERVAL_IN_MILLISECONDS)
+                .setFastestInterval(FASTEST_UPDATE_INTERVAL_IN_MILLISECONDS);
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, locationRequest, this);
+        if (mCurrentLocation == null) {
+            mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+            logLocation();
+        }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        if (location != null) {
+            mCurrentLocation = location;
+            logLocation();
+        }
+    }
+
+    private void logLocation() {
+        if (mCurrentLocation != null) {
+            Log.i("Traveler", "Update location: Longitude(" + mCurrentLocation.getLongitude() + ") Latitude(" + mCurrentLocation.getLatitude() + ")");
+        } else {
+            Log.i("Traveler", "Update location:" + "null");
+        }
+    }
+
+
+    @Override
+    public void onConnectionSuspended(int cause) {
+        Log.i(TAG, "Connection suspended");
+        if (reconectTrys < 5) {
+            mGoogleApiClient.connect();
+            reconectTrys++;
+        }
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult result) {
+        Log.i(TAG, "Connection failed: ConnectionResult.getErrorCode() = " + result.getErrorCode());
+        if (reconectTrys < 5) {
+            mGoogleApiClient.connect();
+            reconectTrys++;
+        }
     }
 
 }

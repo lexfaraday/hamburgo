@@ -1,12 +1,13 @@
 package wearable.hotelbeds.shared.event;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
 /**
  * Created by Zavierazo on 06/10/2015.
  */
-public class EventInfoBean {
+public class EventInfoBean implements Serializable{
 
     private String id;
     private String name;

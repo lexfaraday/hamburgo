@@ -5,5 +5,5 @@
     <string name="please_say">Say Event Name</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="confirm_reservation">Confirm booking?</string>
-    <string name="total_amount">Total Amount:</string>
+    <string name="total_amount">356.56€</string>
 </resources>

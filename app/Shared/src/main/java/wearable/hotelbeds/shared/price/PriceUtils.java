@@ -16,7 +16,7 @@ public class PriceUtils {
     public static final DateFormat DATE_FORMATER = new SimpleDateFormat("dd/MM/yyyy");
     public static final DateFormat DATE_FORMATER_HOUR = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 
-    public static List<PriceInfoBean> searchPrices(String eventId,Location location) {
+    public static List<PriceInfoBean> searchPrices(String eventId, Location location) {
         List<PriceInfoBean> prices = new ArrayList<>();
         //TODO Si viene location null poner gps de evento hackaton :-)
         //Start Dummy
@@ -36,7 +36,7 @@ public class PriceUtils {
     public static ConfirmDataBean confirmBooking(PriceInfoBean price) {
         ConfirmDataBean confirmData;
         //TODO Make confirm
-        confirmData = new ConfirmDataBean("265182231566XS");//Dummy
+        confirmData = new ConfirmDataBean(true, "265182231566XS");//Dummy
         return confirmData;
     }
 }

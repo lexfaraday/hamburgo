@@ -54,5 +54,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <receiver android:name=".WearActionReceiver"/>
     </application>
 </manifest>
