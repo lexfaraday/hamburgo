@@ -26,4 +26,5 @@ dependencies {
     compile 'com.google.android.gms:play-services-wearable:8.1.0'
     compile project(':Shared')
     compile 'com.google.android.gms:play-services-location:8.1.0'
+    compile 'com.google.android.gms:play-services-wallet:8.1.0'
 }

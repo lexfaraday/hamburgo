@@ -18,6 +18,7 @@ public class PriceUtils {
 
     public static List<PriceInfoBean> searchPrices(String eventId,Location location) {
         List<PriceInfoBean> prices = new ArrayList<>();
+        //TODO Si viene location null poner gps de evento hackaton :-)
         //Start Dummy
         try {
             prices.add(new PriceInfoBean(1, new BigDecimal("653.5"), "Sunset Flower Palas", 4, DATE_FORMATER_HOUR.parse("14/10/2015 18:30"), DATE_FORMATER_HOUR.parse("17/10/2015 06:00"), "Double", "Rayanair", "Air Europa"));
