@@ -11,7 +11,7 @@ import org.springframework.boot.context.web.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = { "com.hotelbeds.eventapp" }, excludeFilters = {})
+@ComponentScan(basePackages = { "com.hotelbeds.travel.api" }, excludeFilters = {})
 public class Application extends SpringBootServletInitializer {
 
     private static Class<Application> applicationClass = Application.class;
