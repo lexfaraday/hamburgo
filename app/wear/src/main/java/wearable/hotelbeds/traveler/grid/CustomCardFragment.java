@@ -19,7 +19,7 @@ public class CustomCardFragment extends CardFragment {
 
     @Override
     public View onCreateContentView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.row_simple_grid_layout, container, false);
+        View view = inflater.inflate(R.layout.row_simple_item_grid_layout, container, false);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {

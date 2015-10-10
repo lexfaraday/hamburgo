@@ -30,6 +30,7 @@ public class SimpleListActivity extends Activity implements WearableListView.Cli
                 mListView = (WearableListView) stub.findViewById(R.id.listView1);
                 mListView.setAdapter(new MyAdapter(SimpleListActivity.this));
                 mListView.setClickListener(SimpleListActivity.this);
+                mListView.setHasFixedSize(false);
             }
         });
     }
@@ -68,45 +69,30 @@ public class SimpleListActivity extends Activity implements WearableListView.Cli
         // Provide a reference to the type of views you're using
         public class ItemViewHolder extends WearableListView.ViewHolder {
             private TextView textViewTitle;
-            private TextView textViewDescription;
+            private TextView textViewPrice;
 
             public ItemViewHolder(View itemView) {
                 super(itemView);
                 // find the text view within the custom item's layout
-                textViewTitle = (TextView) itemView.findViewById(R.id.textView);
-                textViewDescription = (TextView) itemView.findViewById(R.id.textView_Content);
+                textViewTitle = (TextView) itemView.findViewById(R.id.title_list);
+                textViewPrice = (TextView) itemView.findViewById(R.id.price_list);
             }
         }
 
         @Override
         public WearableListView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new ItemViewHolder(mInflater.inflate(R.layout.row_simple_item_layout, null));
+            return new ItemViewHolder(mInflater.inflate(R.layout.row_simple_item_list_layout, null));
         }
 
         @Override
         public void onBindViewHolder(WearableListView.ViewHolder holder, int position) {
             ItemViewHolder itemHolder = (ItemViewHolder) holder;
-
-            itemHolder.textViewTitle.setText(buildName(params.getStringArrayList("name").get(position)));
-            itemHolder.textViewDescription.setText(buildDescription(params.getStringArrayList("description").get(position),
-                    params.getStringArrayList("price").get(position)));
+            itemHolder.textViewPrice.setText(params.getStringArrayList("price").get(position) + "€");
+            itemHolder.textViewTitle.setText(params.getStringArrayList("name").get(position));
             holder.itemView.setTag(position);
 
         }
 
-        private String buildDescription(String desc, String price) {
-            StringBuilder description = new StringBuilder();
-            description.append(price).append("€ ").append(desc);
-            return description.toString();
-        }
-
-        private String buildName(String name) {
-            if (name.length() > 27) {
-                return name.substring(0, 26);
-            } else {
-                return name;
-            }
-        }
 
         @Override
         public int getItemCount() {

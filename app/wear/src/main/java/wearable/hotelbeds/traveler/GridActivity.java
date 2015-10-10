@@ -4,15 +4,18 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.wearable.view.DotsPageIndicator;
 import android.support.wearable.view.FragmentGridPagerAdapter;
 import android.support.wearable.view.GridViewPager;
 import android.support.wearable.view.WatchViewStub;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import wearable.hotelbeds.shared.GPSService;
 import wearable.hotelbeds.shared.price.PriceInfoBean;
 import wearable.hotelbeds.shared.price.PriceUtils;
 import wearable.hotelbeds.traveler.grid.CustomCardFragment;
@@ -26,11 +29,13 @@ public class GridActivity extends Activity {
     private DotsPageIndicator mPageIndicator;
     private GridViewPager mViewPager;
     private ArrayList<SimpleRow> mPages;
-
+    Location location;
+    GPSService service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        service = new GPSService();
         setContentView(R.layout.activity_grid);
         params = getIntent().getExtras();
         loadPrices(params.getString("eventId"));
@@ -49,7 +54,11 @@ public class GridActivity extends Activity {
     }
 
     private void loadPrices(String eventId) {
-        List<PriceInfoBean> prices = PriceUtils.searchPrices(eventId);
+        location = GPSService.getLocation(this);
+        Toast.makeText(GridActivity.this,
+                "Better location found: " + location.getLongitude() + ", " + location.getLatitude(), Toast.LENGTH_LONG)
+                .show();
+        List<PriceInfoBean> prices = PriceUtils.searchPrices(eventId, location);
         mPages = new ArrayList<SimpleRow>();
         SimpleRow row1 = new SimpleRow();
         for (PriceInfoBean price : prices) {

@@ -1,5 +1,6 @@
 package wearable.hotelbeds.shared.price;
 
+import android.location.Location;
 import android.util.Log;
 
 import java.math.BigDecimal;
@@ -15,7 +16,7 @@ public class PriceUtils {
     public static final DateFormat DATE_FORMATER = new SimpleDateFormat("dd/MM/yyyy");
     public static final DateFormat DATE_FORMATER_HOUR = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 
-    public static List<PriceInfoBean> searchPrices(String eventId) {
+    public static List<PriceInfoBean> searchPrices(String eventId,Location location) {
         List<PriceInfoBean> prices = new ArrayList<>();
         //Start Dummy
         try {

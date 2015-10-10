@@ -69,12 +69,17 @@ public class MainActivity extends Activity {
                                 id.add(event.getId());
                                 nameList.add(event.getName());
                                 description.add(EventUtils.DATE_FORMATER.format(event.getTimeStart()) + " to " + EventUtils.DATE_FORMATER.format(event.getTimeEnd()));
-                                price.add(event.getPrice().setScale(1, BigDecimal.ROUND_UP).toString());
+                                if (event.getPrice().stripTrailingZeros().scale() <= 0) {
+                                    price.add(event.getPrice().setScale(0, BigDecimal.ROUND_DOWN).toString());
+                                }else{
+                                    price.add(event.getPrice().setScale(1, BigDecimal.ROUND_UP).toString());
+                                }
                             }
                             b.putStringArrayList("id", id);
                             b.putStringArrayList("name", nameList);
                             b.putStringArrayList("description", description);
                             b.putStringArrayList("price", price);
+
                             intent.putExtras(b);
                             startActivityForResult(intent, LIST_REQUEST_CODE);
                         }

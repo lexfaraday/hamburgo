@@ -1,12 +1,13 @@
-package wearable.hotelbeds.traveler;
+package wearable.hotelbeds.traveler.list;
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.support.wearable.view.CardFrame;
 import android.support.wearable.view.WearableListView;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import wearable.hotelbeds.traveler.R;
 
 /**
  * Created by Zavierazo on 04/10/2015.
@@ -36,20 +37,16 @@ public class WearableListItemLayout extends LinearLayout implements WearableList
         super.onFinishInflate();
         // These are defined in the layout file for list items
         // (see next section)
-        mName = (TextView) findViewById(R.id.textView);
-        mDescription = (TextView) findViewById(R.id.textView_Content);
+        mName = (TextView) findViewById(R.id.title_list);
+        mDescription = (TextView) findViewById(R.id.price_list);
         mFrame = (CardFrame) findViewById(R.id.cardFrameItem);
     }
 
     @Override
     public void onCenterPosition(boolean animate) {
-        mName.setTypeface(null, Typeface.BOLD);
-        mDescription.animate().alpha(1);
     }
 
     @Override
     public void onNonCenterPosition(boolean animate) {
-        mName.setTypeface(null, Typeface.NORMAL);
-        mDescription.animate().alpha(0.5f);
     }
 }
