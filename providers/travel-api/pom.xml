@@ -4,10 +4,10 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.hotelbeds.hamburgo</groupId>
-	<artifactId>eventapp</artifactId>
+	<artifactId>travel-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<name>event-app</name>
+	<name>travel-api</name>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
