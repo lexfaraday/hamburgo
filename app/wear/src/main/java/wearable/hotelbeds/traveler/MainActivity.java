@@ -17,8 +17,6 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.wearable.Wearable;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 import wearable.hotelbeds.shared.event.EventInfoBean;
@@ -79,22 +77,9 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
                             eventFound = true;
                             Intent intent = new Intent(this, SimpleListActivity.class);
                             Bundle b = new Bundle();
-                            ArrayList<String> id = new ArrayList<>();
-                            ArrayList<String> nameList = new ArrayList<>();
-                            ArrayList<String> price = new ArrayList<>();
-                            for (EventInfoBean event : events) {
-                                id.add(event.getId());
-                                nameList.add(event.getName());
-                                //Si es un int pasamos directamente el valor sin decimales.
-                                if (event.getPrice().stripTrailingZeros().scale() <= 0) {
-                                    price.add(event.getPrice().toString());
-                                } else {
-                                    price.add(event.getPrice().setScale(1, BigDecimal.ROUND_UP).toString());
-                                }
+                            for (int i = 0; i < events.size(); i++) {
+                                b.putSerializable("event" + i, events.get(i));
                             }
-                            b.putStringArrayList("id", id);
-                            b.putStringArrayList("name", nameList);
-                            b.putStringArrayList("price", price);
                             b.putParcelable("location", mCurrentLocation);
                             intent.putExtras(b);
                             mGoogleApiClient.disconnect();
@@ -103,7 +88,7 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
                             //Podemos pasar directamente a mostrar precios
                             Intent intent = new Intent(this, GridActivity.class);
                             Bundle b = new Bundle();
-                            b.putString("eventId", events.get(0).getId());
+                            b.putSerializable("event0", events.get(0));
                             b.putParcelable("location", mCurrentLocation);
                             intent.putExtras(b);
                             mGoogleApiClient.disconnect();

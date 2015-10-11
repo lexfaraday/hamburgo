@@ -14,6 +14,7 @@ import android.support.wearable.view.WatchViewStub;
 import java.util.ArrayList;
 import java.util.List;
 
+import wearable.hotelbeds.shared.event.EventInfoBean;
 import wearable.hotelbeds.shared.price.PriceInfoBean;
 import wearable.hotelbeds.shared.price.PriceUtils;
 import wearable.hotelbeds.traveler.grid.CustomCardFragment;
@@ -23,16 +24,16 @@ import wearable.hotelbeds.traveler.grid.SimpleRow;
 public class GridActivity extends Activity {
 
     private static final int CONFIRM_ACTIVITY_ID = 0;
-    private Bundle params;
     private GridViewPager mViewPager;
     private ArrayList<SimpleRow> mPages;
+    private EventInfoBean event;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_grid);
-        params = getIntent().getExtras();
-        loadPrices(params.getString("eventId"));
+        event = (EventInfoBean) getIntent().getExtras().getSerializable("event");
+        loadPrices();
         final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
@@ -47,8 +48,8 @@ public class GridActivity extends Activity {
         });
     }
 
-    private void loadPrices(String eventId) {
-        List<PriceInfoBean> prices = PriceUtils.searchPrices(eventId, (Location) params.getParcelable("location"));
+    private void loadPrices() {
+        List<PriceInfoBean> prices = PriceUtils.searchPrices(event, (Location) getIntent().getExtras().getParcelable("location"));
         mPages = new ArrayList<SimpleRow>();
         SimpleRow row1 = new SimpleRow();
         for (PriceInfoBean price : prices) {
@@ -60,7 +61,7 @@ public class GridActivity extends Activity {
     public void clicked(SimplePage page) {
         Intent intent = new Intent(this, ConfirmActivity.class);
         Bundle b = new Bundle();
-        b.putSerializable("key", page.getInfoBean());
+        b.putSerializable("price", page.getInfoBean());
         intent.putExtras(b);
         startActivityForResult(intent, CONFIRM_ACTIVITY_ID);
     }

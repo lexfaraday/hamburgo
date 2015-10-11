@@ -11,18 +11,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
+import wearable.hotelbeds.shared.event.EventInfoBean;
+
 public class SimpleListActivity extends Activity implements WearableListView.ClickListener {
 
     private static final int PRICE_ACTIVITY_ID = 0;
 
     private WearableListView mListView;
-    private Bundle params;
+    private List<EventInfoBean> events;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listview);
-        params = getIntent().getExtras();
+        int i = 0;
+        events = new ArrayList<>();
+        while (getIntent().getExtras().containsKey("event" + i)) {
+            events.add((EventInfoBean) getIntent().getExtras().getSerializable("event" + i));
+            i++;
+        }
         final WatchViewStub stub = (WatchViewStub) findViewById(R.id.watch_view_stub);
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
@@ -39,8 +50,8 @@ public class SimpleListActivity extends Activity implements WearableListView.Cli
     public void onClick(WearableListView.ViewHolder viewHolder) {
         Intent intent = new Intent(this, GridActivity.class);
         Bundle b = new Bundle();
-        b.putString("eventId", params.getStringArrayList("id").get(viewHolder.getAdapterPosition()));
-        b.putParcelable("location", params.getParcelable("location"));
+        b.putSerializable("event", events.get(viewHolder.getAdapterPosition()));
+        b.putParcelable("location", getIntent().getExtras().getParcelable("location"));
         intent.putExtras(b);
         startActivityForResult(intent, PRICE_ACTIVITY_ID);
     }
@@ -89,8 +100,14 @@ public class SimpleListActivity extends Activity implements WearableListView.Cli
         @Override
         public void onBindViewHolder(WearableListView.ViewHolder holder, int position) {
             ItemViewHolder itemHolder = (ItemViewHolder) holder;
-            itemHolder.textViewPrice.setText(params.getStringArrayList("price").get(position) + "€");
-            itemHolder.textViewTitle.setText(params.getStringArrayList("name").get(position));
+            String amount;
+            if (events.get(position).getPrice().stripTrailingZeros().scale() <= 0) {
+                amount = String.valueOf(events.get(position).getPrice());
+            } else {
+                amount = String.valueOf(events.get(position).getPrice().setScale(2, BigDecimal.ROUND_UP));
+            }
+            itemHolder.textViewPrice.setText(amount + "€");
+            itemHolder.textViewTitle.setText(events.get(position).getName());
             holder.itemView.setTag(position);
 
         }
@@ -98,7 +115,7 @@ public class SimpleListActivity extends Activity implements WearableListView.Cli
 
         @Override
         public int getItemCount() {
-            return params.getStringArrayList("id").size();
+            return events.size();
         }
 
     }

@@ -41,5 +41,15 @@ public class EventUtils {
         return events;
     }
 
+    public static EventInfoBean searchEventById(String id) {
+        List<EventInfoBean> events = obtainAllEvent();
+        //TODO Make search by id.
+        for (EventInfoBean event : events) {
+            if (event != null && event.getId().equals(id)) {
+                return event;
+            }
+        }
+        return events != null ? events.get(0) : null;
+    }
 
 }

@@ -8,10 +8,12 @@ import java.io.Serializable;
 public class ConfirmDataBean implements Serializable {
     private String token;
     private boolean success;
+    private PriceInfoBean price;
 
-    public ConfirmDataBean(boolean success, String token) {
+    public ConfirmDataBean(boolean success, String token, PriceInfoBean price) {
         this.success = success;
         this.token = token;
+        this.price = price;
     }
 
     public String getToken() {
@@ -28,5 +30,13 @@ public class ConfirmDataBean implements Serializable {
 
     public void setSuccess(boolean success) {
         this.success = success;
+    }
+
+    public PriceInfoBean getPrice() {
+        return price;
+    }
+
+    public void setPrice(PriceInfoBean price) {
+        this.price = price;
     }
 }

@@ -4,10 +4,12 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import wearable.hotelbeds.shared.event.EventInfoBean;
+
 /**
  * Created by Zavierazo on 08/10/2015.
  */
-public class PriceInfoBean implements Serializable{
+public class PriceInfoBean implements Serializable {
     private int id;
     private BigDecimal totalAmount;
     private String hotelName;
@@ -17,12 +19,14 @@ public class PriceInfoBean implements Serializable{
     private String roomInfo;
     private String flyOutAerolineName;
     private String flyInAerolineName;
+    private EventInfoBean event;
 
     public PriceInfoBean() {
 
     }
 
-    public PriceInfoBean(int id, BigDecimal totalAmount, String hotelName, int hotelStars, Date flyOut, Date flyIn, String roomInfo, String flyOutAerolineName, String flyInAerolineName) {
+    public PriceInfoBean(EventInfoBean event, int id, BigDecimal totalAmount, String hotelName, int hotelStars, Date flyOut, Date flyIn, String roomInfo, String flyOutAerolineName, String flyInAerolineName) {
+        this.event = event;
         this.id = id;
         this.totalAmount = totalAmount;
         this.hotelName = hotelName;
@@ -32,6 +36,14 @@ public class PriceInfoBean implements Serializable{
         this.roomInfo = roomInfo;
         this.flyOutAerolineName = flyOutAerolineName;
         this.flyInAerolineName = flyInAerolineName;
+    }
+
+    public EventInfoBean getEvent() {
+        return event;
+    }
+
+    public void setEvent(EventInfoBean event) {
+        this.event = event;
     }
 
     public int getId() {

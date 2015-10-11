@@ -34,7 +34,7 @@ public class ConfirmActivity extends Activity implements DelayedConfirmationView
         setContentView(R.layout.activity_confirm);
         context = this;
         params = getIntent().getExtras();
-        price = (PriceInfoBean) params.getSerializable("key");
+        price = (PriceInfoBean) params.getSerializable("price");
         final WatchViewStub stub = (WatchViewStub) findViewById(R.id.confirm_panel);
         stub.setOnLayoutInflatedListener(new WatchViewStub.OnLayoutInflatedListener() {
             @Override
