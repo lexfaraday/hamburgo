@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">hovee</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_main">hovee</string>
 </resources>
