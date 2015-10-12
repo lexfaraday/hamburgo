@@ -1,6 +1,6 @@
 package com.hotelbeds.travel.api.service.domain.aero;
 
-public class Booking {
+public class AeroBookRS {
 	private String ref;
 
 	public String getRef() {

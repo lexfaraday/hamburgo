@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.hotelbeds.travel.api.profiles.ApplicationProfile;
+import com.hotelbeds.travel.api.service.domain.aero.AeroSearchRQ;
 import com.hotelbeds.travel.api.websocket.MessageFlow;
 
 @Controller
@@ -46,13 +47,20 @@ public class AeroController {
     @ResponseBody
     public ResponseEntity<?> searchFlights() throws JsonProcessingException, IOException, ParseException {
         messageFlow.publish("Searching flights..");
-        return new ResponseEntity<String>(aeroProvider.searchFlights(), HttpStatus.OK);
+        return new ResponseEntity<String>(aeroProvider.searchFlights(new AeroSearchRQ()).toString(), HttpStatus.OK);
     }
     
     @RequestMapping(value = "/flights/book", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
     @ResponseBody
     public ResponseEntity<?> bookFlight() throws JsonProcessingException, IOException {
         messageFlow.publish("Booking flights..");
-        return new ResponseEntity<String>(aeroProvider.bookFlight(), HttpStatus.OK);
+        return new ResponseEntity<String>(aeroProvider.bookFlight("magicString").toString(), HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/flights/checkin", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+    @ResponseBody
+    public ResponseEntity<?> checkinFlight() throws JsonProcessingException, IOException {
+        messageFlow.publish("Checkin flights..");
+        return new ResponseEntity<String>(aeroProvider.checkin(), HttpStatus.OK);
     }
 }

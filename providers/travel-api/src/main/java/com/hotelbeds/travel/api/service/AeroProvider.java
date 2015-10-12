@@ -2,35 +2,34 @@ package com.hotelbeds.travel.api.service;
 
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
-import org.springframework.security.oauth2.client.OAuth2RestOperations;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.JsonToken;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hotelbeds.travel.api.service.domain.aero.Booking;
-import com.hotelbeds.travel.api.service.domain.aero.Flight;
-import com.hotelbeds.travel.api.service.domain.aero.FlightOption;
+import com.hotelbeds.travel.api.service.domain.aero.AeroBookRS;
+import com.hotelbeds.travel.api.service.domain.aero.AeroSearchRQ;
+import com.hotelbeds.travel.api.service.domain.aero.AeroSearchRS;
+import com.hotelbeds.travel.api.service.domain.aero.api.CheckinRS;
+import com.hotelbeds.travel.api.service.domain.aero.api.CreditCardPaymentInfo;
+import com.hotelbeds.travel.api.service.domain.aero.api.Flight;
+import com.hotelbeds.travel.api.service.domain.aero.api.OutboundOption;
+import com.hotelbeds.travel.api.service.domain.aero.api.Passenger;
+import com.hotelbeds.travel.api.service.domain.aero.api.Reservation;
+import com.hotelbeds.travel.api.service.domain.aero.api.ReservationRS;
+import com.hotelbeds.travel.api.service.domain.aero.api.Shop;
+
 
 
 @Service
@@ -51,72 +50,98 @@ public class AeroProvider {
         return null;
     }
     
-    public String bookFlight() throws JsonProcessingException, IOException{
-    	Booking booking = new Booking();
-    	//read json file data to String
-    	byte[] jsonData = getResponse("reservation").getBytes();
-    	 
-    	//create ObjectMapper instance
-    	ObjectMapper objectMapper = new ObjectMapper();
-    	 
-    	//read JSON like DOM Parser
-    	JsonNode rootNode = objectMapper.readTree(jsonData);
-    	booking.setRef(rootNode.path("airReservation").path("bookingReferenceID").asText());
+    public AeroBookRS bookFlight(String magicKey) throws JsonProcessingException, IOException{
     	
-    	return objectMapper.writeValueAsString(booking);
+    	ObjectMapper mapper = new ObjectMapper();
+    	
+    	//Dummy Reservation Data
+    	Reservation reservation = getDummyReservationData();
+    	
+    	String jsonRQ = mapper.writeValueAsString(reservation);
+    	
+    	AeroBookRS booking = new AeroBookRS();
+
+    	ReservationRS reservationRS = mapper.readValue(callApi("reservation",jsonRQ,null), ReservationRS.class);
+    	booking.setRef(reservationRS.getAirReservation().getBookingReferenceID());
+    	return booking;
     }
 
-    public String searchFlights() throws JsonProcessingException, IOException, ParseException {
+	public Reservation getDummyReservationData() {
+		Reservation reservation = new Reservation();
+    	reservation.setMagicString("XXX");
     	
-    	//read json file data to String
-    	byte[] jsonData = getResponse("shop").getBytes();
-    	 
-    	//create ObjectMapper instance
-    	ObjectMapper objectMapper = new ObjectMapper();
-    	 
-    	//read JSON like DOM Parser
-    	JsonNode rootNode = objectMapper.readTree(jsonData);
+    	CreditCardPaymentInfo card = new CreditCardPaymentInfo();
+    	card.setCardCode("VI");
+    	card.setCardHolderName("Solomeo Paredes");
+    	card.setCardNumber("4444333322221111");
+    	card.setCardType(1);
+    	card.setCcv("585");
+    	card.setExpireDateMMyyyy("25082010");
+    	reservation.setCreditCardPaymentInfo(card);
+    	
+    	List<Passenger> lstPas = new ArrayList<Passenger>();
+    	Passenger pas = new Passenger();
+    	pas.setEmail("test@test.es");
+    	lstPas.add(pas);
+    	reservation.setPassengers(lstPas);
+		return reservation;
+	}
 
-    	JsonNode outboundOptionsNode = rootNode.path("outboundOptions");
-    	Iterator<JsonNode> elements = outboundOptionsNode.elements();
-    	List<FlightOption> options = new ArrayList<FlightOption>(); 
-    	FlightOption option;
-    	List<Flight> flights;
-    	Flight flight = new Flight();
-    	while(elements.hasNext()){
-    	    JsonNode outboundOption = elements.next();
-    	    
-    	    option = new FlightOption();
-    	    option.setAmount(outboundOption.path("fareDetails").path("journeyFare").asDouble());
-    	    option.setCurrency(outboundOption.path("fareDetails").path("fareCurrency").asText());
-    	    
-    	    JsonNode flightsNode = outboundOption.path("flights");
-    	    Iterator<JsonNode> flightsIte = flightsNode.elements();
-    	    flights = new ArrayList<Flight>();
-    	    while(flightsIte.hasNext()){
-    	    	flight = new Flight();
-    	    	JsonNode flightNode = flightsIte.next();
-    	    	flight.setFlightNumber(flightNode.path("flightNumber").asText());
-    	    	flight.setAptDep(flightNode.path("departureAirport").path("name").asText());
-    	    	flight.setAptArr(flightNode.path("arrivalAirport").path("name").asText());
-    	    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
-    	    	flight.setFecDep(sdf.parse(flightNode.path("depScheduled").asText()));
-    	    	flight.setFecArr(sdf.parse(flightNode.path("arrScheduled").asText()));
-    	    	flights.add(flight);
-    	    }
-    	    option.setFlights(flights);
-    	    options.add(option);
-    	    
+    public List<AeroSearchRS> searchFlights(AeroSearchRQ rq) throws JsonProcessingException, IOException, ParseException {
+    	    	
+    	ObjectMapper mapper = new ObjectMapper();
+    	List<AeroSearchRS> rs = new ArrayList<AeroSearchRS>();
+    	List<com.hotelbeds.travel.api.service.domain.aero.Flight> flights;
+    	AeroSearchRS option = new AeroSearchRS();
+    	
+    	Shop shop = mapper.readValue(callApi("shop",null,null), Shop.class);
+
+    	for(OutboundOption outOption : shop.getOutboundOptions()){
+    		
+    		option = new AeroSearchRS();
+    		option.setAmount(new BigDecimal(outOption.getFareDetails().getJourneyFare()));
+    		option.setCurrency(outOption.getFareDetails().getFareCurrency());
+    		option.setMagicString(outOption.getMagicString().toString()); //TODO WTF
+    		flights = new ArrayList<com.hotelbeds.travel.api.service.domain.aero.Flight>();
+    		com.hotelbeds.travel.api.service.domain.aero.Flight flight;
+    		
+    		for(Flight flight2 : outOption.getFlights()){
+    			
+    			flight = new com.hotelbeds.travel.api.service.domain.aero.Flight();
+    			flight.setFlightNumber(flight2.getFlightNumber());
+    			flight.setAptDep(flight2.getDepartureAirport().getName());
+    			flight.setAptArr(flight2.getArrivalAirport().getName());
+    			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX");
+    			flight.setFecDep(sdf.parse(flight2.getDepScheduled()));
+    			flight.setFecArr(sdf.parse(flight2.getArrScheduled()));
+    			flights.add(flight);
+    			
+    		}
+    		
+    		option.setFlights(flights);
     	}
     	
-    	return objectMapper.writeValueAsString(options);
+    	
+    	return rs;
 
     }
     
-    public String getResponse(String type){
+    public String checkin() throws JsonParseException, JsonMappingException, IOException{
+    	
+    	ObjectMapper mapper = new ObjectMapper();
+    	
+    	CheckinRS checkin = mapper.readValue(callApi("checkin",null,null), CheckinRS.class);
+    	
+    	checkin.getSuccess();
+    	
+    	return mapper.writeValueAsString(checkin); 
+    }
+    
+    public String callApi(String path, String rq, Map<String,String> param){
+    	
     	String response = "";
     	try{
-    		response = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("aero/"+type+".json").getFile())));
+    		response = new String(Files.readAllBytes(Paths.get(getClass().getClassLoader().getResource("aero/"+path+".json").getFile())));
     	}catch(Exception e){
     		e.printStackTrace();
     	}

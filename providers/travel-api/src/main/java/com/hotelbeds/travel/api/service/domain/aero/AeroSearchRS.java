@@ -3,15 +3,16 @@ package com.hotelbeds.travel.api.service.domain.aero;
 import java.math.BigDecimal;
 import java.util.List;
 
-public class FlightOption {
-	private Double amount;
+public class AeroSearchRS {
+	private BigDecimal amount;
 	private String     currency;
 	private List<Flight> flights;
+	private String magicString;
 	
-	public Double getAmount() {
+	public BigDecimal getAmount() {
 		return amount;
 	}
-	public void setAmount(Double amount) {
+	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}
 	public String getCurrency() {
@@ -25,6 +26,12 @@ public class FlightOption {
 	}
 	public void setFlights(List<Flight> flights) {
 		this.flights = flights;
+	}
+	public String getMagicString() {
+		return magicString;
+	}
+	public void setMagicString(String magicString) {
+		this.magicString = magicString;
 	}
 
 }
