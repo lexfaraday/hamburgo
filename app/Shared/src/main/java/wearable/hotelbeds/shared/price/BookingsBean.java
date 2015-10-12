@@ -30,6 +30,15 @@ public class BookingsBean implements Serializable {
         this.confirmDataBeans = confirmDataBeans;
     }
 
+    public boolean containsBooking(ConfirmDataBean conf) {
+        for (ConfirmDataBean bean : confirmDataBeans) {
+            if (bean.getToken().equals(conf.getToken())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static BookingsBean load(Context context) {
         FileInputStream fis = null;
         ObjectInputStream is = null;

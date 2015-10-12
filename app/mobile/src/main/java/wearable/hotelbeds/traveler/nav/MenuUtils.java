@@ -1,11 +1,17 @@
 package wearable.hotelbeds.traveler.nav;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import wearable.hotelbeds.shared.event.EventUtils;
+import wearable.hotelbeds.shared.price.PriceUtils;
+import wearable.hotelbeds.traveler.ConfirmActivity;
+import wearable.hotelbeds.traveler.MainActivity;
 import wearable.hotelbeds.traveler.R;
 
 /**
@@ -38,14 +44,22 @@ public class MenuUtils {
         if (activityId == position) {
             return;//Si se selecciona misma opcion en la que ya se encuentra no se hace nada.
         }
+        Intent intent = null;
         switch (position) {
             case MENU_SELECTED_MAIN:
                 //Home
                 Log.i(TAG, "Home Selected");
+                intent = new Intent(context, MainActivity.class);
+                context.startActivity(intent);
                 break;
             case MENU_SELECTED_BOOKINGS:
                 //Bookings
                 Log.i(TAG, "Bookings Selected");
+                intent = new Intent(context, ConfirmActivity.class);
+                Bundle b = new Bundle();
+                b.putSerializable("price", PriceUtils.searchPrices(EventUtils.obtainAllEvent().get(0), null).get(0));
+                intent.putExtras(b);
+                context.startActivity(intent);
                 break;
             default:
                 break;

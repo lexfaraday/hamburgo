@@ -46,8 +46,10 @@ public class PriceUtils {
         //TODO Make confirm
         confirmData = new ConfirmDataBean(true, "265182231566XS", price);//Dummy
         BookingsBean bookings = BookingsBean.load(context);
-        bookings.getConfirmDataBeans().add(confirmData);
-        bookings.save(context);
+        if (!bookings.containsBooking(confirmData)) {
+            bookings.getConfirmDataBeans().add(confirmData);
+            bookings.save(context);
+        }
         return confirmData;
     }
 }
