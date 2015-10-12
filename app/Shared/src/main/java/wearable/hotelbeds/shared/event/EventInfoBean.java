@@ -15,18 +15,20 @@ public class EventInfoBean implements Serializable{
     private Date timeEnd;
     private BigDecimal price;
     private String imageUrl;
+    private String shortDescription;
 
     public EventInfoBean() {
 
     }
 
-    public EventInfoBean(String id, String name, Date timeStart, Date timeEnd, BigDecimal price, String imageUrl) {
+    public EventInfoBean(String id, String name, Date timeStart, Date timeEnd, BigDecimal price, String imageUrl, String shortDescription) {
         this.id = id;
         this.name = name;
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
         this.price = price;
         this.imageUrl = imageUrl;
+        this.shortDescription = shortDescription;
     }
 
     public String getName() {
@@ -75,5 +77,13 @@ public class EventInfoBean implements Serializable{
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
     }
 }

@@ -1,4 +1,11 @@
 <resources>
     <string name="title_activity_maps">Map</string>
-    <string name="title_activity_main">hovee</string>
+    <string name="title_activity_main">Hovee</string>
+    <string name="title_activity_confirmation">Confirmation</string>
+    <string name="nav_item_home">Home</string>
+    <string name="nav_item_bookings">Bookings</string>
+    <string name="action_search">Search</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+
 </resources>

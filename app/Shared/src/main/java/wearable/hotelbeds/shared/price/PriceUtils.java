@@ -1,5 +1,6 @@
 package wearable.hotelbeds.shared.price;
 
+import android.content.Context;
 import android.location.Location;
 import android.util.Log;
 
@@ -40,10 +41,15 @@ public class PriceUtils {
         return prices;
     }
 
-    public static ConfirmDataBean confirmBooking(PriceInfoBean price) {
+    public static ConfirmDataBean confirmBooking(Context context, PriceInfoBean price) {
         ConfirmDataBean confirmData;
         //TODO Make confirm
         confirmData = new ConfirmDataBean(true, "265182231566XS", price);//Dummy
+        BookingsBean bookings = BookingsBean.load(context);
+        if (!bookings.containsBooking(confirmData)) {
+            bookings.getConfirmDataBeans().add(confirmData);
+            bookings.save(context);
+        }
         return confirmData;
     }
 }
