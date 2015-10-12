@@ -4,4 +4,6 @@ spring:
   datasource:
     initialize: false
 server:
-  context-path: 
+  context-path:
+sabre:
+  base_url: https://api.test.sabre.com  
