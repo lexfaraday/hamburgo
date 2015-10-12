@@ -22,8 +22,6 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private static String LOG_TAG = "RecyclerViewActivity";
-    private Toolbar mToolbar;
-    private FragmentDrawer drawerFragment;
 
 
     @Override
@@ -40,13 +38,13 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         RecyclerView.ItemDecoration itemDecoration =
                 new DividerItemDecorator(this, LinearLayoutManager.VERTICAL);
         mRecyclerView.addItemDecoration(itemDecoration);
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
 
+        //Menu
+        Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar);
+        FragmentDrawer drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar, MenuUtils.MENU_SELECTED_MAIN);
         drawerFragment.setDrawerListener(this);
 
 
@@ -73,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         MenuItem searchMenuItem = menu.findItem(R.id.action_search);
+        searchMenuItem.setVisible(true);//Poner esto si se quiere que en la activity se vea el boton buscar :-)
         SearchView.OnQueryTextListener searchListener = new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -82,8 +81,9 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             }
 
             @Override
-            public boolean onQueryTextChange(String newText) {
-                changeAdapter(newText);//TODO para hacer este tipo de busqueda la respuesta tiene que ser muy rapida o sobre un objeto ya instanciado
+            public boolean onQueryTextChange(String query) {
+                Log.i(LOG_TAG, "Searching... " + query);
+                changeAdapter(query);//TODO para hacer este tipo de busqueda la respuesta tiene que ser muy rapida o sobre un objeto ya instanciado
                 return false;
             }
 
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
     @Override
     public void onDrawerItemSelected(View view, int position) {
-        MenuUtils.onMenuSelected(this, position);
+        MenuUtils.onMenuSelected(this, MenuUtils.MENU_SELECTED_MAIN, position);
     }
 
 

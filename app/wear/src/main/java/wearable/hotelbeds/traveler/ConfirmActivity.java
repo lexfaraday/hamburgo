@@ -90,7 +90,7 @@ public class ConfirmActivity extends Activity implements DelayedConfirmationView
     }
 
     private void performConfirmAction() {
-        confirmation = PriceUtils.confirmBooking(price);
+        confirmation = PriceUtils.confirmBooking(this, price);
         Intent intent = new Intent(this, ConfirmationActivity.class);
         if (confirmation.isSuccess()) {
             intent.putExtra(ConfirmationActivity.EXTRA_ANIMATION_TYPE, ConfirmationActivity.SUCCESS_ANIMATION);

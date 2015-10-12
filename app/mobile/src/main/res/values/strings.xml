@@ -4,13 +4,6 @@
     <string name="nav_item_home">Home</string>
     <string name="nav_item_bookings">Bookings</string>
     <string name="action_search">Search</string>
-
-    <!-- navigation drawer item labels  -->
-    <string-array name="nav_drawer_labels">
-        <item>@string/nav_item_home</item>
-        <item>@string/nav_item_bookings</item>
-    </string-array>
-
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 
