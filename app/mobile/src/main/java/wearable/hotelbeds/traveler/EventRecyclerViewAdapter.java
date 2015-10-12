@@ -1,5 +1,6 @@
 package wearable.hotelbeds.traveler;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -46,7 +47,9 @@ public class EventRecyclerViewAdapter extends RecyclerView
 
         @Override
         public void onClick(View v) {
-            myClickListener.onItemClick(getPosition(), v);
+            //myClickListener.onItemClick(getPosition(), v);
+           // Intent intent = new Intent(v.getContext(), HotelFlightActivity.class);
+            myClickListener.onItemClick(getAdapterPosition(), v);
         }
     }
 
