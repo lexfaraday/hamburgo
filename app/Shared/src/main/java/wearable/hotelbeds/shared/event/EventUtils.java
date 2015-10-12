@@ -35,10 +35,20 @@ public class EventUtils {
         return events;
     }
 
-    public static List<EventInfoBean> searchEventByName(String name) {
-        List<EventInfoBean> events = obtainAllEvent();
+    public static ArrayList<EventInfoBean> searchEventByName(String name) {
+        ArrayList<EventInfoBean> events = obtainAllEvent();
         //TODO Make search (Si hay dos que coinciden se puede devolver lista)
-        return events;
+        ArrayList<EventInfoBean> possible = new ArrayList<>();
+        for (EventInfoBean event : events) {
+            if (name == null || name.isEmpty() || event.getName().toLowerCase().contains(name.toLowerCase())) {
+                possible.add(event);
+            }
+        }
+        if (possible.size() > 0) {
+            return possible;
+        } else {
+            return events;
+        }
     }
 
     public static EventInfoBean searchEventById(String id) {
