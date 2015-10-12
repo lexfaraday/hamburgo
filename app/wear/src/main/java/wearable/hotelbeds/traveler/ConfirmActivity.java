@@ -126,7 +126,7 @@ public class ConfirmActivity extends Activity implements DelayedConfirmationView
         //Building notification layout
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setSmallIcon(R.drawable.ic_launcher)
                         .setContentTitle("Booking Confirmed!")
                         .setContentText("Your booking reference is " + confirmation.getToken())
                         .addAction(R.drawable.ic_smartphone_black_24dp, "Open on Phone", pendingIntent);
