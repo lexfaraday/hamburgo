@@ -2,6 +2,7 @@ package wearable.hotelbeds.traveler;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ public class EventRecyclerViewAdapter extends RecyclerView
     private static String LOG_TAG = "EventRecyclerViewAdapter";
     private ArrayList<EventInfoBean> mDataset;
     private static MyClickListener myClickListener;
+    private AppCompatActivity activity;
 
     public static class EventHolder extends RecyclerView.ViewHolder
             implements View
@@ -57,8 +59,9 @@ public class EventRecyclerViewAdapter extends RecyclerView
         this.myClickListener = myClickListener;
     }
 
-    public EventRecyclerViewAdapter(ArrayList<EventInfoBean> myDataset) {
+    public EventRecyclerViewAdapter(ArrayList<EventInfoBean> myDataset, AppCompatActivity activity) {
         mDataset = myDataset;
+        this.activity = activity;
     }
 
     @Override

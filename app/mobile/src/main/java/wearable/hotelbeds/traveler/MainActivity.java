@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new EventRecyclerViewAdapter(EventUtils.obtainAllEvent());
+        mAdapter = new EventRecyclerViewAdapter(EventUtils.obtainAllEvent(), this);
         mRecyclerView.setAdapter(mAdapter);
         RecyclerView.ItemDecoration itemDecoration =
                 new DividerItemDecorator(this, LinearLayoutManager.VERTICAL);
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             }
 
             private void changeAdapter(String query) {
-                mAdapter = new EventRecyclerViewAdapter(EventUtils.searchEventByName(query));
+                mAdapter = new EventRecyclerViewAdapter(EventUtils.searchEventByName(query), null);
                 mRecyclerView.setAdapter(mAdapter);
             }
         };
