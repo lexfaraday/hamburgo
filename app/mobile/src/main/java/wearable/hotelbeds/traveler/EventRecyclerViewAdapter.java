@@ -1,6 +1,5 @@
 package wearable.hotelbeds.traveler;
 
-import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -28,15 +29,17 @@ public class EventRecyclerViewAdapter extends RecyclerView
     public static class EventHolder extends RecyclerView.ViewHolder
             implements View
             .OnClickListener {
-        TextView label;
-        TextView dateTime;
-        ImageView imageView;
+        TextView title;
+        TextView shortDescription;
+        TextView price;
+        ImageView image;
 
         public EventHolder(View itemView) {
             super(itemView);
-            label = (TextView) itemView.findViewById(R.id.textView);
-            dateTime = (TextView) itemView.findViewById(R.id.textView2);
-            imageView = (ImageView) itemView.findViewById(R.id.imageView);
+            title = (TextView) itemView.findViewById(R.id.titleEvent);
+            shortDescription = (TextView) itemView.findViewById(R.id.shortDescriptionEvent);
+            price = (TextView) itemView.findViewById(R.id.priceEvent);
+            image = (ImageView) itemView.findViewById(R.id.imageView);
             Log.i(LOG_TAG, "Adding Listener");
             itemView.setOnClickListener(this);
         }
@@ -67,16 +70,21 @@ public class EventRecyclerViewAdapter extends RecyclerView
 
     @Override
     public void onBindViewHolder(EventHolder holder, int position) {
-        holder.label.setText(mDataset.get(position).getName());
-        holder.dateTime.setText(mDataset.get(position).getPrice().toString());
 
         Uri uri = Uri.parse(mDataset.get(position).getImageUrl());
-        Picasso.with(holder.imageView.getContext())
+        Picasso.with(holder.image.getContext())
                 .load(uri)
                 .fit()
                         //.placeholder(R.drawable.user_placeholder)
                         //.error(R.drawable.user_placeholder_error)
-                .into(holder.imageView);
+                .into(holder.image);
+
+        holder.title.setText(mDataset.get(position).getName());
+        String complexShortDescription = "Start at " + mDataset.get(position).getTimeStart() + " to " + mDataset.get(position).getTimeEnd();
+        complexShortDescription += " " + mDataset.get(position).getShortDescription();
+        holder.shortDescription.setText(complexShortDescription);
+
+        holder.price.setText(mDataset.get(position).getPrice().toString() + "€");
     }
 
     public void addItem(EventInfoBean dataObj, int index) {
