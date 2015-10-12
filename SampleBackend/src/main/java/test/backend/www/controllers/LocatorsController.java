@@ -27,6 +27,7 @@ import test.backend.www.model.RelativeDistance;
 @EqualsAndHashCode(callSuper = false)
 @Slf4j
 @Controller
+// Ej: http://localhost:8080/locate/39.577251/2.633764/
 public class LocatorsController
 {
 
