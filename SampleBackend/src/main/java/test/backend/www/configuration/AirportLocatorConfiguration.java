@@ -1,0 +1,45 @@
+package test.backend.www.configuration;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
+
+import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import test.backend.www.model.Airport;
+import test.backend.www.model.AirportLocator;
+
+@Configuration
+@Slf4j
+public class AirportLocatorConfiguration
+{
+  final static String AIRPORT_FILE_NAME = "airports.dat";
+
+  @Bean
+  public AirportLocator buildAirportLocator()
+  {
+    log.info("Building airport locator...");
+    Map<Integer, Airport> airports = new HashMap<>();
+    try (InputStream inputStream = ClassLoader.getSystemResourceAsStream(AIRPORT_FILE_NAME);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream)))
+    {
+      String line = null;
+      while ((line = reader.readLine()) != null)
+      {
+        Airport airport = new Airport(line);
+        airports.put(airport.getId(), airport);
+      }
+    }
+    catch (Exception e)
+    {
+      log.error("Error initialising airports from file", e);
+    }
+    log.info("Airport locator configured with {} airports.", airports.size());
+    return new AirportLocator(airports);
+  }
+}
