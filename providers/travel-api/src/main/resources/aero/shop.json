@@ -1,0 +1,1001 @@
+{
+    "processingDurationMillis": 11442,
+    "authorisedAPI": true,
+    "success": true,
+    "airline": "MH",
+    "validCreditCards": [
+        "VI",
+        "MC",
+        "AX"
+    ],
+    "paypal": false,
+    "outboundOptions": [
+        {
+            "optionId": 2,
+            "flights": [
+                {
+                    "flightNumber": "0602",
+                    "departureAirport": {
+                        "code": "SIN",
+                        "name": "Changi Intl",
+                        "city": "Singapore",
+                        "country": "Singapore",
+                        "lat": 1.350189,
+                        "lng": 103.994433,
+                        "terminal": "2",
+                        "gate": null,
+                        "timezone": "Asia/Singapore"
+                    },
+                    "arrivalAirport": {
+                        "code": "KUL",
+                        "name": "Kuala Lumpur Intl",
+                        "city": "Kuala Lumpur",
+                        "country": "Malaysia",
+                        "lat": 2.745578,
+                        "lng": 101.709917,
+                        "terminal": "M",
+                        "gate": null,
+                        "timezone": "Asia/Kuala_Lumpur"
+                    },
+                    "marketingAirline": "MH",
+                    "operatingAirline": null,
+                    "equipment": "738",
+                    "flightRPH": 10201,
+                    "comments": [],
+                    "depScheduled": "2013-03-20T06:45:00.000+08:00",
+                    "arrScheduled": "2013-03-20T07:45:00.000+08:00",
+                    "depEstimated": null,
+                    "depActual": null,
+                    "arrEstimated": null,
+                    "arrActual": null,
+                    "cabin": "ECONOMY",
+                    "fareMarketingType": "FULL_FLEX",
+                    "rbd": "B",
+                    "seatsAvailable": 9,
+                    "minutesToScheduledFlightDeparture": 19098
+                },
+                {
+                    "flightNumber": "0004",
+                    "departureAirport": {
+                        "code": "KUL",
+                        "name": "Kuala Lumpur Intl",
+                        "city": "Kuala Lumpur",
+                        "country": "Malaysia",
+                        "lat": 2.745578,
+                        "lng": 101.709917,
+                        "terminal": "M",
+                        "gate": null,
+                        "timezone": "Asia/Kuala_Lumpur"
+                    },
+                    "arrivalAirport": {
+                        "code": "LHR",
+                        "name": "Heathrow",
+                        "city": "London",
+                        "country": "United Kingdom",
+                        "lat": 51.4775,
+                        "lng": -0.461389,
+                        "terminal": "4",
+                        "gate": null,
+                        "timezone": "Europe/London"
+                    },
+                    "marketingAirline": "MH",
+                    "operatingAirline": null,
+                    "equipment": "744",
+                    "flightRPH": 10202,
+                    "comments": [],
+                    "depScheduled": "2013-03-20T10:45:00.000+08:00",
+                    "arrScheduled": "2013-03-20T16:15:00.000Z",
+                    "depEstimated": null,
+                    "depActual": null,
+                    "arrEstimated": null,
+                    "arrActual": null,
+                    "cabin": "ECONOMY",
+                    "fareMarketingType": "BASIC",
+                    "rbd": "N",
+                    "seatsAvailable": 2,
+                    "minutesToScheduledFlightDeparture": 19338
+                }
+            ],
+            "stopOvers": [
+                {
+                    "airport": {
+                        "code": "KUL",
+                        "name": "Kuala Lumpur Intl",
+                        "city": "Kuala Lumpur",
+                        "country": "Malaysia",
+                        "lat": 2.745578,
+                        "lng": 101.709917,
+                        "terminal": "M",
+                        "gate": null,
+                        "timezone": "Asia/Kuala_Lumpur"
+                    },
+                    "duration": "PT3H",
+                    "durationAsString": "3h 0m"
+                }
+            ],
+            "fareDetails": {
+                "perPassengerJourneyFares": [
+                    {
+                        "passengerType": "ADT",
+                        "fare": "349.99",
+                        "currencyCode": "SGD"
+                    },
+                    {
+                        "passengerType": "INF",
+                        "fare": "34.98",
+                        "currencyCode": "SGD"
+                    }
+                ],
+                "journeyFare": "734.96",
+                "totalTripFare": null,
+                "fareCurrency": "SGD"
+            },
+            "returnOptions": [
+                {
+                    "optionId": 0,
+                    "flights": [
+                        {
+                            "flightNumber": "0001",
+                            "departureAirport": {
+                                "code": "LHR",
+                                "name": "Heathrow",
+                                "city": "London",
+                                "country": "United Kingdom",
+                                "lat": 51.4775,
+                                "lng": -0.461389,
+                                "terminal": "4",
+                                "gate": null,
+                                "timezone": "Europe/London"
+                            },
+                            "arrivalAirport": {
+                                "code": "KUL",
+                                "name": "Kuala Lumpur Intl",
+                                "city": "Kuala Lumpur",
+                                "country": "Malaysia",
+                                "lat": 2.745578,
+                                "lng": 101.709917,
+                                "terminal": null,
+                                "gate": null,
+                                "timezone": "Asia/Kuala_Lumpur"
+                            },
+                            "marketingAirline": "MH",
+                            "operatingAirline": null,
+                            "equipment": "744",
+                            "flightRPH": 20101,
+                            "comments": [],
+                            "depScheduled": "2013-03-21T22:00:00.000Z",
+                            "arrScheduled": "2013-03-22T17:25:00.000+08:00",
+                            "depEstimated": null,
+                            "depActual": null,
+                            "arrEstimated": null,
+                            "arrActual": null,
+                            "cabin": "ECONOMY",
+                            "fareMarketingType": "BASIC",
+                            "rbd": "Q",
+                            "seatsAvailable": 2,
+                            "minutesToScheduledFlightDeparture": 21933
+                        },
+                        {
+                            "flightNumber": "0607",
+                            "departureAirport": {
+                                "code": "KUL",
+                                "name": "Kuala Lumpur Intl",
+                                "city": "Kuala Lumpur",
+                                "country": "Malaysia",
+                                "lat": 2.745578,
+                                "lng": 101.709917,
+                                "terminal": "M",
+                                "gate": null,
+                                "timezone": "Asia/Kuala_Lumpur"
+                            },
+                            "arrivalAirport": {
+                                "code": "SIN",
+                                "name": "Changi Intl",
+                                "city": "Singapore",
+                                "country": "Singapore",
+                                "lat": 1.350189,
+                                "lng": 103.994433,
+                                "terminal": "2",
+                                "gate": null,
+                                "timezone": "Asia/Singapore"
+                            },
+                            "marketingAirline": "MH",
+                            "operatingAirline": null,
+                            "equipment": "738",
+                            "flightRPH": 20102,
+                            "comments": [],
+                            "depScheduled": "2013-03-22T19:30:00.000+08:00",
+                            "arrScheduled": "2013-03-22T20:25:00.000+08:00",
+                            "depEstimated": null,
+                            "depActual": null,
+                            "arrEstimated": null,
+                            "arrActual": null,
+                            "cabin": "ECONOMY",
+                            "fareMarketingType": "FULL_FLEX",
+                            "rbd": "B",
+                            "seatsAvailable": 9,
+                            "minutesToScheduledFlightDeparture": 22743
+                        }
+                    ],
+                    "stopOvers": [
+                        {
+                            "airport": {
+                                "code": "KUL",
+                                "name": "Kuala Lumpur Intl",
+                                "city": "Kuala Lumpur",
+                                "country": "Malaysia",
+                                "lat": 2.745578,
+                                "lng": 101.709917,
+                                "terminal": null,
+                                "gate": null,
+                                "timezone": "Asia/Kuala_Lumpur"
+                            },
+                            "duration": "PT2H5M",
+                            "durationAsString": "2h 5m"
+                        }
+                    ],
+                    "fareDetails": {
+                        "perPassengerJourneyFares": [
+                            {
+                                "passengerType": "ADT",
+                                "fare": "274.99",
+                                "currencyCode": "SGD"
+                            },
+                            {
+                                "passengerType": "INF",
+                                "fare": "27.48",
+                                "currencyCode": "SGD"
+                            }
+                        ],
+                        "perPassengerTripTaxes": [
+                            {
+                                "passengerType": "ADT",
+                                "totalTax": "837.80",
+                                "taxes": [
+                                    {
+                                        "code": "YQ",
+                                        "amount": "25.60",
+                                        "currency": "SGD"
+                                    },
+                                    {
+                                        "code": "YQ",
+                                        "amount": "532.80",
+                                        "currency": "SGD"
+                                    },
+                                    {
+                                        "code": "YR",
+                                        "amount": "10.40",
+                                        "currency": "SGD"
+                                    },
+                                    {
+                                        "code": "OO",
+                                        "amount": "8.00",
+                                        "currency": "SGD"
+                                    },
+                                    {
+                                        "code": "OP",
+                                        "amount": "6.10",
+                                        "currency": "SGD"
+                                    },
+                                    {
+                                        "code": "SG",
+                                        "amount": "13.90",
+                                        "currency": "SGD"
+                                    },
+                                    {
+                                        "code": "GB",
+                                        "amount": "175.30",
+                                        "currency": "SGD"
+                                    },
+                                    {
+                                        "code": "UB",
+                                        "amount": "65.70",
+                                        "currency": "SGD"
+                                    }
+                                ]
+                            },
+                            {
+                                "passengerType": "INF",
+                                "totalTax": "91.30",
+                                "taxes": [
+                                    {
+                                        "code": "YQ",
+                                        "amount": "25.60",
+                                        "currency": "SGD"
+                                    },
+                                    {
+                                        "code": "UB",
+                                        "amount": "65.70",
+                                        "currency": "SGD"
+                                    }
+                                ]
+                            }
+                        ],
+                        "journeyFare": "577.46",
+                        "totalTripFare": "3079.90",
+                        "fareCurrency": "SGD"
+                    },
+                    "magicString": "",
+                    "seatsAvailable": [
+                        2,
+                        9
+                    ],
+                    "corporateAccount": false,
+                    "flightCanBeHeld": true,
+                    "directFlight": false,
+                    "lowestSeatCount": 2
+                }
+            ],
+            "magicString": null,
+            "seatsAvailable": [
+                9,
+                2
+            ],
+            "corporateAccount": false,
+            "flightCanBeHeld": true,
+            "directFlight": false,
+            "lowestSeatCount": 2
+        },
+        {
+            "optionId": 3,
+            "flights": [
+                {
+                    "flightNumber": "0602",
+                    "departureAirport": {
+                        "code": "SIN",
+                        "name": "Changi Intl",
+                        "city": "Singapore",
+                        "country": "Singapore",
+                        "lat": 1.350189,
+                        "lng": 103.994433,
+                        "terminal": "2",
+                        "gate": null,
+                        "timezone": "Asia/Singapore"
+                    },
+                    "arrivalAirport": {
+                        "code": "KUL",
+                        "name": "Kuala Lumpur Intl",
+                        "city": "Kuala Lumpur",
+                        "country": "Malaysia",
+                        "lat": 2.745578,
+                        "lng": 101.709917,
+                        "terminal": "M",
+                        "gate": null,
+                        "timezone": "Asia/Kuala_Lumpur"
+                    },
+                    "marketingAirline": "MH",
+                    "operatingAirline": null,
+                    "equipment": "738",
+                    "flightRPH": 10201,
+                    "comments": [],
+                    "depScheduled": "2013-03-20T06:45:00.000+08:00",
+                    "arrScheduled": "2013-03-20T07:45:00.000+08:00",
+                    "depEstimated": null,
+                    "depActual": null,
+                    "arrEstimated": null,
+                    "arrActual": null,
+                    "cabin": "ECONOMY",
+                    "fareMarketingType": "FULL_FLEX",
+                    "rbd": "Y",
+                    "seatsAvailable": 9,
+                    "minutesToScheduledFlightDeparture": 19098
+                },
+                {
+                    "flightNumber": "0004",
+                    "departureAirport": {
+                        "code": "KUL",
+                        "name": "Kuala Lumpur Intl",
+                        "city": "Kuala Lumpur",
+                        "country": "Malaysia",
+                        "lat": 2.745578,
+                        "lng": 101.709917,
+                        "terminal": "M",
+                        "gate": null,
+                        "timezone": "Asia/Kuala_Lumpur"
+                    },
+                    "arrivalAirport": {
+                        "code": "LHR",
+                        "name": "Heathrow",
+                        "city": "London",
+                        "country": "United Kingdom",
+                        "lat": 51.4775,
+                        "lng": -0.461389,
+                        "terminal": "4",
+                        "gate": null,
+                        "timezone": "Europe/London"
+                    },
+                    "marketingAirline": "MH",
+                    "operatingAirline": null,
+                    "equipment": "744",
+                    "flightRPH": 10202,
+                    "comments": [],
+                    "depScheduled": "2013-03-20T10:45:00.000+08:00",
+                    "arrScheduled": "2013-03-20T16:15:00.000Z",
+                    "depEstimated": null,
+                    "depActual": null,
+                    "arrEstimated": null,
+                    "arrActual": null,
+                    "cabin": "ECONOMY",
+                    "fareMarketingType": "BASIC",
+                    "rbd": "N",
+                    "seatsAvailable": 2,
+                    "minutesToScheduledFlightDeparture": 19338
+                }
+            ],
+            "stopOvers": [
+                {
+                    "airport": {
+                        "code": "KUL",
+                        "name": "Kuala Lumpur Intl",
+                        "city": "Kuala Lumpur",
+                        "country": "Malaysia",
+                        "lat": 2.745578,
+                        "lng": 101.709917,
+                        "terminal": "M",
+                        "gate": null,
+                        "timezone": "Asia/Kuala_Lumpur"
+                    },
+                    "duration": "PT3H",
+                    "durationAsString": "3h 0m"
+                }
+            ],
+            "fareDetails": {
+                "perPassengerJourneyFares": [
+                    {
+                        "passengerType": "ADT",
+                        "fare": "349.99",
+                        "currencyCode": "SGD"
+                    },
+                    {
+                        "passengerType": "INF",
+                        "fare": "34.98",
+                        "currencyCode": "SGD"
+                    }
+                ],
+                "journeyFare": "734.96",
+                "totalTripFare": null,
+                "fareCurrency": "SGD"
+            },
+            "returnOptions": [
+                {
+                    "optionId": 0,
+                    "flights": [
+                        {
+                            "flightNumber": "0003",
+                            "departureAirport": {
+                                "code": "LHR",
+                                "name": "Heathrow",
+                                "city": "London",
+                                "country": "United Kingdom",
+                                "lat": 51.4775,
+                                "lng": -0.461389,
+                                "terminal": "4",
+                                "gate": null,
+                                "timezone": "Europe/London"
+                            },
+                            "arrivalAirport": {
+                                "code": "KUL",
+                                "name": "Kuala Lumpur Intl",
+                                "city": "Kuala Lumpur",
+                                "country": "Malaysia",
+                                "lat": 2.745578,
+                                "lng": 101.709917,
+                                "terminal": null,
+                                "gate": null,
+                                "timezone": "Asia/Kuala_Lumpur"
+                            },
+                            "marketingAirline": "MH",
+                            "operatingAirline": null,
+                            "equipment": "380",
+                            "flightRPH": 20201,
+                            "comments": [],
+                            "depScheduled": "2013-03-21T10:50:00.000Z",
+                            "arrScheduled": "2013-03-22T07:10:00.000+08:00",
+                            "depEstimated": null,
+                            "depActual": null,
+                            "arrEstimated": null,
+                            "arrActual": null,
+                            "cabin": "ECONOMY",
+                            "fareMarketingType": "BASIC",
+                            "rbd": "N",
+                            "seatsAvailable": 2,
+                            "minutesToScheduledFlightDeparture": 21263
+                        },
+                        {
+                            "flightNumber": "0611",
+                            "departureAirport": {
+                                "code": "KUL",
+                                "name": "Kuala Lumpur Intl",
+                                "city": "Kuala Lumpur",
+                                "country": "Malaysia",
+                                "lat": 2.745578,
+                                "lng": 101.709917,
+                                "terminal": "M",
+                                "gate": null,
+                                "timezone": "Asia/Kuala_Lumpur"
+                            },
+                            "arrivalAirport": {
+                                "code": "SIN",
+                                "name": "Changi Intl",
+                                "city": "Singapore",
+                                "country": "Singapore",
+                                "lat": 1.350189,
+                                "lng": 103.994433,
+                                "terminal": "2",
+                                "gate": null,
+                                "timezone": "Asia/Singapore"
+                            },
+                            "marketingAirline": "MH",
+                            "operatingAirline": null,
+                            "equipment": "734",
+                            "flightRPH": 20202,
+                            "comments": [],
+                            "depScheduled": "2013-03-22T09:25:00.000+08:00",
+                            "arrScheduled": "2013-03-22T10:20:00.000+08:00",
+                            "depEstimated": null,
+                            "depActual": null,
+                            "arrEstimated": null,
+                            "arrActual": null,
+                            "cabin": "ECONOMY",
+                            "fareMarketingType": "FULL_FLEX",
+                            "rbd": "B",
+                            "seatsAvailable": 9,
+                            "minutesToScheduledFlightDeparture": 22138
+                        }
+                    ],
+                    "stopOvers": [
+                        {
+                            "airport": {
+                                "code": "KUL",
+                                "name": "Kuala Lumpur Intl",
+                                "city": "Kuala Lumpur",
+                                "country": "Malaysia",
+                                "lat": 2.745578,
+                                "lng": 101.709917,
+                                "terminal": null,
+                                "gate": null,
+                                "timezone": "Asia/Kuala_Lumpur"
+                            },
+                            "duration": "PT2H15M",
+                            "durationAsString": "2h 15m"
+                        }
+                    ],
+                    "fareDetails": {
+                        "perPassengerJourneyFares": [
+                            {
+                                "passengerType": "ADT",
+                                "fare": "349.99",
+                                "currencyCode": "SGD"
+                            },
+                            {
+                                "passengerType": "INF",
+                                "fare": "34.98",
+                                "currencyCode": "SGD"
+                            }
+                        ],
+                        "perPassengerTripTaxes": [
+                            {
+                                "passengerType": "ADT",
+                                "totalTax": "837.80",
+                                "taxes": [
+                                    {
+                                        "code": "YQ",
+                                        "amount": "25.60",
+                                        "currency": "SGD"
+                                    },
+                                    {
+                                        "code": "YQ",
+                                        "amount": "532.80",
+                                        "currency": "SGD"
+                                    },
+                                    {
+                                        "code": "YR",
+                                        "amount": "10.40",
+                                        "currency": "SGD"
+                                    },
+                                    {
+                                        "code": "OO",
+                                        "amount": "8.00",
+                                        "currency": "SGD"
+                                    },
+                                    {
+                                        "code": "OP",
+                                        "amount": "6.10",
+                                        "currency": "SGD"
+                                    },
+                                    {
+                                        "code": "SG",
+                                        "amount": "13.90",
+                                        "currency": "SGD"
+                                    },
+                                    {
+                                        "code": "GB",
+                                        "amount": "175.30",
+                                        "currency": "SGD"
+                                    },
+                                    {
+                                        "code": "UB",
+                                        "amount": "65.70",
+                                        "currency": "SGD"
+                                    }
+                                ]
+                            },
+                            {
+                                "passengerType": "INF",
+                                "totalTax": "91.30",
+                                "taxes": [
+                                    {
+                                        "code": "YQ",
+                                        "amount": "25.60",
+                                        "currency": "SGD"
+                                    },
+                                    {
+                                        "code": "UB",
+                                        "amount": "65.70",
+                                        "currency": "SGD"
+                                    }
+                                ]
+                            }
+                        ],
+                        "journeyFare": "734.96",
+                        "totalTripFare": "3236.90",
+                        "fareCurrency": "SGD"
+                    },
+                    "magicString": "",
+                    "seatsAvailable": [
+                        2,
+                        9
+                    ],
+                    "corporateAccount": false,
+                    "flightCanBeHeld": true,
+                    "directFlight": false,
+                    "lowestSeatCount": 2
+                }
+            ],
+            "departureAirport": {
+                "code": "SIN",
+                "name": "Changi Intl",
+                "city": "Singapore",
+                "country": "Singapore",
+                "lat": 1.350189,
+                "lng": 103.994433,
+                "terminal": null,
+                "gate": null,
+                "timezone": "Asia/Singapore"
+            },
+            "arrivalAirport": {
+                "code": "LHR",
+                "name": "Heathrow",
+                "city": "London",
+                "country": "United Kingdom",
+                "lat": 51.4775,
+                "lng": -0.461389,
+                "terminal": null,
+                "gate": null,
+                "timezone": "Europe/London"
+            },
+            "fareRules": [
+                {
+                    "id": 70,
+                    "order": 3,
+                    "priority": 0,
+                    "code": "Full_Flex",
+                    "name": "MHflex",
+                    "value": "Economy Class Fares",
+                    "listFareRules": [
+                        {
+                            "id": 360,
+                            "order": 0,
+                            "code": "",
+                            "name": "Discount level",
+                            "value": "Varies"
+                        },
+                        {
+                            "id": 370,
+                            "order": 1,
+                            "code": "",
+                            "name": "Where to buy",
+                            "value": "All channels"
+                        },
+                        {
+                            "id": 380,
+                            "order": 2,
+                            "code": "",
+                            "name": "Advance purchase",
+                            "value": "Anytime"
+                        },
+                        {
+                            "id": 390,
+                            "order": 3,
+                            "code": "",
+                            "name": "Payment",
+                            "value": "Ticket dateline applies"
+                        },
+                        {
+                            "id": 400,
+                            "order": 4,
+                            "code": "",
+                            "name": "Baggage allowance",
+                            "value": "20 kg"
+                        },
+                        {
+                            "id": 410,
+                            "order": 5,
+                            "code": "",
+                            "name": "Advance seat selection",
+                            "value": "Allowed"
+                        },
+                        {
+                            "id": 420,
+                            "order": 6,
+                            "code": "",
+                            "name": "Enrich miles",
+                            "value": "125%"
+                        },
+                        {
+                            "id": 430,
+                            "order": 7,
+                            "code": "",
+                            "name": "Change of booking",
+                            "value": "For a fee"
+                        },
+                        {
+                            "id": 440,
+                            "order": 8,
+                            "code": "",
+                            "name": "Upgrade",
+                            "value": "For a fee"
+                        },
+                        {
+                            "id": 450,
+                            "order": 9,
+                            "code": "",
+                            "name": "Stand by at the airport",
+                            "value": "Allowed"
+                        },
+                        {
+                            "id": 460,
+                            "order": 10,
+                            "code": "",
+                            "name": "No show",
+                            "value": "Penalties apply"
+                        },
+                        {
+                            "id": 470,
+                            "order": 11,
+                            "code": "",
+                            "name": "Refund",
+                            "value": "For a fee"
+                        }
+                    ],
+                    "listFareNotes": [
+                        {
+                            "id": 10,
+                            "order": 0,
+                            "code": "",
+                            "name": "Important Notice",
+                            "value": ""
+                        },
+                        {
+                            "id": 15,
+                            "order": 1,
+                            "code": "",
+                            "name": "",
+                            "value": ""
+                        },
+                        {
+                            "id": 20,
+                            "order": 2,
+                            "code": "",
+                            "name": "1.",
+                            "value": "Flights MH3000-3999 are operated by MASwings and subjected to MASwings' Terms and Conditions."
+                        },
+                        {
+                            "id": 30,
+                            "order": 3,
+                            "code": "",
+                            "name": "2.",
+                            "value": "For transpacific and transatlantic flights, the following baggage allowances apply: Economy - 2 pieces (23kg each piece), First and Business - 2 pieces (32kg each piece)."
+                        },
+                        {
+                            "id": 40,
+                            "order": 4,
+                            "code": "",
+                            "name": "3.",
+                            "value": "For journeys originating from Australia, the following baggage allowances apply: Economy - 30kg, Business - 40kg, First- 50kg."
+                        },
+                        {
+                            "id": 50,
+                            "order": 5,
+                            "code": "",
+                            "name": "4.",
+                            "value": "Upgrade, standby at the airport and refund fees for specific routes can be obtained from subsequent booking pages."
+                        },
+                        {
+                            "id": 60,
+                            "order": 6,
+                            "code": "",
+                            "name": "5.",
+                            "value": "Standby at the airport denotes the same day for an earlier flight."
+                        },
+                        {
+                            "id": 70,
+                            "order": 7,
+                            "code": "",
+                            "name": "6.",
+                            "value": "Fare rules shown are indicative only. Please call our Contact Center to check the detailed fare rules."
+                        },
+                        {
+                            "id": 80,
+                            "order": 8,
+                            "code": "",
+                            "name": "",
+                            "value": "Should there be any discrepancy between the above information and the terms and conditions (T&C) published in the fare rules, then the T&C in the fare rules shall prevail."
+                        }
+                    ]
+                },
+                {
+                    "id": 50,
+                    "order": 1,
+                    "priority": 0,
+                    "code": "Basic",
+                    "name": "MHbasic",
+                    "value": "Economy Class Fares",
+                    "listFareRules": [
+                        {
+                            "id": 130,
+                            "order": 0,
+                            "code": "",
+                            "name": "Discount level",
+                            "value": "Up to 65%"
+                        },
+                        {
+                            "id": 140,
+                            "order": 1,
+                            "code": "",
+                            "name": "Where to buy",
+                            "value": "All channels"
+                        },
+                        {
+                            "id": 150,
+                            "order": 2,
+                            "code": "",
+                            "name": "Advance purchase",
+                            "value": "Applies"
+                        },
+                        {
+                            "id": 160,
+                            "order": 3,
+                            "code": "",
+                            "name": "Payment",
+                            "value": "Ticket dateline applies"
+                        },
+                        {
+                            "id": 170,
+                            "order": 4,
+                            "code": "",
+                            "name": "Baggage allowance",
+                            "value": "20 kg"
+                        },
+                        {
+                            "id": 180,
+                            "order": 5,
+                            "code": "",
+                            "name": "Advance seat selection",
+                            "value": "Not allowed"
+                        },
+                        {
+                            "id": 190,
+                            "order": 6,
+                            "code": "",
+                            "name": "Enrich miles",
+                            "value": "Nil"
+                        },
+                        {
+                            "id": 200,
+                            "order": 7,
+                            "code": "",
+                            "name": "Change of booking",
+                            "value": "Not allowed"
+                        },
+                        {
+                            "id": 210,
+                            "order": 8,
+                            "code": "",
+                            "name": "Upgrade",
+                            "value": "Not allowed"
+                        },
+                        {
+                            "id": 220,
+                            "order": 9,
+                            "code": "",
+                            "name": "Stand by at the airport",
+                            "value": "For a fee"
+                        },
+                        {
+                            "id": 220,
+                            "order": 10,
+                            "code": "",
+                            "name": "No show",
+                            "value": "Penalty applies"
+                        },
+                        {
+                            "id": 230,
+                            "order": 11,
+                            "code": "",
+                            "name": "Refund",
+                            "value": "For a fee"
+                        }
+                    ],
+                    "listFareNotes": [
+                        {
+                            "id": 10,
+                            "order": 0,
+                            "code": "",
+                            "name": "Important Notice",
+                            "value": ""
+                        },
+                        {
+                            "id": 15,
+                            "order": 1,
+                            "code": "",
+                            "name": "",
+                            "value": ""
+                        },
+                        {
+                            "id": 20,
+                            "order": 2,
+                            "code": "",
+                            "name": "1.",
+                            "value": "Flights MH3000-3999 are operated by MASwings and subjected to MASwings' Terms and Conditions."
+                        },
+                        {
+                            "id": 30,
+                            "order": 3,
+                            "code": "",
+                            "name": "2.",
+                            "value": "For transpacific and transatlantic flights, the following baggage allowances apply: Economy - 2 pieces (23kg each piece), First and Business - 2 pieces (32kg each piece)."
+                        },
+                        {
+                            "id": 40,
+                            "order": 4,
+                            "code": "",
+                            "name": "3.",
+                            "value": "For journeys originating from Australia, the following baggage allowances apply: Economy - 30kg, Business - 40kg, First - 50kg."
+                        },
+                        {
+                            "id": 50,
+                            "order": 5,
+                            "code": "",
+                            "name": "4.",
+                            "value": "Upgrade, standby at the airport and refund fees for specific routes can be obtained from subsequent booking pages."
+                        },
+                        {
+                            "id": 60,
+                            "order": 6,
+                            "code": "",
+                            "name": "5.",
+                            "value": "Standby at the airport denotes the same day for an earlier flight."
+                        },
+                        {
+                            "id": 70,
+                            "order": 7,
+                            "code": "",
+                            "name": "6.",
+                            "value": "Fare rules shown are indicative only. Please call our Contact Center to check the detailed fare rules."
+                        },
+                        {
+                            "id": 80,
+                            "order": 8,
+                            "code": "",
+                            "name": "",
+                            "value": "Should there be any discrepancy between the above information and the terms and conditions (T&C) published in the fare rules, then the T&C in the fare rules shall prevail."
+                        }
+                    ]
+                }
+            ],
+            "Errors": [],
+            "Warnings": []
+        }
+    ]
+}
