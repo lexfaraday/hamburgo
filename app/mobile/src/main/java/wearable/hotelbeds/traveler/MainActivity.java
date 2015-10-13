@@ -1,7 +1,10 @@
 package wearable.hotelbeds.traveler;
 
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,15 +16,16 @@ import android.view.MenuItem;
 import android.view.View;
 
 import wearable.hotelbeds.shared.event.EventUtils;
-import wearable.hotelbeds.traveler.nav.FragmentDrawer;
 import wearable.hotelbeds.traveler.nav.MenuUtils;
 
-public class MainActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private static String LOG_TAG = "RecyclerViewActivity";
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle mDrawerToggle;
 
 
     @Override
@@ -43,16 +47,15 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        FragmentDrawer drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar, MenuUtils.MENU_SELECTED_MAIN);
-        drawerFragment.setDrawerListener(this);
-
-
-        // Code to Add an item with default animation
-        //((MyRecyclerViewAdapter) mAdapter).addItem(obj, index);
-
-        // Code to remove an item with default animation
-        //((MyRecyclerViewAdapter) mAdapter).deleteItem(index);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close);
+        drawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        if (navigationView != null) {
+            navigationView.setNavigationItemSelectedListener(this);
+            navigationView.setCheckedItem(R.id.nav_home);
+        }
     }
 
     @Override
@@ -94,17 +97,28 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         };
         SearchView mSearchView = (SearchView) searchMenuItem.getActionView();
         mSearchView.setOnQueryTextListener(searchListener);
+        if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            getMenuInflater().inflate(R.menu.menu_lateral, menu);
+            return true;
+        }
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void onDrawerItemSelected(View view, int position) {
-        MenuUtils.onMenuSelected(this, MenuUtils.MENU_SELECTED_MAIN, position);
+    public boolean onNavigationItemSelected(final MenuItem menuItem) {
+        MenuUtils.onMenuSelected(this, menuItem);
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
     }
 
 

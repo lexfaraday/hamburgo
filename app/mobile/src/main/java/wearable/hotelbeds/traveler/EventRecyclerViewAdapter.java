@@ -56,7 +56,7 @@ public class EventRecyclerViewAdapter extends RecyclerView
     }
 
     public void setOnItemClickListener(MyClickListener myClickListener) {
-        this.myClickListener = myClickListener;
+        EventRecyclerViewAdapter.myClickListener = myClickListener;
     }
 
     public EventRecyclerViewAdapter(ArrayList<EventInfoBean> myDataset, AppCompatActivity activity) {
@@ -109,6 +109,6 @@ public class EventRecyclerViewAdapter extends RecyclerView
     }
 
     public interface MyClickListener {
-        public void onItemClick(int position, View v);
+        void onItemClick(int position, View v);
     }
 }

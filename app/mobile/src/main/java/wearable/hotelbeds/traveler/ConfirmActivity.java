@@ -2,7 +2,10 @@ package wearable.hotelbeds.traveler;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -19,10 +22,9 @@ import java.math.BigDecimal;
 import wearable.hotelbeds.shared.price.ConfirmDataBean;
 import wearable.hotelbeds.shared.price.PriceInfoBean;
 import wearable.hotelbeds.shared.price.PriceUtils;
-import wearable.hotelbeds.traveler.nav.FragmentDrawer;
 import wearable.hotelbeds.traveler.nav.MenuUtils;
 
-public class ConfirmActivity extends AppCompatActivity implements FragmentDrawer.FragmentDrawerListener {
+public class ConfirmActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static String TAG = "ConfirmActivity";
 
@@ -33,6 +35,8 @@ public class ConfirmActivity extends AppCompatActivity implements FragmentDrawer
     private TextView flyOut;
     private TextView flyIn;
     private PriceInfoBean priceBean;
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle mDrawerToggle;
 
 
     @Override
@@ -72,9 +76,14 @@ public class ConfirmActivity extends AppCompatActivity implements FragmentDrawer
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        FragmentDrawer drawerFragment = (FragmentDrawer) getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
-        drawerFragment.setUp(R.id.fragment_navigation_drawer, (DrawerLayout) findViewById(R.id.drawer_layout), mToolbar, MenuUtils.MENU_SELECTED_NONE);
-        drawerFragment.setDrawerListener(this);
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close);
+        drawerLayout.setDrawerListener(mDrawerToggle);
+        mDrawerToggle.syncState();
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        if (navigationView != null) {
+            navigationView.setNavigationItemSelectedListener(this);
+        }
 
     }
 
@@ -82,17 +91,28 @@ public class ConfirmActivity extends AppCompatActivity implements FragmentDrawer
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            getMenuInflater().inflate(R.menu.menu_lateral, menu);
+            return true;
+        }
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawerLayout.openDrawer(GravityCompat.START);
+                return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
     @Override
-    public void onDrawerItemSelected(View view, int position) {
-        MenuUtils.onMenuSelected(this, MenuUtils.MENU_SELECTED_NONE, position);
+    public boolean onNavigationItemSelected(final MenuItem menuItem) {
+        MenuUtils.onMenuSelected(this, menuItem);
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     public void btnConfirm(View v) {

@@ -4,9 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.view.MenuItem;
 
 import wearable.hotelbeds.shared.event.EventUtils;
 import wearable.hotelbeds.shared.price.PriceUtils;
@@ -18,42 +16,29 @@ import wearable.hotelbeds.traveler.R;
  * Created by Zavierazo on 12/10/2015.
  */
 public class MenuUtils {
-    public static final int MENU_SELECTED_NONE = -1;
-    public static final int MENU_SELECTED_MAIN = 0;
-    public static final int MENU_SELECTED_BOOKINGS = 1;
-
+    public static final int DRAWER_CLOSE_DELAY_MS = 250;
     private static final String TAG = "MenuUtils";
 
-    public static List<NavDrawerItem> getMenuItems(int activityId) {
-        List<NavDrawerItem> data = new ArrayList<>();
-        NavDrawerItem navItem = new NavDrawerItem();
-        navItem.setTitle("Home");
-        navItem.setChecked(activityId == MENU_SELECTED_MAIN);
-        navItem.setIcon(R.drawable.ic_home_black_24dp);
-        data.add(navItem);
-        NavDrawerItem navItem2 = new NavDrawerItem();
-        navItem2.setTitle("Bookings");
-        navItem2.setChecked(activityId == MENU_SELECTED_BOOKINGS);
-        navItem2.setIcon(R.drawable.ic_book_black_24dp);
-        data.add(navItem2);
-        return data;
-    }
-
-    public static void onMenuSelected(Context context, int activityId, int position) {
+    public static void onMenuSelected(Context context, MenuItem menuItem) {
         //TODO Make actions
-        if (activityId == position) {
-            return;//Si se selecciona misma opcion en la que ya se encuentra no se hace nada.
-        }
+        menuItem.setChecked(true);
         Intent intent = null;
-        switch (position) {
-            case MENU_SELECTED_MAIN:
+        switch (menuItem.getItemId()) {
+            case R.id.nav_home:
                 //Home
+                if(context instanceof MainActivity){
+                    return;
+                }
                 Log.i(TAG, "Home Selected");
                 intent = new Intent(context, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK); // Adds the FLAG_ACTIVITY_NO_HISTORY flag
                 context.startActivity(intent);
                 break;
-            case MENU_SELECTED_BOOKINGS:
+            case R.id.nav_bookings:
                 //Bookings
+                if(context instanceof ConfirmActivity){
+                    return;
+                }
                 Log.i(TAG, "Bookings Selected");
                 intent = new Intent(context, ConfirmActivity.class);
                 Bundle b = new Bundle();
