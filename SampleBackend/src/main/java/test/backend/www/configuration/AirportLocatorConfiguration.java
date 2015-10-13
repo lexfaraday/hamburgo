@@ -6,11 +6,10 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
-import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import lombok.extern.slf4j.Slf4j;
 import test.backend.www.model.Airport;
 import test.backend.www.model.AirportLocator;
 
@@ -18,6 +17,7 @@ import test.backend.www.model.AirportLocator;
 @Slf4j
 public class AirportLocatorConfiguration
 {
+  // Source: http://openflights.org/data.html
   final static String AIRPORT_FILE_NAME = "airports.dat";
 
   @Bean
