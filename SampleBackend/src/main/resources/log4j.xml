@@ -14,6 +14,10 @@
   <logger name="test.backend">
     <level value="info" />
   </logger>
+
+  <logger name="test.backend.www.model.hotelbeds.sdk.helpers.LoggingRequestInterceptor">
+    <level value="debug" />
+  </logger>
   
   <logger name="org.springframework">
     <level value="warn" />

@@ -1,0 +1,8 @@
+XMLAvailabilityRQ
+XMLAvailabilityRS
+XMLAvailConfirmRQ
+XMLBookingDetailRS
+XMLBookingCancellationRQ
+XMLBookingCancellationRS
+XMLBookingListRS
+GenericErrorRS
