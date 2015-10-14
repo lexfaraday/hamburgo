@@ -2,6 +2,7 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_main">Hovee</string>
     <string name="title_activity_confirmation">Confirmation</string>
+    <string name="title_activity_hotel_flight">Hotels and Flights</string>
     <string name="nav_item_home">Home</string>
     <string name="nav_item_bookings">Bookings</string>
     <string name="action_search">Search</string>

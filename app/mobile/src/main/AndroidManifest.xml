@@ -52,6 +52,10 @@
         <activity
             android:name=".ConfirmActivity"
             android:label="@string/title_activity_confirmation"></activity>
+
+        <activity
+            android:name=".HotelFlightActivity"
+            android:label="@string/title_activity_hotel_flight"></activity>
     </application>
 
 </manifest>

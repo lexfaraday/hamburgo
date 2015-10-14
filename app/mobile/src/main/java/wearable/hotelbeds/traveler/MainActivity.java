@@ -1,5 +1,6 @@
 package wearable.hotelbeds.traveler;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -66,7 +67,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                                                              EventRecyclerViewAdapter.MyClickListener() {
                                                                                  @Override
                                                                                  public void onItemClick(int position, View v) {
-                                                                                     Log.i(LOG_TAG, " Clicked on Item " + position);
+                                                                                     Intent intent = new Intent(v.getContext(), HotelFlightActivity.class);
+                                                                                     startActivity(intent);
                                                                                  }
                                                                              });
     }
