@@ -19,12 +19,13 @@ public class GeoPoint
   {
     // haversine formula (https://en.wikipedia.org/wiki/Haversine_formula)
     int R = 6371000; // metres
-    double φ1 = latitude.getDecimalRadians();
-    double φ2 = anotherPosition.getLatitude().getDecimalRadians();
-    double Δφ = Math.toRadians((anotherPosition.getLatitude().getDecimalDegrees() - getLatitude().getDecimalDegrees()));
-    double Δλ = Math.toRadians((anotherPosition.getLongitude().getDecimalDegrees() - getLongitude().getDecimalDegrees()));
+    double phi1 = latitude.getDecimalRadians();
+    double phi2 = anotherPosition.getLatitude().getDecimalRadians();
+    double deltaPhi = Math.toRadians((anotherPosition.getLatitude().getDecimalDegrees() - getLatitude().getDecimalDegrees()));
+    double deltaLambda = Math.toRadians((anotherPosition.getLongitude().getDecimalDegrees() - getLongitude().getDecimalDegrees()));
 
-    double a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) + Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+    double a = Math.sin(deltaPhi / 2) * Math.sin(deltaPhi / 2)
+        + Math.cos(phi1) * Math.cos(phi2) * Math.sin(deltaLambda / 2) * Math.sin(deltaLambda / 2);
     double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
     return new Distance(R * c);
