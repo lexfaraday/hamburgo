@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -28,7 +29,8 @@ public class ConfirmActivity extends AppCompatActivity implements NavigationView
 
     private static String TAG = "ConfirmActivity";
 
-    private ImageView eventImage;
+    private LinearLayout myGallery;
+    private TextView event;
     private TextView price;
     private TextView calendar;
     private TextView hotel;
@@ -43,7 +45,8 @@ public class ConfirmActivity extends AppCompatActivity implements NavigationView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm);
-        eventImage = (ImageView) findViewById(R.id.eventImage);
+        myGallery = (LinearLayout) findViewById(R.id.mygallery);
+        event = (TextView) findViewById(R.id.event);
         price = (TextView) findViewById(R.id.price);
         calendar = (TextView) findViewById(R.id.calendario);
         hotel = (TextView) findViewById(R.id.hotel);
@@ -53,9 +56,15 @@ public class ConfirmActivity extends AppCompatActivity implements NavigationView
         //Load info
         priceBean = (PriceInfoBean) getIntent().getExtras().getSerializable("price");
         if (priceBean != null) {
-
-            Uri uri = Uri.parse(priceBean.getEvent().getImageUrl());
-            Picasso.with(eventImage.getContext()).load(uri).fit().into(eventImage);
+            if (priceBean.getEvent().getImageUrl() != null) {
+                myGallery.addView(insertPhoto(priceBean.getEvent().getImageUrl()));
+            }
+            if (priceBean.getHotelImages() != null && priceBean.getHotelImages().size() > 0) {
+                for (String imageUrl : priceBean.getHotelImages()) {
+                    myGallery.addView(insertPhoto(imageUrl));
+                }
+            }
+            event.setText(priceBean.getEvent().getName());
             if (priceBean.getTotalAmount().stripTrailingZeros().scale() <= 0) {
                 price.setText(priceBean.getTotalAmount().toString() + " €");
             } else {
@@ -85,6 +94,14 @@ public class ConfirmActivity extends AppCompatActivity implements NavigationView
             navigationView.setNavigationItemSelectedListener(this);
         }
 
+    }
+
+    private View insertPhoto(String path) {
+        Uri uri = Uri.parse(path);
+        View cell = getLayoutInflater().inflate(R.layout.horizontal_image_cell, null);
+        ImageView imageView = (ImageView) cell.findViewById(R.id.image);
+        Picasso.with(imageView.getContext()).load(uri).resize(0, imageView.getLayoutParams().height).into(imageView);
+        return cell;
     }
 
 

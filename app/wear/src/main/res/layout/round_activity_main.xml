@@ -16,7 +16,7 @@
         android:src="@drawable/search_ideogram"
         android:scaleType="fitXY"
         android:onClick="btnSimpleClick"
-        android:background="@android:color/darker_gray"
+        android:background="@color/primary_wear"
         android:layout_margin="30dp" />
 
     <TextView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -27,7 +27,6 @@
         android:paddingTop="15dp"
         android:password="false"
         android:phoneNumber="false"
-        android:textColor="#f80c0c"
         android:textStyle="bold"
         android:typeface="normal"
         android:visibility="visible"

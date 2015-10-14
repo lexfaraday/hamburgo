@@ -32,18 +32,30 @@
             android:paddingStart="16dp"
             android:paddingTop="16dp">
 
-            <ImageView
-                android:id="@+id/eventImage"
-                android:layout_width="match_parent"
+            <HorizontalScrollView
+                android:id="@+id/allimages"
+                android:layout_width="fill_parent"
                 android:layout_height="150dp"
-                android:src="@drawable/default_event" />
+                android:layout_gravity="center"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:id="@+id/mygallery"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="bottom"
+                    android:gravity="bottom"
+                    android:scrollbars="vertical"/>
+            </HorizontalScrollView>
 
             <ImageView
                 android:id="@+id/separador"
                 android:layout_width="fill_parent"
                 android:layout_height="2dip"
-                android:layout_below="@+id/eventImage"
+                android:layout_below="@+id/allimages"
                 android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
                 android:background="@color/black_info" />
 
             <ImageView
@@ -67,10 +79,30 @@
 
 
             <ImageView
-                android:id="@+id/imagecalendar"
+                android:id="@+id/imageevent"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_below="@+id/price"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_event_black_24dp" />
+
+            <TextView
+                android:id="@+id/event"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/price"
+                android:layout_marginLeft="2dp"
+                android:layout_toEndOf="@+id/imageevent"
+                android:text="openDeck | Oktoberfest"
+                android:textColor="#404040"
+                android:textSize="@dimen/text_size" />
+
+
+            <ImageView
+                android:id="@+id/imagecalendar"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_below="@+id/event"
                 android:layout_gravity="center"
                 android:src="@drawable/calendar" />
 
@@ -78,7 +110,7 @@
                 android:id="@+id/calendario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/price"
+                android:layout_below="@+id/event"
                 android:layout_marginLeft="2dp"
                 android:layout_toEndOf="@+id/imagecalendar"
                 android:text="16/10/2015 - 17/10/2015"

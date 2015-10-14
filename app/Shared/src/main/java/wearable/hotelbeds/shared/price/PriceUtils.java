@@ -29,11 +29,11 @@ public class PriceUtils {
         //TODO Si viene location null poner gps de evento hackaton :-)
         //Start Dummy
         try {
-            prices.add(new PriceInfoBean(event, 1, new BigDecimal("653.5"), "Sunset Flower Palas", 4, DATE_FORMATER_HOUR.parse("14/10/2015 18:30"), DATE_FORMATER_HOUR.parse("17/10/2015 06:00"), "Double", "Rayanair", "Air Europa"));
-            prices.add(new PriceInfoBean(event, 2, new BigDecimal("520"), "Supreme Haven Resort", 4, DATE_FORMATER_HOUR.parse("14/10/2015 14:20"), DATE_FORMATER_HOUR.parse("17/10/2015 08:10"), "Apartment", "Vueling", "Air Europa"));
-            prices.add(new PriceInfoBean(event, 3, new BigDecimal("465.2"), "Bronze Bay Hotel", 3, DATE_FORMATER_HOUR.parse("14/10/2015 13:45"), DATE_FORMATER_HOUR.parse("17/10/2015 09:40"), "Single", "Air Europa", "Air Europa"));
-            prices.add(new PriceInfoBean(event, 4, new BigDecimal("752.5"), "Baroque", 5, DATE_FORMATER_HOUR.parse("13/10/2015 20:00"), DATE_FORMATER_HOUR.parse("17/10/2015 07:45"), "Suite", "Air Berlin", "Vueling"));
-            prices.add(new PriceInfoBean(event, 5, new BigDecimal("219.85"), "Crescent", 2, DATE_FORMATER_HOUR.parse("13/10/2015 18:30"), DATE_FORMATER_HOUR.parse("17/10/2015 05:20"), "Shared Room", "Vueling", "Air Europa"));
+            prices.add(new PriceInfoBean(event, 1, new BigDecimal("653.5"), "Sunset Flower Palas", 4, dummyHotelUrls(), DATE_FORMATER_HOUR.parse("14/10/2015 18:30"), DATE_FORMATER_HOUR.parse("17/10/2015 06:00"), "Double", "Rayanair", "Air Europa"));
+            prices.add(new PriceInfoBean(event, 2, new BigDecimal("520"), "Supreme Haven Resort", 4, dummyHotelUrls(), DATE_FORMATER_HOUR.parse("14/10/2015 14:20"), DATE_FORMATER_HOUR.parse("17/10/2015 08:10"), "Apartment", "Vueling", "Air Europa"));
+            prices.add(new PriceInfoBean(event, 3, new BigDecimal("465.2"), "Bronze Bay Hotel", 3, dummyHotelUrls(), DATE_FORMATER_HOUR.parse("14/10/2015 13:45"), DATE_FORMATER_HOUR.parse("17/10/2015 09:40"), "Single", "Air Europa", "Air Europa"));
+            prices.add(new PriceInfoBean(event, 4, new BigDecimal("752.5"), "Baroque", 5, dummyHotelUrls(), DATE_FORMATER_HOUR.parse("13/10/2015 20:00"), DATE_FORMATER_HOUR.parse("17/10/2015 07:45"), "Suite", "Air Berlin", "Vueling"));
+            prices.add(new PriceInfoBean(event, 5, new BigDecimal("219.85"), "Crescent", 2, dummyHotelUrls(), DATE_FORMATER_HOUR.parse("13/10/2015 18:30"), DATE_FORMATER_HOUR.parse("17/10/2015 05:20"), "Shared Room", "Vueling", "Air Europa"));
         } catch (Exception e) {
             Log.e("Traveler", "Error al rellenar dummy " + e.getMessage());
         }
@@ -51,5 +51,13 @@ public class PriceUtils {
             bookings.save(context);
         }
         return confirmData;
+    }
+
+    private static List<String> dummyHotelUrls() {
+        List<String> images = new ArrayList<>();
+        images.add("http://luxurycomm.com/wp-content/uploads/2015/07/vaciones-de-lujo-InterContinental.jpg");
+        images.add("http://www.mayfairhotelandspa.com/_images/_design/headers/rooftop2.jpg");
+        images.add("http://www.minihotelpms.com/wp-content/uploads/2013/01/hotel.jpg");
+        return images;
     }
 }
