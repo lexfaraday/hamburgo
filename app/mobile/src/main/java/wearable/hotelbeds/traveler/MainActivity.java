@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //Menu
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar.hideOverflowMenu();
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -97,10 +98,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         };
         SearchView mSearchView = (SearchView) searchMenuItem.getActionView();
         mSearchView.setOnQueryTextListener(searchListener);
-        if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            getMenuInflater().inflate(R.menu.menu_lateral, menu);
-            return true;
-        }
         return true;
     }
 
