@@ -2,9 +2,6 @@ package test.backend.www.controllers;
 
 import java.time.LocalDate;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -16,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import test.backend.www.model.sabre.SabrePricedItineraries;
 import test.backend.www.model.sabre.SabreService;
 

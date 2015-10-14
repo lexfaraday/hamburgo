@@ -8,9 +8,9 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-import lombok.Data;
-
 import org.apache.commons.lang3.StringUtils;
+
+import lombok.Data;
 
 @Data
 public class AirportLocator

@@ -8,15 +8,14 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
-
 import org.apache.commons.codec.binary.Base64;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import test.backend.www.model.sabre.SabreOriginDestinationLocationsResponse.SabreLocation;
 import test.backend.www.model.sabre.SabreOriginDestinationLocationsResponse.SabreOriginDestinationLocation;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Data
 @Slf4j

@@ -3,10 +3,10 @@ package test.backend.www.model.sabre;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Data
 public class SabrePricedItineraries

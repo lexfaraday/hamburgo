@@ -6,4 +6,6 @@ spring:
 server:
   context-path:
 sabre:
-  base_url: https://api.test.sabre.com  
+  base_url: https://api.test.sabre.com
+hotelbeds:
+  base_url: https://api.test.hotelbeds.com/hotel-api/0.2
