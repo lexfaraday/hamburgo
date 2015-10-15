@@ -11,12 +11,14 @@ import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import test.backend.www.model.hotelbeds.basic.convert.json.DateSerializer;
+import test.backend.www.model.hotelbeds.basic.convert.json.CustomDateDeserializer;
+import test.backend.www.model.hotelbeds.basic.convert.json.CustomDateSerializer;
 import test.backend.www.model.hotelbeds.basic.convert.json.RateSerializer;
 
 @JsonInclude(Include.NON_NULL)
@@ -28,10 +30,10 @@ public class RateSupplement {
 	private String code;
 	private String name;
 	@JsonProperty
-	@JsonSerialize(using = DateSerializer.class)
+	@JsonSerialize(using = CustomDateSerializer.class) @JsonDeserialize(using = CustomDateDeserializer.class)
 	private LocalDate from;
 	@JsonProperty
-	@JsonSerialize(using = DateSerializer.class)
+	@JsonSerialize(using = CustomDateSerializer.class) @JsonDeserialize(using = CustomDateDeserializer.class)
 	private LocalDate to;
 	@JsonSerialize(using = RateSerializer.class)
 	private BigDecimal amount;

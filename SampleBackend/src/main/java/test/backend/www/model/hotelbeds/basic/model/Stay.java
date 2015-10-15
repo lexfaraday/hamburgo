@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.AllArgsConstructor;
@@ -20,7 +21,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import test.backend.www.model.hotelbeds.basic.annotation.validators.FutureForLocalDate;
-import test.backend.www.model.hotelbeds.basic.convert.json.DateSerializer;
+import test.backend.www.model.hotelbeds.basic.convert.json.CustomDateDeserializer;
+import test.backend.www.model.hotelbeds.basic.convert.json.CustomDateSerializer;
 
 @JsonInclude(Include.NON_NULL)
 @ToString
@@ -30,12 +32,12 @@ import test.backend.www.model.hotelbeds.basic.convert.json.DateSerializer;
 public class Stay {
 
 	@JsonProperty
-	@JsonSerialize(using = DateSerializer.class)
+	@JsonSerialize(using = CustomDateSerializer.class) @JsonDeserialize(using = CustomDateDeserializer.class)
 	@NotNull
 	@FutureForLocalDate
 	private LocalDate checkIn;
 	@JsonProperty
-	@JsonSerialize(using = DateSerializer.class)
+	@JsonSerialize(using = CustomDateSerializer.class) @JsonDeserialize(using = CustomDateDeserializer.class)
 	@NotNull
 	private LocalDate checkOut;
 	@Min(value = 1)

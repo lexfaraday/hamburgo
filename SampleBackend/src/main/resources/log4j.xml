@@ -16,7 +16,7 @@
   </logger>
 
   <logger name="test.backend.www.model.hotelbeds.sdk.helpers.LoggingRequestInterceptor">
-    <level value="debug" />
+    <level value="warn" />
   </logger>
   
   <logger name="org.springframework">

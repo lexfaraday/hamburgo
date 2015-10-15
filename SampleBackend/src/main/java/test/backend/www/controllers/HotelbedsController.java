@@ -33,7 +33,7 @@ public class HotelbedsController
   public ResponseEntity<Object> flights(@PathVariable(value = "latitude") String latitude, @PathVariable(value = "longitude") String longitude,
       @PathVariable(value = "from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
       @PathVariable(value = "to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to,
-      @RequestParam(value = "limitKm", required = false, defaultValue = "20") long limitKm)
+      @RequestParam(value = "limitKm", required = false, defaultValue = "10") long limitKm)
   {
     return new ResponseEntity<>(hotelbedsService.getAvailability(latitude, longitude, from, to, limitKm), HttpStatus.OK);
   }

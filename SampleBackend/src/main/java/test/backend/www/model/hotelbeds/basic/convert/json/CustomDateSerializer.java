@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 import test.backend.www.model.hotelbeds.basic.util.AssignUtils;
 
-public class DateSerializer extends JsonSerializer<LocalDate> {
+public class CustomDateSerializer extends JsonSerializer<LocalDate> {
 
     @Override
     public void serialize(final LocalDate date, final JsonGenerator generator, final SerializerProvider provider) throws IOException {

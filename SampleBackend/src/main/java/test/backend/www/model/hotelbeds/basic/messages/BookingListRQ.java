@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.Data;
@@ -19,7 +20,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import test.backend.www.model.hotelbeds.basic.common.SimpleTypes.BookingListFilterType;
-import test.backend.www.model.hotelbeds.basic.convert.json.DateSerializer;
+import test.backend.www.model.hotelbeds.basic.convert.json.CustomDateDeserializer;
+import test.backend.www.model.hotelbeds.basic.convert.json.CustomDateSerializer;
 
 @JsonInclude(Include.NON_NULL)
 @ToString
@@ -29,11 +31,11 @@ import test.backend.www.model.hotelbeds.basic.convert.json.DateSerializer;
 public class BookingListRQ extends AbstractGenericRequest {
 
 	@JsonProperty
-	@JsonSerialize(using = DateSerializer.class)
+	@JsonSerialize(using = CustomDateSerializer.class) @JsonDeserialize(using = CustomDateDeserializer.class)
 	@NotNull
 	private LocalDate start;
 	@JsonProperty
-	@JsonSerialize(using = DateSerializer.class)
+	@JsonSerialize(using = CustomDateSerializer.class) @JsonDeserialize(using = CustomDateDeserializer.class)
 	@NotNull
 	private LocalDate end;
 	@NotNull

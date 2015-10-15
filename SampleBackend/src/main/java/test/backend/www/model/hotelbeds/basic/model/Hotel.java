@@ -12,12 +12,14 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import test.backend.www.model.hotelbeds.basic.convert.json.DateSerializer;
+import test.backend.www.model.hotelbeds.basic.convert.json.CustomDateDeserializer;
+import test.backend.www.model.hotelbeds.basic.convert.json.CustomDateSerializer;
 import test.backend.www.model.hotelbeds.basic.convert.json.RateSerializer;
 
 @JsonInclude(Include.NON_NULL)
@@ -27,10 +29,10 @@ import test.backend.www.model.hotelbeds.basic.convert.json.RateSerializer;
 public class Hotel {
 
 	@JsonProperty
-	@JsonSerialize(using = DateSerializer.class)
+	@JsonSerialize(using = CustomDateSerializer.class) @JsonDeserialize(using = CustomDateDeserializer.class)
 	private LocalDate checkIn;
 	@JsonProperty
-	@JsonSerialize(using = DateSerializer.class)
+	@JsonSerialize(using = CustomDateSerializer.class) @JsonDeserialize(using = CustomDateDeserializer.class)
 	private LocalDate checkOut;
 	private Integer code;
 	private String name;

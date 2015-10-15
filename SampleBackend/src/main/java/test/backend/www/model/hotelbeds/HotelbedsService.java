@@ -40,7 +40,7 @@ public class HotelbedsService
   {
     try
     {
-      DelimitedShape withinThis = new Availability.Circle(latitude, longitude, limitKm);
+      DelimitedShape withinThis = new Availability.Circle(longitude, latitude, limitKm);
       Availability availability = Availability
                                               .builder()
                                               .checkIn(from)
