@@ -1,0 +1,5 @@
+{
+ "directory": "libs",
+ "proxy": "http://proxy1.services.gfc:3128",
+ "https-proxy": "http://proxy1.services.gfc:3128"
+}

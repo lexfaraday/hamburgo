@@ -1,0 +1,966 @@
+{
+  "auditData": {
+    "processTime": "6805",
+    "timestamp": "2015-09-28 11:44:01.451",
+    "serverId": "PCHOF2LQ3032",
+    "environment": "[itest, local, iSET_A]",
+    "release": "5056"
+  },
+  "bookings": {
+    "bookings": [
+      {
+        "reference": "102-5909720",
+        "clientReference": "zffxus8c7rzfabxp8rgkgt27",
+        "creationDate": "2015-09-20",
+        "status": "CANCELLED",
+        "holder": {
+          "name": "INTEGRATIONTESTFIRSTNAME",
+          "surname": "INTEGRATIONTESTLASTNAME"
+        },
+        "hotel": {
+          "checkIn": "2015-11-17",
+          "checkOut": "2015-11-19",
+          "name": "NH Paseo de la Habana",
+          "destinationCode": "MAD",
+          "rooms": [
+            {
+              "status": "CANCELLED",
+              "code": "SGL.ST",
+              "paxes": [
+                {
+                  "type": "AD"
+                }
+              ],
+              "rates": [
+                {
+                  "amount": "0.000",
+                  "paymentType": "AT_WEB",
+                  "boardCode": "RO",
+                  "rooms": 1
+                }
+              ]
+            }
+          ],
+          "totalSellingRate": "0.000",
+          "totalNet": "0.000",
+          "currency": "EUR"
+        }
+      },
+      {
+        "reference": "102-5909747",
+        "clientReference": "zffxus8c7rzfabxp8rgkgt27",
+        "creationDate": "2015-09-21",
+        "status": "CANCELLED",
+        "holder": {
+          "name": "INTEGRATIONTESTFIRSTNAME",
+          "surname": "INTEGRATIONTESTLASTNAME"
+        },
+        "hotel": {
+          "checkIn": "2015-11-17",
+          "checkOut": "2015-11-19",
+          "name": "NH Paseo de la Habana",
+          "destinationCode": "MAD",
+          "rooms": [
+            {
+              "status": "CANCELLED",
+              "code": "SGL.ST",
+              "paxes": [
+                {
+                  "type": "AD"
+                }
+              ],
+              "rates": [
+                {
+                  "amount": "0.000",
+                  "paymentType": "AT_WEB",
+                  "boardCode": "RO",
+                  "rooms": 1
+                }
+              ]
+            }
+          ],
+          "totalSellingRate": "0.000",
+          "totalNet": "0.000",
+          "currency": "EUR"
+        }
+      },
+      {
+        "reference": "102-5909768",
+        "clientReference": "zffxus8c7rzfabxp8rgkgt27",
+        "creationDate": "2015-09-21",
+        "status": "CANCELLED",
+        "holder": {
+          "name": "TEST NAME 1442827222599",
+          "surname": "TEST SURNAME 1442827222599"
+        },
+        "hotel": {
+          "checkIn": "2016-04-08",
+          "checkOut": "2016-04-10",
+          "name": "Castro Exclusive Residences Sant Pau",
+          "destinationCode": "BCN",
+          "rooms": [
+            {
+              "status": "CANCELLED",
+              "code": "APT.1B-DP",
+              "paxes": [
+                {
+                  "type": "AD"
+                }
+              ],
+              "rates": [
+                {
+                  "amount": "0.000",
+                  "paymentType": "AT_WEB",
+                  "boardCode": "SC",
+                  "rooms": 1
+                }
+              ]
+            }
+          ],
+          "totalSellingRate": "0.000",
+          "totalNet": "0.000",
+          "currency": "EUR"
+        }
+      },
+      {
+        "reference": "102-5909769",
+        "clientReference": "zffxus8c7rzfabxp8rgkgt27",
+        "creationDate": "2015-09-21",
+        "status": "CANCELLED",
+        "holder": {
+          "name": "TEST NAME 1442827627705",
+          "surname": "TEST SURNAME 1442827627705"
+        },
+        "hotel": {
+          "checkIn": "2016-04-08",
+          "checkOut": "2016-04-10",
+          "name": "Castro Exclusive Residences Sant Pau",
+          "destinationCode": "BCN",
+          "rooms": [
+            {
+              "status": "CANCELLED",
+              "code": "APT.1B-DP",
+              "paxes": [
+                {
+                  "type": "AD"
+                }
+              ],
+              "rates": [
+                {
+                  "amount": "0.000",
+                  "paymentType": "AT_WEB",
+                  "boardCode": "SC",
+                  "rooms": 1
+                }
+              ]
+            }
+          ],
+          "totalSellingRate": "0.000",
+          "totalNet": "0.000",
+          "currency": "EUR"
+        }
+      },
+      {
+        "reference": "102-5909772",
+        "clientReference": "zffxus8c7rzfabxp8rgkgt27",
+        "creationDate": "2015-09-21",
+        "status": "CANCELLED",
+        "holder": {
+          "name": "TEST NAME 1442828069363",
+          "surname": "TEST SURNAME 1442828069363"
+        },
+        "hotel": {
+          "checkIn": "2016-04-08",
+          "checkOut": "2016-04-10",
+          "name": "Castro Exclusive Residences Sant Pau",
+          "destinationCode": "BCN",
+          "rooms": [
+            {
+              "status": "CANCELLED",
+              "code": "APT.1B-DP",
+              "paxes": [
+                {
+                  "type": "AD"
+                }
+              ],
+              "rates": [
+                {
+                  "amount": "0.000",
+                  "paymentType": "AT_WEB",
+                  "boardCode": "SC",
+                  "rooms": 1
+                }
+              ]
+            }
+          ],
+          "totalSellingRate": "0.000",
+          "totalNet": "0.000",
+          "currency": "EUR"
+        }
+      },
+      {
+        "reference": "102-5909773",
+        "clientReference": "zffxus8c7rzfabxp8rgkgt27",
+        "creationDate": "2015-09-21",
+        "status": "CANCELLED",
+        "holder": {
+          "name": "TEST NAME 1442828768793",
+          "surname": "TEST SURNAME 1442828768793"
+        },
+        "hotel": {
+          "checkIn": "2016-04-08",
+          "checkOut": "2016-04-10",
+          "name": "Castro Exclusive Residences Sant Pau",
+          "destinationCode": "BCN",
+          "rooms": [
+            {
+              "status": "CANCELLED",
+              "code": "APT.1B-DP",
+              "paxes": [
+                {
+                  "type": "AD"
+                }
+              ],
+              "rates": [
+                {
+                  "amount": "0.000",
+                  "paymentType": "AT_WEB",
+                  "boardCode": "SC",
+                  "rooms": 1
+                }
+              ]
+            }
+          ],
+          "totalSellingRate": "0.000",
+          "totalNet": "0.000",
+          "currency": "EUR"
+        }
+      },
+      {
+        "reference": "102-5909779",
+        "clientReference": "zffxus8c7rzfabxp8rgkgt27",
+        "creationDate": "2015-09-21",
+        "status": "CANCELLED",
+        "holder": {
+          "name": "TEST NAME 1442829908945",
+          "surname": "TEST SURNAME 1442829908945"
+        },
+        "hotel": {
+          "checkIn": "2016-04-08",
+          "checkOut": "2016-04-10",
+          "name": "Castro Exclusive Residences Sant Pau",
+          "destinationCode": "BCN",
+          "rooms": [
+            {
+              "status": "CANCELLED",
+              "code": "APT.1B-DP",
+              "paxes": [
+                {
+                  "type": "AD"
+                }
+              ],
+              "rates": [
+                {
+                  "amount": "0.000",
+                  "paymentType": "AT_WEB",
+                  "boardCode": "SC",
+                  "rooms": 1
+                }
+              ]
+            }
+          ],
+          "totalSellingRate": "0.000",
+          "totalNet": "0.000",
+          "currency": "EUR"
+        }
+      },
+      {
+        "reference": "102-5909780",
+        "clientReference": "zffxus8c7rzfabxp8rgkgt27",
+        "creationDate": "2015-09-21",
+        "status": "CANCELLED",
+        "holder": {
+          "name": "TEST NAME 1442829916593",
+          "surname": "TEST SURNAME 1442829916593"
+        },
+        "hotel": {
+          "checkIn": "2016-04-08",
+          "checkOut": "2016-04-10",
+          "name": "Castro Exclusive Residences Sant Pau",
+          "destinationCode": "BCN",
+          "rooms": [
+            {
+              "status": "CANCELLED",
+              "code": "APT.1B-DP",
+              "paxes": [
+                {
+                  "type": "AD"
+                }
+              ],
+              "rates": [
+                {
+                  "amount": "0.000",
+                  "paymentType": "AT_WEB",
+                  "boardCode": "SC",
+                  "rooms": 1
+                }
+              ]
+            }
+          ],
+          "totalSellingRate": "0.000",
+          "totalNet": "0.000",
+          "currency": "EUR"
+        }
+      },
+      {
+        "reference": "102-5909782",
+        "clientReference": "zffxus8c7rzfabxp8rgkgt27",
+        "creationDate": "2015-09-21",
+        "status": "CANCELLED",
+        "holder": {
+          "name": "TEST NAME 1442829923985",
+          "surname": "TEST SURNAME 1442829923985"
+        },
+        "hotel": {
+          "checkIn": "2016-04-08",
+          "checkOut": "2016-04-10",
+          "name": "Castro Exclusive Residences Sant Pau",
+          "destinationCode": "BCN",
+          "rooms": [
+            {
+              "status": "CANCELLED",
+              "code": "APT.1B-DP",
+              "paxes": [
+                {
+                  "type": "AD"
+                }
+              ],
+              "rates": [
+                {
+                  "amount": "0.000",
+                  "paymentType": "AT_WEB",
+                  "boardCode": "SC",
+                  "rooms": 1
+                }
+              ]
+            }
+          ],
+          "totalSellingRate": "0.000",
+          "totalNet": "0.000",
+          "currency": "EUR"
+        }
+      },
+      {
+        "reference": "102-5909783",
+        "clientReference": "zffxus8c7rzfabxp8rgkgt27",
+        "creationDate": "2015-09-21",
+        "status": "CANCELLED",
+        "holder": {
+          "name": "TEST NAME 1442829932092",
+          "surname": "TEST SURNAME 1442829932092"
+        },
+        "hotel": {
+          "checkIn": "2016-04-08",
+          "checkOut": "2016-04-10",
+          "name": "Castro Exclusive Residences Sant Pau",
+          "destinationCode": "BCN",
+          "rooms": [
+            {
+              "status": "CANCELLED",
+              "code": "APT.1B-DP",
+              "paxes": [
+                {
+                  "type": "AD"
+                }
+              ],
+              "rates": [
+                {
+                  "amount": "0.000",
+                  "paymentType": "AT_WEB",
+                  "boardCode": "SC",
+                  "rooms": 1
+                }
+              ]
+            }
+          ],
+          "totalSellingRate": "0.000",
+          "totalNet": "0.000",
+          "currency": "EUR"
+        }
+      },
+      {
+        "reference": "102-5909784",
+        "clientReference": "zffxus8c7rzfabxp8rgkgt27",
+        "creationDate": "2015-09-21",
+        "status": "CANCELLED",
+        "holder": {
+          "name": "TEST NAME 1442829939305",
+          "surname": "TEST SURNAME 1442829939305"
+        },
+        "hotel": {
+          "checkIn": "2016-04-08",
+          "checkOut": "2016-04-10",
+          "name": "Castro Exclusive Residences Sant Pau",
+          "destinationCode": "BCN",
+          "rooms": [
+            {
+              "status": "CANCELLED",
+              "code": "APT.1B-DP",
+              "paxes": [
+                {
+                  "type": "AD"
+                }
+              ],
+              "rates": [
+                {
+                  "amount": "0.000",
+                  "paymentType": "AT_WEB",
+                  "boardCode": "SC",
+                  "rooms": 1
+                }
+              ]
+            }
+          ],
+          "totalSellingRate": "0.000",
+          "totalNet": "0.000",
+          "currency": "EUR"
+        }
+      },
+      {
+        "reference": "102-5909785",
+        "clientReference": "zffxus8c7rzfabxp8rgkgt27",
+        "creationDate": "2015-09-21",
+        "status": "CANCELLED",
+        "holder": {
+          "name": "TEST NAME 1442829946759",
+          "surname": "TEST SURNAME 1442829946759"
+        },
+        "hotel": {
+          "checkIn": "2016-04-08",
+          "checkOut": "2016-04-10",
+          "name": "Castro Exclusive Residences Sant Pau",
+          "destinationCode": "BCN",
+          "rooms": [
+            {
+              "status": "CANCELLED",
+              "code": "APT.1B-DP",
+              "paxes": [
+                {
+                  "type": "AD"
+                }
+              ],
+              "rates": [
+                {
+                  "amount": "0.000",
+                  "paymentType": "AT_WEB",
+                  "boardCode": "SC",
+                  "rooms": 1
+                }
+              ]
+            }
+          ],
+          "totalSellingRate": "0.000",
+          "totalNet": "0.000",
+          "currency": "EUR"
+        }
+      },
+      {
+        "reference": "102-5909787",
+        "clientReference": "zffxus8c7rzfabxp8rgkgt27",
+        "creationDate": "2015-09-21",
+        "status": "CANCELLED",
+        "holder": {
+          "name": "TEST NAME 1442830208718",
+          "surname": "TEST SURNAME 1442830208718"
+        },
+        "hotel": {
+          "checkIn": "2016-04-08",
+          "checkOut": "2016-04-10",
+          "name": "Castro Exclusive Residences Sant Pau",
+          "destinationCode": "BCN",
+          "rooms": [
+            {
+              "status": "CANCELLED",
+              "code": "APT.1B-DP",
+              "paxes": [
+                {
+                  "type": "AD"
+                }
+              ],
+              "rates": [
+                {
+                  "amount": "0.000",
+                  "paymentType": "AT_WEB",
+                  "boardCode": "SC",
+                  "rooms": 1
+                }
+              ]
+            }
+          ],
+          "totalSellingRate": "0.000",
+          "totalNet": "0.000",
+          "currency": "EUR"
+        }
+      },
+      {
+        "reference": "102-5909789",
+        "clientReference": "zffxus8c7rzfabxp8rgkgt27",
+        "creationDate": "2015-09-21",
+        "status": "CANCELLED",
+        "holder": {
+          "name": "TEST NAME 1442830633037",
+          "surname": "TEST SURNAME 1442830633037"
+        },
+        "hotel": {
+          "checkIn": "2016-04-08",
+          "checkOut": "2016-04-10",
+          "name": "Castro Exclusive Residences Sant Pau",
+          "destinationCode": "BCN",
+          "rooms": [
+            {
+              "status": "CANCELLED",
+              "code": "APT.1B-DP",
+              "paxes": [
+                {
+                  "type": "AD"
+                }
+              ],
+              "rates": [
+                {
+                  "amount": "0.000",
+                  "paymentType": "AT_WEB",
+                  "boardCode": "SC",
+                  "rooms": 1
+                }
+              ]
+            }
+          ],
+          "totalSellingRate": "0.000",
+          "totalNet": "0.000",
+          "currency": "EUR"
+        }
+      },
+      {
+        "reference": "102-5909790",
+        "clientReference": "zffxus8c7rzfabxp8rgkgt27",
+        "creationDate": "2015-09-21",
+        "status": "CANCELLED",
+        "holder": {
+          "name": "TEST NAME 1442831298293",
+          "surname": "TEST SURNAME 1442831298294"
+        },
+        "hotel": {
+          "checkIn": "2016-04-08",
+          "checkOut": "2016-04-10",
+          "name": "Castro Exclusive Residences Sant Pau",
+          "destinationCode": "BCN",
+          "rooms": [
+            {
+              "status": "CANCELLED",
+              "code": "APT.1B-DP",
+              "paxes": [
+                {
+                  "type": "AD"
+                }
+              ],
+              "rates": [
+                {
+                  "amount": "0.000",
+                  "paymentType": "AT_WEB",
+                  "boardCode": "SC",
+                  "rooms": 1
+                }
+              ]
+            }
+          ],
+          "totalSellingRate": "0.000",
+          "totalNet": "0.000",
+          "currency": "EUR"
+        }
+      },
+      {
+        "reference": "102-5909791",
+        "clientReference": "zffxus8c7rzfabxp8rgkgt27",
+        "creationDate": "2015-09-21",
+        "status": "CANCELLED",
+        "holder": {
+          "name": "TEST NAME 1442831306197",
+          "surname": "TEST SURNAME 1442831306197"
+        },
+        "hotel": {
+          "checkIn": "2016-04-08",
+          "checkOut": "2016-04-10",
+          "name": "Castro Exclusive Residences Sant Pau",
+          "destinationCode": "BCN",
+          "rooms": [
+            {
+              "status": "CANCELLED",
+              "code": "APT.1B-DP",
+              "paxes": [
+                {
+                  "type": "AD"
+                }
+              ],
+              "rates": [
+                {
+                  "amount": "0.000",
+                  "paymentType": "AT_WEB",
+                  "boardCode": "SC",
+                  "rooms": 1
+                }
+              ]
+            }
+          ],
+          "totalSellingRate": "0.000",
+          "totalNet": "0.000",
+          "currency": "EUR"
+        }
+      },
+      {
+        "reference": "102-5909792",
+        "clientReference": "zffxus8c7rzfabxp8rgkgt27",
+        "creationDate": "2015-09-21",
+        "status": "CANCELLED",
+        "holder": {
+          "name": "TEST NAME 1442831313403",
+          "surname": "TEST SURNAME 1442831313403"
+        },
+        "hotel": {
+          "checkIn": "2016-04-08",
+          "checkOut": "2016-04-10",
+          "name": "Castro Exclusive Residences Sant Pau",
+          "destinationCode": "BCN",
+          "rooms": [
+            {
+              "status": "CANCELLED",
+              "code": "APT.1B-DP",
+              "paxes": [
+                {
+                  "type": "AD"
+                }
+              ],
+              "rates": [
+                {
+                  "amount": "0.000",
+                  "paymentType": "AT_WEB",
+                  "boardCode": "SC",
+                  "rooms": 1
+                }
+              ]
+            }
+          ],
+          "totalSellingRate": "0.000",
+          "totalNet": "0.000",
+          "currency": "EUR"
+        }
+      },
+      {
+        "reference": "102-5909793",
+        "clientReference": "zffxus8c7rzfabxp8rgkgt27",
+        "creationDate": "2015-09-21",
+        "status": "CANCELLED",
+        "holder": {
+          "name": "TEST NAME 1442831321249",
+          "surname": "TEST SURNAME 1442831321249"
+        },
+        "hotel": {
+          "checkIn": "2016-04-08",
+          "checkOut": "2016-04-10",
+          "name": "Castro Exclusive Residences Sant Pau",
+          "destinationCode": "BCN",
+          "rooms": [
+            {
+              "status": "CANCELLED",
+              "code": "APT.1B-DP",
+              "paxes": [
+                {
+                  "type": "AD"
+                }
+              ],
+              "rates": [
+                {
+                  "amount": "0.000",
+                  "paymentType": "AT_WEB",
+                  "boardCode": "SC",
+                  "rooms": 1
+                }
+              ]
+            }
+          ],
+          "totalSellingRate": "0.000",
+          "totalNet": "0.000",
+          "currency": "EUR"
+        }
+      },
+      {
+        "reference": "102-5909794",
+        "clientReference": "zffxus8c7rzfabxp8rgkgt27",
+        "creationDate": "2015-09-21",
+        "status": "CANCELLED",
+        "holder": {
+          "name": "TEST NAME 1442831328686",
+          "surname": "TEST SURNAME 1442831328686"
+        },
+        "hotel": {
+          "checkIn": "2016-04-08",
+          "checkOut": "2016-04-10",
+          "name": "Castro Exclusive Residences Sant Pau",
+          "destinationCode": "BCN",
+          "rooms": [
+            {
+              "status": "CANCELLED",
+              "code": "APT.1B-DP",
+              "paxes": [
+                {
+                  "type": "AD"
+                }
+              ],
+              "rates": [
+                {
+                  "amount": "0.000",
+                  "paymentType": "AT_WEB",
+                  "boardCode": "SC",
+                  "rooms": 1
+                }
+              ]
+            }
+          ],
+          "totalSellingRate": "0.000",
+          "totalNet": "0.000",
+          "currency": "EUR"
+        }
+      },
+      {
+        "reference": "102-5909795",
+        "clientReference": "zffxus8c7rzfabxp8rgkgt27",
+        "creationDate": "2015-09-21",
+        "status": "CANCELLED",
+        "holder": {
+          "name": "TEST NAME 1442831335703",
+          "surname": "TEST SURNAME 1442831335703"
+        },
+        "hotel": {
+          "checkIn": "2016-04-08",
+          "checkOut": "2016-04-10",
+          "name": "Castro Exclusive Residences Sant Pau",
+          "destinationCode": "BCN",
+          "rooms": [
+            {
+              "status": "CANCELLED",
+              "code": "APT.1B-DP",
+              "paxes": [
+                {
+                  "type": "AD"
+                }
+              ],
+              "rates": [
+                {
+                  "amount": "0.000",
+                  "paymentType": "AT_WEB",
+                  "boardCode": "SC",
+                  "rooms": 1
+                }
+              ]
+            }
+          ],
+          "totalSellingRate": "0.000",
+          "totalNet": "0.000",
+          "currency": "EUR"
+        }
+      },
+      {
+        "reference": "102-5909809",
+        "clientReference": "zffxus8c7rzfabxp8rgkgt27",
+        "creationDate": "2015-09-21",
+        "status": "CANCELLED",
+        "holder": {
+          "name": "INTEGRATIONTESTFIRSTNAME",
+          "surname": "INTEGRATIONTESTLASTNAME"
+        },
+        "hotel": {
+          "checkIn": "2015-11-17",
+          "checkOut": "2015-11-19",
+          "name": "NH Paseo de la Habana",
+          "destinationCode": "MAD",
+          "rooms": [
+            {
+              "status": "CANCELLED",
+              "code": "SGL.ST",
+              "paxes": [
+                {
+                  "type": "AD"
+                }
+              ],
+              "rates": [
+                {
+                  "amount": "0.000",
+                  "paymentType": "AT_WEB",
+                  "boardCode": "RO",
+                  "rooms": 1
+                }
+              ]
+            }
+          ],
+          "totalSellingRate": "0.000",
+          "totalNet": "0.000",
+          "currency": "EUR"
+        }
+      },
+      {
+        "reference": "102-5909824",
+        "clientReference": "zffxus8c7rzfabxp8rgkgt27",
+        "creationDate": "2015-09-21",
+        "status": "CANCELLED",
+        "holder": {
+          "name": "TEST NAME 1442851251325",
+          "surname": "TEST SURNAME 1442851251325"
+        },
+        "hotel": {
+          "checkIn": "2016-04-08",
+          "checkOut": "2016-04-10",
+          "name": "Castro Exclusive Residences Sant Pau",
+          "destinationCode": "BCN",
+          "rooms": [
+            {
+              "status": "CANCELLED",
+              "code": "APT.1B-DP",
+              "paxes": [
+                {
+                  "type": "AD"
+                }
+              ],
+              "rates": [
+                {
+                  "amount": "0.000",
+                  "paymentType": "AT_WEB",
+                  "boardCode": "SC",
+                  "rooms": 1
+                }
+              ]
+            }
+          ],
+          "totalSellingRate": "0.000",
+          "totalNet": "0.000",
+          "currency": "EUR"
+        }
+      },
+      {
+        "reference": "102-5909825",
+        "clientReference": "zffxus8c7rzfabxp8rgkgt27",
+        "creationDate": "2015-09-21",
+        "status": "CANCELLED",
+        "holder": {
+          "name": "TEST NAME 1442851265314",
+          "surname": "TEST SURNAME 1442851265314"
+        },
+        "hotel": {
+          "checkIn": "2016-04-08",
+          "checkOut": "2016-04-10",
+          "name": "Castro Exclusive Residences Sant Pau",
+          "destinationCode": "BCN",
+          "rooms": [
+            {
+              "status": "CANCELLED",
+              "code": "APT.1B-DP",
+              "paxes": [
+                {
+                  "type": "AD"
+                }
+              ],
+              "rates": [
+                {
+                  "amount": "0.000",
+                  "paymentType": "AT_WEB",
+                  "boardCode": "SC",
+                  "rooms": 1
+                }
+              ]
+            }
+          ],
+          "totalSellingRate": "0.000",
+          "totalNet": "0.000",
+          "currency": "EUR"
+        }
+      },
+      {
+        "reference": "102-5909826",
+        "clientReference": "zffxus8c7rzfabxp8rgkgt27",
+        "creationDate": "2015-09-21",
+        "status": "CANCELLED",
+        "holder": {
+          "name": "TEST NAME 1442851273109",
+          "surname": "TEST SURNAME 1442851273109"
+        },
+        "hotel": {
+          "checkIn": "2016-04-08",
+          "checkOut": "2016-04-10",
+          "name": "Castro Exclusive Residences Sant Pau",
+          "destinationCode": "BCN",
+          "rooms": [
+            {
+              "status": "CANCELLED",
+              "code": "APT.1B-DP",
+              "paxes": [
+                {
+                  "type": "AD"
+                }
+              ],
+              "rates": [
+                {
+                  "amount": "0.000",
+                  "paymentType": "AT_WEB",
+                  "boardCode": "SC",
+                  "rooms": 1
+                }
+              ]
+            }
+          ],
+          "totalSellingRate": "0.000",
+          "totalNet": "0.000",
+          "currency": "EUR"
+        }
+      },
+      {
+        "reference": "102-5909827",
+        "clientReference": "zffxus8c7rzfabxp8rgkgt27",
+        "creationDate": "2015-09-21",
+        "status": "CANCELLED",
+        "holder": {
+          "name": "TEST NAME 1442851280397",
+          "surname": "TEST SURNAME 1442851280397"
+        },
+        "hotel": {
+          "checkIn": "2016-04-08",
+          "checkOut": "2016-04-10",
+          "name": "Castro Exclusive Residences Sant Pau",
+          "destinationCode": "BCN",
+          "rooms": [
+            {
+              "status": "CANCELLED",
+              "code": "APT.1B-DP",
+              "paxes": [
+                {
+                  "type": "AD"
+                }
+              ],
+              "rates": [
+                {
+                  "amount": "0.000",
+                  "paymentType": "AT_WEB",
+                  "boardCode": "SC",
+                  "rooms": 1
+                }
+              ]
+            }
+          ],
+          "totalSellingRate": "0.000",
+          "totalNet": "0.000",
+          "currency": "EUR"
+        }
+      }
+    ],
+    "from": 1,
+    "to": 25,
+    "total": 214
+  }
+}

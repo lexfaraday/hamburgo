@@ -11,7 +11,8 @@ ANDROID API 22
 - wear   -> AndroidWear app
 
 
-
+#### Widget folder
+Web widget made with AngularJS that interacts with server-side api.
 
 #### App folder
 Skeleton Android/Android Wear app

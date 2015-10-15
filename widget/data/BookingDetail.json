@@ -1,0 +1,73 @@
+{
+  "auditData": {
+    "processTime": "512",
+    "timestamp": "2015-09-28 12:18:32.267",
+    "serverId": "PCHOF2LQ3032",
+    "environment": "[itest, local, iSET_A]",
+    "release": "5056"
+  },
+  "booking": {
+    "reference": "1-2904097",
+    "clientReference": "TESTCARONTECONFIRM",
+    "creationDate": "2015-09-28",
+    "status": "CONFIRMED",
+    "creationUser": "XML",
+    "holder": {
+      "name": "INTEGRATIONTESTFIRSTNAME",
+      "surname": "INTEGRATIONTESTLASTNAME"
+    },
+    "hotel": {
+      "checkIn": "2015-10-26",
+      "checkOut": "2015-10-28",
+      "code": 1541,
+      "name": "Aya",
+      "categoryCode": "4EST",
+      "categoryName": "4 STARS",
+      "destinationCode": "PMI",
+      "destinationName": "Majorca",
+      "zoneCode": 20,
+      "zoneName": "Playa de Palma",
+      "latitude": "39.510663",
+      "longitude": "2.749364",
+      "rooms": [
+        {
+          "status": "CONFIRMED",
+          "code": "SGL.ST",
+          "name": "SINGLE STANDARD",
+          "paxes": [
+            {
+              "type": "AD",
+              "name": "TestFirstName",
+              "surname": "TestLastName"
+            }
+          ],
+          "rates": [
+            {
+              "rateClass": "NOR",
+              "net": "109.100",
+              "rateName": "CG-TODOS",
+              "paymentType": "AT_WEB",
+              "packaging": false,
+              "boardCode": "BB",
+              "boardName": "BED AND BREAKFAST",
+              "cancellationPolicies": [
+                {
+                  "amount": "54.550",
+                  "from": "2015-10-26T12:00:00+01:00"
+                }
+              ],
+              "rooms": 1
+            }
+          ]
+        }
+      ],
+      "totalNet": "109.100",
+      "pendingAmount": "109.100",
+      "currency": "EUR",
+      "supplier": {
+        "name": "HOTELBEDS PRODUCT,S.L.U.",
+        "vatNumber": "B38877676"
+      }
+    }
+  }
+}
