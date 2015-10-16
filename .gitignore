@@ -49,3 +49,5 @@ providers/travel-api/.settings/org.eclipse.wst.common.project.facet.core.xml
 .metadata/*
 
 .settings/*
+
+SampleBackend/.settings/*
