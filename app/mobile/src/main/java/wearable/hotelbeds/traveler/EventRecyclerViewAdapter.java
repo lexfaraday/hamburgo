@@ -1,6 +1,5 @@
 package wearable.hotelbeds.traveler;
 
-import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
@@ -12,8 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -68,7 +65,7 @@ public class EventRecyclerViewAdapter extends RecyclerView
     public EventHolder onCreateViewHolder(ViewGroup parent,
                                                int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recycler_item, parent, false);
+                .inflate(R.layout.event_item, parent, false);
 
         EventHolder dataObjectHolder = new EventHolder(view);
         return dataObjectHolder;

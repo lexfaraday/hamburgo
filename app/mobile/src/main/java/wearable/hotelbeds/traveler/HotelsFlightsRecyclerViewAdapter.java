@@ -1,7 +1,6 @@
 package wearable.hotelbeds.traveler;
 
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,7 +13,6 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import wearable.hotelbeds.shared.event.EventInfoBean;
 import wearable.hotelbeds.shared.hotel.HotelInfo;
 
 /**
@@ -64,7 +62,7 @@ public class HotelsFlightsRecyclerViewAdapter extends RecyclerView
     public HotelFlightHolder onCreateViewHolder(ViewGroup parent,
                                                int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recycler_item, parent, false);
+                .inflate(R.layout.event_item, parent, false);
 
         HotelFlightHolder dataObjectHolder = new HotelFlightHolder(view);
         return dataObjectHolder;

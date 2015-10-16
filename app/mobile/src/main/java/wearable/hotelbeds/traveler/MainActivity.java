@@ -15,6 +15,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+
+import com.mikepenz.actionitembadge.library.ActionItemBadge;
+import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 
 import wearable.hotelbeds.shared.event.EventUtils;
 import wearable.hotelbeds.traveler.nav.MenuUtils;
@@ -28,6 +32,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
 
+    static int mTotalPaxes = 1;
+    static Button notifCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +83,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         MenuItem searchMenuItem = menu.findItem(R.id.action_search);
-        searchMenuItem.setVisible(true);//Poner esto si se quiere que en la activity se vea el boton buscar :-)
+
+        //ActionItemBadge.update(this, menu.findItem(R.id.item_samplebadge), FontAwesome.Icon.faw_group, ActionItemBadge.BadgeStyles.BLUE_LARGE, mTotalPaxes);
+
         SearchView.OnQueryTextListener searchListener = new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -109,8 +117,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 return true;
+            case R.id.action_search:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -120,6 +131,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    public void onContextualMenuItemClicked(MenuItem item) {
+        //ActionItemBadge.update(this, menu.findItem(R.id.item_samplebadge), FontAwesome.Icon.faw_group, ActionItemBadge.BadgeStyles.BLUE_LARGE, mTotalPaxes++);
+    }
 
+    private void setNotifCount(int count) {
+        mTotalPaxes++;
+        invalidateOptionsMenu();
+    }
 }
 
