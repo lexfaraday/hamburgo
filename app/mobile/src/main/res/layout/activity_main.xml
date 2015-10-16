@@ -46,14 +46,13 @@
     </android.support.v4.widget.DrawerLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/addPax"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:clickable="true"
         android:src="@drawable/ic_group_add_black_24dp"
         app:layout_anchor="@id/drawer_layout"
-        app:layout_anchorGravity="bottom|right|end"
-        android:onClick="onContextualMenuItemClicked"/>
+        app:layout_anchorGravity="bottom|right|end" />
 
 </android.support.design.widget.CoordinatorLayout>
