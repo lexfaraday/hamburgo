@@ -45,3 +45,7 @@ providers/travel-api/.factorypath
 providers/travel-api/.settings/oracle.eclipse.tools.webtier.ui.prefs
 *.prefs
 providers/travel-api/.settings/org.eclipse.wst.common.project.facet.core.xml
+
+.metadata/*
+
+.settings/*
