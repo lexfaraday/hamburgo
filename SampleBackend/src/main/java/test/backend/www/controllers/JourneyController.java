@@ -1,7 +1,9 @@
 package test.backend.www.controllers;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ import lombok.extern.slf4j.Slf4j;
 import test.backend.www.model.AirportLocator;
 import test.backend.www.model.GeoPoint;
 import test.backend.www.model.RelativeDistance;
+import test.backend.www.model.eventbrite.EventbriteService;
+import test.backend.www.model.eventbrite.domain.EventBean;
 import test.backend.www.model.hotelbeds.HotelbedsService;
 import test.backend.www.model.hotelbeds.basic.messages.AvailabilityRS;
 import test.backend.www.model.hotelbeds.basic.model.Hotel;
@@ -45,10 +49,33 @@ public class JourneyController {
 	HotelbedsService hotelbedsService;
 
 	@Autowired
+	EventbriteService eventbriteService;
+
+	@Autowired
 	SabreService sabreService;
 
 	@Autowired
 	AirportLocator airportLocator;
+
+	@ResponseBody
+	@RequestMapping(value = "/journey/{origin_latitude}/{origin_longitude}/{event_id}/", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseStatus(HttpStatus.OK)
+	public ResponseEntity<Object> journeysFromEvent(@PathVariable(value = "origin_latitude") String originLatitude,
+			@PathVariable(value = "origin_longitude") String originLongitude,
+			@PathVariable(value = "event_id") String eventId,
+			@RequestParam(value = "limitKm", required = false, defaultValue = "50") long limitKm) throws Exception {
+		EventBean event = eventbriteService.getEventById(eventId);
+		if (event != null && event.getVenue() != null) {
+			LocalDate startDate = Instant.parse(event.getStartDate()).atZone(ZoneId.systemDefault()).toLocalDate();
+			LocalDate endDate = Instant.parse(event.getEndDate()).atZone(ZoneId.systemDefault()).toLocalDate();
+			log.info("Found event: {} ({}-{} :: {},{})", new Object[] { event.getTitle(), startDate, endDate,
+					event.getVenue().getLatitude(), event.getVenue().getLongitude() });
+			return findJourneyData(originLatitude, originLongitude, event.getVenue().getLatitude(),
+					event.getVenue().getLongitude(), startDate.minusDays(1), endDate.plusDays(1), limitKm);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
 
 	@ResponseBody
 	@RequestMapping(value = "/journey/{origin_latitude}/{origin_longitude}/{destination_latitude}/{destination_longitude}/{from}/{to}/", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -61,6 +88,12 @@ public class JourneyController {
 			@PathVariable(value = "to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to,
 			@RequestParam(value = "limitKm", required = false, defaultValue = "50") long limitKm) {
 
+		return findJourneyData(originLatitude, originLongitude, destinationLatitude, destinationLongitude, from, to,
+				limitKm);
+	}
+
+	private ResponseEntity<Object> findJourneyData(String originLatitude, String originLongitude,
+			String destinationLatitude, String destinationLongitude, LocalDate from, LocalDate to, long limitKm) {
 		// Locate the airports closest to the origin
 		List<RelativeDistance> originAirports = airportLocator
 				.getClosestAirports(new GeoPoint(originLatitude, originLongitude), DEFAULT_MAX, limitKm, true);
@@ -84,7 +117,7 @@ public class JourneyController {
 						break;
 					}
 				} catch (IOException e) {
-					log.warn("No itinerary from {} to {}", origin, destinationDistance.getAirport().getIataFaaCode());
+					log.debug("No itinerary from {} to {}", origin, destinationDistance.getAirport().getIataFaaCode());
 				} catch (Exception e) {
 					log.error("Error", e);
 				}

@@ -7,5 +7,7 @@ server:
   context-path:
 sabre:
   base_url: https://api.test.sabre.com
+eventbrite:
+  base_url: https://www.eventbriteapi.com/v3
 hotelbeds:
   base_url: https://api.test.hotelbeds.com/hotel-api/0.2

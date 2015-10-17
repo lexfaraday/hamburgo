@@ -67,6 +67,9 @@ dependencies {
   compile "javax.inject:javax.inject:$inject_version"
 
   compile "org.codehaus.jettison:jettison:$jettison_version"
+  compile "com.google.code.gson:gson:2.4"
+  compile "commons-io:commons-io:2.4"
+  compile "org.iata.ndc:ndc-client:0.1.0"
     
   runtime "org.apache.tomcat.embed:tomcat-embed-jasper"
   runtime "org.aspectj:aspectjrt:$aspectj_version"
