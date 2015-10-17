@@ -16,10 +16,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-
-import com.mikepenz.actionitembadge.library.ActionItemBadge;
-import com.mikepenz.fontawesome_typeface_library.FontAwesome;
 
 import wearable.hotelbeds.shared.event.EventUtils;
 import wearable.hotelbeds.traveler.nav.MenuUtils;
@@ -32,9 +28,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static String LOG_TAG = "RecyclerViewActivity";
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
-
-    static int mTotalPaxes = 1;
-    static Button notifCount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,15 +130,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         MenuUtils.onMenuSelected(this, menuItem);
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public void onContextualMenuItemClicked(MenuItem item) {
-        //ActionItemBadge.update(this, menu.findItem(R.id.item_samplebadge), FontAwesome.Icon.faw_group, ActionItemBadge.BadgeStyles.BLUE_LARGE, mTotalPaxes++);
-    }
-
-    private void setNotifCount(int count) {
-        mTotalPaxes++;
-        invalidateOptionsMenu();
     }
 }
 
