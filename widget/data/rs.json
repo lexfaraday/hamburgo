@@ -1,0 +1,30 @@
+event: {
+  name: 'World Travel Market 2015',
+  from: '02/11/2015',
+  to: '05/11/2015',
+  price: '150'
+},
+hotel: {
+  checkin: '02/11/2015',
+  checkout: '05/11/2015',
+  name: 'Novotel London ExCeL',
+  category: '4EST',
+  cancellationPolicies: [
+    {
+      "amount": "35,370",
+      "from": "25/10/2015"
+    }
+  ],
+},
+flights: {
+  departure: {
+    date: '01/11/2015',
+    hour: '06:00',
+    company: 'EasyJet'
+  },
+  departure: {
+    date: '06/11/2015',
+    hour: '20:30',
+    company: 'Ryanair1'
+  }
+}
