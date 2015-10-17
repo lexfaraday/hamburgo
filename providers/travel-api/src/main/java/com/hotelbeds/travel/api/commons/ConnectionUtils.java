@@ -16,8 +16,8 @@ public class ConnectionUtils {
 
     private ClientHttpRequestFactory clientHttpRequestFactory() {
         HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
-        factory.setReadTimeout(1000);
-        factory.setConnectTimeout(1000);
+        factory.setReadTimeout(7000);
+        factory.setConnectTimeout(7000);
         return factory;
     }
 }
