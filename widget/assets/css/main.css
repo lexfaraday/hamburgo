@@ -14,15 +14,9 @@ html, body {
     outline: none;
 }
 
-img {
+.event.main img {
     width: 100%;
     height: auto;
-}
-
-button img {
-    width: 25px;
-    height: auto;
-    margin: 0;
 }
 
 img.voucher {
@@ -39,6 +33,7 @@ img.voucher {
     font-size: 10px;
     color: #cc0b33;
 }
+
 
 .event {
     width: 383px;
@@ -81,12 +76,14 @@ img.voucher {
     position: relative;
 }
 
-.event button.half-btn {
-    width: 48%;
+.event button.wallet-btn{
+    border-radius: 0;
+    background-color: transparent;
+    padding: 0;
 }
 
-.event button:nth-of-type(2) {
-    margin-left: 2%;
+.event button.half-btn {
+    width: 48%;
 }
 
 
@@ -105,7 +102,26 @@ img.voucher {
     margin: 5px;
 }
 
+.actions {
+    width:100%;
+    position: relative;
+    clear: both;
+    height:40px;
+}
 
+.actions a {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.actions button {
+    position: absolute;
+    top:0;
+    width:auto;
+    right:0;
+    margin-top:5px;
+}
 
 .hvr-bubble-top:before {
     border-color: transparent transparent #cc0b33;
@@ -127,8 +143,10 @@ img.voucher {
 
 .event.summary h4 {
     text-align: center;
-    margin-bottom: 3px;
-    color: #555;
+    color: #cc0b33;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #cc0b33;
+    margin-top: 5px;
 }
 
 .event.summary small {
@@ -149,12 +167,6 @@ img.voucher {
     padding: 2%;
 }
 
-.event.summary .col h4 {
-    color: #cc0b33;
-    margin-bottom: 5px;
-    border-bottom: 1px solid #cc0b33;
-    margin-top: 5px;
-}
 
 .loading {
     position: fixed;
@@ -162,7 +174,7 @@ img.voucher {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(100, 11, 107, 0.9);
+    background-color: rgba(204, 11, 51, 0.9);
     z-index: 999;
     color: #fff;
     font-size: 30px;
@@ -174,6 +186,7 @@ img.voucher {
     position:absolute;
     top:40%;
     margin-left:-40px;
+    color:#fff;
 }
 
 .clearfix {
