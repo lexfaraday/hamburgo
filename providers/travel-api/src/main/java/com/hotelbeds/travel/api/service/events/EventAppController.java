@@ -1,4 +1,4 @@
-package com.hotelbeds.travel.api.service;
+package com.hotelbeds.travel.api.service.events;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.hotelbeds.travel.api.profiles.ApplicationProfile;
 import com.hotelbeds.travel.api.websocket.MessageFlow;
 
 @Controller
-@RequestMapping(value = "/event-app")
+@RequestMapping(value = "/events")
 public class EventAppController {
 
     @Autowired
@@ -38,11 +39,10 @@ public class EventAppController {
         return "error";
     }
 
-    @RequestMapping(value = "/events/search", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+    @RequestMapping(value = "/search", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
     @ResponseBody
-    public ResponseEntity<?> searchEvents() {
+    public ResponseEntity<?> searchEvents() throws Exception {
         messageFlow.publish("Searching events..");
-        eventBriteProvider.searchEvents();
-        return new ResponseEntity<String>("hh", HttpStatus.OK);
+        return new ResponseEntity<String>(new Gson().toJson(eventBriteProvider.searchEvents()), HttpStatus.OK);
     }
 }
