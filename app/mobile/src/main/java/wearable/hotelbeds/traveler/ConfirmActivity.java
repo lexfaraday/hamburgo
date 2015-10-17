@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -44,6 +45,8 @@ public class ConfirmActivity extends AppCompatActivity implements NavigationView
     private CardView more_detail;
     private FloatingActionButton more_detail_button;
     private LinearLayout modeDetailDiv;
+    private ImageView qr;
+    private boolean isConfirmed = false;
 
 
     @Override
@@ -57,11 +60,18 @@ public class ConfirmActivity extends AppCompatActivity implements NavigationView
         departureFlys = (LinearLayout) findViewById(R.id.flydeparture_div);
         arrivalFlys = (LinearLayout) findViewById(R.id.flyarrival_div);
         buttons = (LinearLayout) findViewById(R.id.buttons);
-        buttons.setVisibility(View.VISIBLE);
+        qr = (ImageView) findViewById(R.id.qr);
         more_detail = (CardView) findViewById(R.id.card_detail);
         more_detail_button = (FloatingActionButton) findViewById(R.id.mode_detail_button);
         modeDetailDiv = (LinearLayout) findViewById(R.id.mode_detail_div);
+
         //Load info
+        isConfirmed = getIntent().getExtras().getBoolean("confirmed");
+        if (isConfirmed) {
+            showAsConfirmed();
+        } else {
+            buttons.setVisibility(View.VISIBLE);
+        }
         priceBean = (PriceInfoBean) getIntent().getExtras().getSerializable("price");
         if (priceBean != null) {
             event.setText(priceBean.getEvent().getName());
@@ -86,7 +96,11 @@ public class ConfirmActivity extends AppCompatActivity implements NavigationView
                     departureFlys.addView(v);
                     buildFlyMessage(points, fly);
                 }
-                addDetailedSection("Departure Flight", points);
+                if (priceBean.getFlyDeparture().get(0).getAmount() != null) {
+                    addDetailedSection("Departure Flight - " + priceBean.getFlyDeparture().get(0).getAmount().setScale(2, BigDecimal.ROUND_UP).toString() + "€", points);
+                } else {
+                    addDetailedSection("Departure Flight", points);
+                }
             }
             if (priceBean.getFlyArrival() != null && priceBean.getFlyArrival().size() > 0) {
                 List<String> points = new ArrayList<>();
@@ -97,13 +111,31 @@ public class ConfirmActivity extends AppCompatActivity implements NavigationView
                     arrivalFlys.addView(v);
                     buildFlyMessage(points, fly);
                 }
-                addDetailedSection("Arrival Flight", points);
+                if (priceBean.getFlyArrival().get(0).getAmount() != null) {
+                    addDetailedSection("Arrival Flight - " + priceBean.getFlyArrival().get(0).getAmount().setScale(2, BigDecimal.ROUND_UP).toString() + "€", points);
+                } else {
+                    addDetailedSection("Arrival Flight", points);
+                }
+
             }
 
             //MoreDetail
             List<String> points = new ArrayList<>();
-            points.add(priceBean.getHotelInfo().getName());
-            addDetailedSection("Hotel", points);
+            points.add(priceBean.getHotelInfo().getName() + " of " + priceBean.getHotelInfo().getStars() + " stars. " + priceBean.getHotelInfo().getCodHab() + " with " + priceBean.getHotelInfo().getReg() + ".");
+            if (priceBean.getHotelInfo().getPrice() != null) {
+                addDetailedSection("Hotel - " + priceBean.getHotelInfo().getPrice().setScale(2, BigDecimal.ROUND_UP).toString() + "€", points);
+            } else {
+                addDetailedSection("Hotel", points);
+            }
+
+            points = new ArrayList<>();
+            points.add(priceBean.getEvent().getName() + " from " + PriceUtils.DATE_FORMATER_HOUR.format(priceBean.getEvent().getTimeStart()) + " to " + PriceUtils.DATE_FORMATER_HOUR.format(priceBean.getEvent().getTimeEnd()) + ". " + priceBean.getEvent().getShortDescription() + ".");
+            if (priceBean.getEvent().getPrice() != null) {
+                addDetailedSection("Event - " + priceBean.getEvent().getPrice().setScale(2, BigDecimal.ROUND_UP).toString() + "€", points);
+            } else {
+                addDetailedSection("Event", points);
+
+            }
         }
 
         //Menu
@@ -147,6 +179,11 @@ public class ConfirmActivity extends AppCompatActivity implements NavigationView
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+                return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -160,11 +197,19 @@ public class ConfirmActivity extends AppCompatActivity implements NavigationView
     public void btnConfirmMIS(View v) {
         Log.i(TAG, "Confirmacion MakeItSocial pulsada");
         ConfirmDataBean confirmBean = PriceUtils.confirmBooking(this, priceBean);
+        showAsConfirmed();
     }
 
     public void btnConfirmGP(View v) {
         Log.i(TAG, "Confirmacion GoogleWallet pulsada");
         ConfirmDataBean confirmBean = PriceUtils.confirmBooking(this, priceBean);
+        showAsConfirmed();
+    }
+
+    public void showAsConfirmed() {
+        buttons.setVisibility(View.GONE);
+        qr.setVisibility(View.VISIBLE);
+        qr.animate().alpha(1).scaleY(1);
     }
 
     public void btnShowMoreInfo(View v) {

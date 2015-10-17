@@ -1,6 +1,7 @@
 package wearable.hotelbeds.shared.price;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -12,14 +13,16 @@ public class FlyBean implements Serializable {
     private String company;
     private String departureAirport;
     private String arrivalAirport;
+    private BigDecimal amount;
 
 
-    public FlyBean(Date departure, Date arrival, String company, String departureAirport, String arrivalAirport) {
+    public FlyBean(Date departure, Date arrival, String company, String departureAirport, String arrivalAirport, BigDecimal amount) {
         this.departure = departure;
         this.arrival = arrival;
         this.company = company;
         this.departureAirport = departureAirport;
         this.arrivalAirport = arrivalAirport;
+        this.amount = amount;
     }
 
     public Date getDeparture() {
@@ -60,5 +63,13 @@ public class FlyBean implements Serializable {
 
     public void setArrivalAirport(String arrivalAirport) {
         this.arrivalAirport = arrivalAirport;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
     }
 }

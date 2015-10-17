@@ -1,6 +1,7 @@
 package wearable.hotelbeds.shared.hotel;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -8,13 +9,13 @@ import java.util.List;
  */
 public class HotelInfo implements Serializable {
     private String name;
-    private String price;
+    private BigDecimal price;
     private int stars;
     private String reg;
     private String codHab;
     private List<String> images;
 
-    public HotelInfo(String name, String price, List<String> images, int stars, String reg, String codHab) {
+    public HotelInfo(String name, BigDecimal price, List<String> images, int stars, String reg, String codHab) {
         this.name = name;
         this.price = price;
         this.images = images;
@@ -31,11 +32,11 @@ public class HotelInfo implements Serializable {
         this.name = name;
     }
 
-    public String getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
