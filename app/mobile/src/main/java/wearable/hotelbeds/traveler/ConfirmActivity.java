@@ -13,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -29,13 +28,12 @@ public class ConfirmActivity extends AppCompatActivity implements NavigationView
 
     private static String TAG = "ConfirmActivity";
 
-    private LinearLayout myGallery;
     private TextView event;
     private TextView price;
-    private TextView calendar;
     private TextView hotel;
     private TextView flyOut;
     private TextView flyIn;
+    private TextView flySection;
     private PriceInfoBean priceBean;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -45,39 +43,31 @@ public class ConfirmActivity extends AppCompatActivity implements NavigationView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm);
-        myGallery = (LinearLayout) findViewById(R.id.mygallery);
         event = (TextView) findViewById(R.id.event);
         price = (TextView) findViewById(R.id.price);
-        calendar = (TextView) findViewById(R.id.calendario);
         hotel = (TextView) findViewById(R.id.hotel);
         flyOut = (TextView) findViewById(R.id.takeout);
         flyIn = (TextView) findViewById(R.id.takein);
+        flySection = (TextView) findViewById(R.id.fly_in_section_label);
 
         //Load info
         priceBean = (PriceInfoBean) getIntent().getExtras().getSerializable("price");
         if (priceBean != null) {
-            if (priceBean.getEvent().getImageUrl() != null) {
-                myGallery.addView(insertPhoto(priceBean.getEvent().getImageUrl()));
-            }
-            if (priceBean.getHotelImages() != null && priceBean.getHotelImages().size() > 0) {
-                for (String imageUrl : priceBean.getHotelImages()) {
-                    myGallery.addView(insertPhoto(imageUrl));
-                }
-            }
             event.setText(priceBean.getEvent().getName());
             if (priceBean.getTotalAmount().stripTrailingZeros().scale() <= 0) {
-                price.setText(priceBean.getTotalAmount().toString() + " €");
+                price.setText(priceBean.getTotalAmount().toString());
             } else {
-                price.setText(priceBean.getTotalAmount().setScale(2, BigDecimal.ROUND_UP).toString() + " €");
+                price.setText(priceBean.getTotalAmount().setScale(2, BigDecimal.ROUND_UP).toString());
             }
-            calendar.setText(PriceUtils.DATE_FORMATER.format(priceBean.getFlyOut()) + " - " + PriceUtils.DATE_FORMATER.format(priceBean.getFlyIn()));
             String mHotel = priceBean.getHotelName() + " " + priceBean.getRoomInfo() + " ";
             for (int i = 0; i < priceBean.getHotelStars(); i++) {
                 mHotel += "*";
             }
             hotel.setText(mHotel);
-            flyIn.setText(priceBean.getFlyOutAerolineName() + " " + PriceUtils.DATE_FORMATER_HOUR.format(priceBean.getFlyOut()));
-            flyOut.setText(priceBean.getFlyInAerolineName() + " " + PriceUtils.DATE_FORMATER_HOUR.format(priceBean.getFlyIn()));
+            flySection.setText("Fly " + PriceUtils.DATE_FORMATER.format(priceBean.getFlyDeparture().get(0).getDeparture()) + "-" + PriceUtils.DATE_FORMATER.format(priceBean.getFlyArrival().get(0).getArrival()));
+
+            //flyIn.setText(priceBean.getFlyOutAerolineName() + " " + PriceUtils.FORMATER_HOUR.format(priceBean.getFlyOut()));
+            //flyOut.setText(priceBean.getFlyInAerolineName() + " " + PriceUtils.FORMATER_HOUR.format(priceBean.getFlyIn()));
         }
 
 
@@ -128,7 +118,12 @@ public class ConfirmActivity extends AppCompatActivity implements NavigationView
         return true;
     }
 
-    public void btnConfirm(View v) {
+    public void btnConfirmMIS(View v) {
+        Log.i(TAG, "Confirmacion pulsada");
+        ConfirmDataBean confirmBean = PriceUtils.confirmBooking(this, priceBean);
+    }
+
+    public void btnConfirmGP(View v) {
         Log.i(TAG, "Confirmacion pulsada");
         ConfirmDataBean confirmBean = PriceUtils.confirmBooking(this, priceBean);
     }

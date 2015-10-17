@@ -2,12 +2,9 @@ package wearable.hotelbeds.traveler.nav;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
-import wearable.hotelbeds.shared.event.EventUtils;
-import wearable.hotelbeds.shared.price.PriceUtils;
 import wearable.hotelbeds.traveler.ConfirmActivity;
 import wearable.hotelbeds.traveler.MainActivity;
 import wearable.hotelbeds.traveler.R;
@@ -40,11 +37,11 @@ public class MenuUtils {
                     return;
                 }
                 Log.i(TAG, "Bookings Selected");
-                intent = new Intent(context, ConfirmActivity.class);
+               /* intent = new Intent(context, ConfirmActivity.class);
                 Bundle b = new Bundle();
                 b.putSerializable("price", PriceUtils.searchPrices(EventUtils.obtainAllEvent().get(0), null).get(0));
                 intent.putExtras(b);
-                context.startActivity(intent);
+                context.startActivity(intent);*/
                 break;
             default:
                 break;
