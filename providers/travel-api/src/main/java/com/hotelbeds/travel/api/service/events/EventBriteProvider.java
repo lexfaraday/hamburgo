@@ -25,10 +25,10 @@ public class EventBriteProvider {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	public List<EventBean> searchEvents() throws Exception {
-		List<EventBean> events = new ArrayList<EventBean>();
+	public EventBean getEventById(String id) throws Exception {
 
-		String url = appProfile.getEventUrl() + appProfile.getEventToken();
+		String endpoint = "/" + id + "/?token=";
+		String url = appProfile.getEventUrl() + endpoint + appProfile.getEventToken();
 		System.out.println(url);
 
 		String eventResponse = null;
@@ -39,7 +39,29 @@ public class EventBriteProvider {
 			jsonObjectResponse = (JsonObject) parser.parse(eventResponse);
 			throw new Exception();
 		} catch (Exception e) {
-			eventResponse = IOUtils.toString(new InputStreamReader(getClass().getResourceAsStream("/events/dummy-events.json"))); 
+			eventResponse = IOUtils
+					.toString(new InputStreamReader(getClass().getResourceAsStream("/events/dummy-events.json")));
+			jsonObjectResponse = (JsonObject) parser.parse(eventResponse);
+		}
+		return constructEventBean(jsonObjectResponse);
+	}
+
+	public List<EventBean> searchEvents() throws Exception {
+		List<EventBean> events = new ArrayList<EventBean>();
+		String endpoint = "/search/?token=";
+		String url = appProfile.getEventUrl() + endpoint + appProfile.getEventToken();
+		System.out.println(url);
+
+		String eventResponse = null;
+		JsonParser parser = new JsonParser();
+		JsonObject jsonObjectResponse = null;
+		try {
+			eventResponse = restTemplate.getForObject(url, String.class);
+			jsonObjectResponse = (JsonObject) parser.parse(eventResponse);
+			throw new Exception();
+		} catch (Exception e) {
+			eventResponse = IOUtils
+					.toString(new InputStreamReader(getClass().getResourceAsStream("/events/dummy-events.json")));
 			jsonObjectResponse = (JsonObject) parser.parse(eventResponse);
 		}
 
@@ -49,19 +71,44 @@ public class EventBriteProvider {
 
 			for (JsonElement e : jsonArrayEvents) {
 				JsonObject jsonObjectEvent = (JsonObject) e;
-				EventBean eventBean = new EventBean();
-				eventBean.setTitle(jsonObjectEvent.get("name").getAsJsonObject().get("text").getAsString());
-				eventBean
-						.setDescription(jsonObjectEvent.get("description").getAsJsonObject().get("text").getAsString());
-				eventBean.setId(jsonObjectEvent.get("id").getAsString());
-				eventBean.setStartDate(jsonObjectEvent.get("start").getAsJsonObject().get("utc").getAsString());
-				eventBean.setEndDate(jsonObjectEvent.get("end").getAsJsonObject().get("utc").getAsString());
-				eventBean.setCapacity(jsonObjectEvent.get("capacity").getAsString());
-				eventBean.setCurrency(jsonObjectEvent.get("currency").getAsString());
-				eventBean.setImage(jsonObjectEvent.get("logo").getAsJsonObject().get("url").getAsString());
+				EventBean eventBean = constructEventBean(jsonObjectEvent);
 				events.add(eventBean);
 			}
 		}
 		return events;
+	}
+
+	private EventBean constructEventBean(JsonObject jsonObjectEvent) {
+		EventBean eventBean = new EventBean();
+		eventBean.setTitle(getJsonValue(jsonObjectEvent, "name", "text"));
+		eventBean.setDescription(getJsonValue(jsonObjectEvent, "description", "text"));
+		eventBean.setId(getJsonValue(jsonObjectEvent, "id", null));
+		eventBean.setStartDate(getJsonValue(jsonObjectEvent, "start", "utc"));
+		eventBean.setEndDate(getJsonValue(jsonObjectEvent, "end", "utc"));
+		eventBean.setCapacity(getJsonValue(jsonObjectEvent, "capacity", null));
+		eventBean.setCurrency(getJsonValue(jsonObjectEvent, "currency", null));
+		eventBean.setImage(getJsonValue(jsonObjectEvent, "logo", "url"));
+		return eventBean;
+	}
+
+	private String getJsonValue(JsonObject jsonObject, String elementName, String elementName2) {
+		try {
+			if (jsonObject != null) {
+				if (jsonObject.get(elementName) != null) {
+					if (elementName2 != null) {
+						if (jsonObject.get(elementName).getAsJsonObject() != null
+								&& jsonObject.get(elementName).getAsJsonObject().get(elementName2) != null) {
+							return jsonObject.get(elementName).getAsJsonObject().get(elementName2).getAsString();
+						}
+					} else {
+						return jsonObject.get(elementName) != null ? jsonObject.get(elementName).getAsString() : null;
+					}
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+			return null;
+		}
+		return null;
 	}
 }

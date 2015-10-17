@@ -3,4 +3,4 @@ server:
 
 app: 
   eventToken: IRRMREVI67C3SSC3T2WR
-  eventUrl:   https://www.eventbriteapi.com/v3/events/search/?token=
+  eventUrl:   https://www.eventbriteapi.com/v3/events
