@@ -15,6 +15,20 @@
             android:id="@+id/toolbar"
             layout="@layout/toolbar" />
 
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/mode_detail_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="5dp"
+            android:clickable="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_info_outline_black_24dp"
+            app:layout_anchor="@id/drawer_layout"
+            app:layout_anchorGravity="bottom|right|end"
+            android:onClick="btnShowMoreInfo"/>
+
         <ScrollView
             android:id="@+id/mainscroll"
             android:layout_width="match_parent"
@@ -34,11 +48,28 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/linear_main"
+                    android:layout_margin="5dp"
                     android:text="openDeck | Oktoberfest"
                     android:textColor="@color/title"
                     android:textSize="25dp"
-                    android:layout_margin="5dp"
                     android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/qr"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/linear_main"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    android:layout_marginTop="10dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/qrcode"
+                    android:textColor="@color/title"
+                    android:textSize="25dp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
 
                 <android.support.v7.widget.CardView
                     android:id="@+id/card"
@@ -59,15 +90,14 @@
                             android:layout_height="wrap_content">
 
 
-
-
                             <TextView
                                 android:id="@+id/hotel_section_label"
                                 style="?android:attr/listSeparatorTextViewStyle"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:text="Hotel"
                                 android:textColor="@color/title"
-                                android:text="Hotel" />
+                                android:textSize="@dimen/text_title_size" />
 
                             <ImageView
                                 android:id="@+id/imagestars"
@@ -97,28 +127,26 @@
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/hotel"
                                 android:text="Fly"
-                                android:textColor="@color/title"/>
+                                android:textColor="@color/title"
+                                android:textSize="@dimen/text_title_size" />
 
 
-
-
-                            <LinearLayout android:id="@+id/flydeparture_div"
+                            <LinearLayout
+                                android:id="@+id/flydeparture_div"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/fly_in_section_label"
                                 android:orientation="vertical">
 
 
-
-
                             </LinearLayout>
 
-                            <LinearLayout android:id="@+id/flyarrival_div"
+                            <LinearLayout
+                                android:id="@+id/flyarrival_div"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/flydeparture_div"
                                 android:orientation="vertical">
-
 
 
                             </LinearLayout>
@@ -127,34 +155,56 @@
                                 android:id="@+id/price"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="2dp"
                                 android:layout_below="@+id/flyarrival_div"
+                                android:layout_marginLeft="2dp"
                                 android:layout_toStartOf="@+id/imageprice"
                                 android:text="20"
                                 android:textColor="#404040"
                                 android:textSize="@dimen/text_size" />
+
                             <ImageView
                                 android:id="@+id/imageprice"
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
+                                android:layout_alignParentEnd="true"
                                 android:layout_below="@+id/flyarrival_div"
                                 android:layout_margin="5dp"
-                                android:src="@drawable/price"
-                                android:layout_alignParentEnd="true" />
+                                android:src="@drawable/price" />
                         </RelativeLayout>
                     </ScrollView>
                 </android.support.v7.widget.CardView>
 
-
-                <LinearLayout
-                    android:id="@+id/purchase_button_GP"
+                <android.support.v7.widget.CardView
+                    android:id="@+id/card_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/card"
+                    android:layout_below="@+id/toolbar"
+                    android:layout_margin="8dp"
+                    android:alpha="0"
+                    android:scaleY="0"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:id="@+id/mode_detail_div"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <LinearLayout
+                    android:id="@+id/buttons"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/card_detail"
+                    android:layout_marginBottom="70dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="5dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="invisible">
 
                     <ImageButton
                         style="?android:attr/borderlessButtonStyle"
