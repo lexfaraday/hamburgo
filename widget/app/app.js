@@ -3,13 +3,14 @@ define([
     'angular',
     'lodash',
     'moment',
+    'makeitsocial',
     'angular-ui-router',
 
     //filters
 
 
     //directives
-    'wowInit',
+    'wowInit', 'misbtn',
 
     //controllers
     'mainCtrl', 'searcherCtrl',
@@ -24,7 +25,6 @@ define([
         //deps in angular
         'controllers',
         'directives',
-        'filters',
         'ui.router'
     ]);
 
