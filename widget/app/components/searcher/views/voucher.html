@@ -1,0 +1,13 @@
+<div class="event summary wow flipInX">
+    <div class="author">hovee.dev</div>
+    <h3>World Travel Market 2015</h3>
+    <small>02/11/2015 - 05/11/2015</small>
+
+    <img class="voucher" ng-src="/assets/img/qr.jpg" alt="Voucher" />
+
+    <button class="wow fadeInDown hvr-bubble-bottom" data-wow-delay="0.8s" ng-click="searcherCtrl.showDetails = true">Details</button>
+
+    <div ui-view="details" ng-if="searcherCtrl.showDetails"></div>
+    <div ui-view="loading"></div>
+</div>
+

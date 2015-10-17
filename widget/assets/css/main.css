@@ -1,5 +1,189 @@
 @import url("../../libs/font-awesome/css/font-awesome.min.css");
 @import url("../../libs/wow/css/libs/animate.css");
 @import url("../../libs/Hover/css/hover-min.css");
+@import url(https://fonts.googleapis.com/css?family=Rajdhani);
+@import url("../../libs/makeitsocial/dist/mis-button.css");
+
+html, body {
+    font-family: 'Rajdhani', sans-serif;
+    margin:0;
+    padding:0;
+}
+
+*:active, *:focus {
+    outline: none;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+button img {
+    width: 25px;
+    height: auto;
+    margin: 0;
+}
+
+img.voucher {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+}
+
+.author {
+    position: absolute;
+    top: 3px;
+    right: 5px;
+    font-size: 10px;
+    color: #cc0b33;
+}
+
+.event {
+    width: 383px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    padding: 7px;
+    border-radius: 7px;
+    position: relative;
+}
+
+.event.main img {
+    width: 30%;
+    float: left;
+}
+
+.event.main h3 {
+    width: 70%;
+    margin-left:30%;
+    color:#cc0b33;
+    text-align: center;
+}
+
+.event.main small {
+    text-align: center;
+    display: block;
+}
+
+.event button {
+    clear: both;
+    width: 100%;
+    display: inline-block;
+    background-color: #cc0b33;
+    padding: 7px 0px;
+    border: none;
+    border-radius: 7px;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    margin-top: 15px;
+    position: relative;
+}
+
+.event button.half-btn {
+    width: 48%;
+}
+
+.event button:nth-of-type(2) {
+    margin-left: 2%;
+}
 
 
+.mks {
+    margin:0 auto;
+    margin-top: 7px;
+    text-align: center;
+    display:block;
+}
+.event button:hover {
+    cursor: pointer;
+}
+
+.event i {
+    color: #787878;
+    margin: 5px;
+}
+
+
+
+.hvr-bubble-top:before {
+    border-color: transparent transparent #cc0b33;
+}
+
+.hvr-bubble-bottom:before {
+    border-color: #cc0b33 transparent transparent;
+}
+
+.plane-to {
+    transform: rotate(75deg);
+}
+
+.event.summary h3 {
+    color: #cc0b33;
+    text-align: center;
+    margin-bottom: 3px;
+}
+
+.event.summary h4 {
+    text-align: center;
+    margin-bottom: 3px;
+    color: #555;
+}
+
+.event.summary small {
+    text-align: center;
+    width: 100%;
+    display: block;
+}
+
+.event.summary span {
+    width: 100%;
+    display: block;
+}
+
+.event.summary .col {
+    text-align: left;
+    float: left;
+    width: 45%;
+    padding: 2%;
+}
+
+.event.summary .col h4 {
+    color: #cc0b33;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #cc0b33;
+    margin-top: 5px;
+}
+
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(100, 11, 107, 0.9);
+    z-index: 999;
+    color: #fff;
+    font-size: 30px;
+    text-align: center;
+    padding-top: 140px;
+}
+
+.loading i {
+    position:absolute;
+    top:40%;
+    margin-left:-40px;
+}
+
+.clearfix {
+    clear: both;
+}
+
+.clearfix:before, .clearfix:after {
+    content: " ";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}

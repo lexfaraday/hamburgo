@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+    <ImageView
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:src="@drawable/dot"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="5dp" />
+    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/texto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/hotel_section_label"
+        android:layout_marginLeft="2dp"
+        android:layout_toEndOf="@+id/imagestars"
+        android:text="Prueba"
+        android:textColor="#404040"
+        android:textSize="@dimen/text_size" />
+
+
+</LinearLayout>

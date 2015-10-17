@@ -8,12 +8,11 @@ require.config({
         'routes': '../app/routes',
         'constants': '../app/constants',
 
-        //ANGULAR FILTERS
-        'filters': '../app/filters/filters',
 
         //ANGULAR DIRECTIVES
         'directives': '../app/directives/directives',
         'wowInit': '../app/directives/wowInit',
+        'misbtn': '../app/directives/misbtn',
 
         //ANGULAR CONTROLLERS
         'controllers': '../app/controllers/controllers',
@@ -31,6 +30,7 @@ require.config({
         'moment': 'moment/min/moment.min',
         'lodash': 'lodash/lodash',
         'wow': 'wow/dist/wow.min',
+        'makeitsocial': 'makeitsocial/dist/mis-button',
 
         'jquery': 'jquery/jquery',
 
