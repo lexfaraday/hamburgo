@@ -3,21 +3,32 @@
     <h3>World Travel Market 2015</h3>
     <small>02/11/2015 - 05/11/2015</small>
     <h4>340,45€</h4>
-    <div class="col">
+
+    <div class="col wow fadeInRight" data-wow-delay="0.8s">
         <h4>Hotel</h4>
         <span><i class="fa fa-calendar"></i>02/11/2015</span>
-        <span><i class="fa fa-building-o"></i>Alexandra</span>
+        <span><i class="fa fa-building-o"></i>Novotel London ExCeL</span>
     </div>
-    <div class="col">
+    <div class="col wow fadeInLeft" data-wow-delay="0.8s">
         <h4>Flights</h4>
         <span><i class="fa fa-plane"></i>06:00 EasyJet</span>
         <span><i class="fa fa-plane plane-to"></i>20:30 Ryanair</span>
     </div>
 
+    <div class="actions">
+        <a misbtn class="makeitsocial-button mks wow fadeInRight" data-wow-delay="1.2s"
+           data-pid="demoproduct_1" href="#"></a>
 
-    <button class="half-btn wow fadeInRight hvr-bubble-bottom" data-wow-delay="0.8s" ng-click="searcherCtrl.showDetails = true">Details</button>
-    <button class="half-btn wow fadeInLeft hvr-bubble-top" data-wow-delay="0.8s" ng-click="searcherCtrl.goTo('voucher')">Book now!</button>
-    <a misbtn class="makeitsocial-button mks wow fadeInDown" data-wow-delay="0.8s" data-pid="demoproduct_1" href="#"></a>
+        <button class="wallet-btn wow fadeInLeft" data-wow-delay="1.2s"
+                ng-click="searcherCtrl.goTo('voucher')">
+            <img height=30 src="http://cdn.business2community.com/wp-content/uploads/2015/08/google-buy.png"/>
+        </button>
+
+    </div>
+
+    <button class="wow fadeInDown hvr-bubble-bottom" data-wow-delay="1.2s"
+            ng-click="searcherCtrl.showDetails = true">Detailed information
+    </button>
 
     <div ui-view="details" ng-if="searcherCtrl.showDetails"></div>
     <div ui-view="loading"></div>

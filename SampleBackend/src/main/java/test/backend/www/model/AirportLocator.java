@@ -13,32 +13,31 @@ import org.apache.commons.lang3.StringUtils;
 import lombok.Data;
 
 @Data
-public class AirportLocator
-{
-  private final Map<Integer, Airport> airports;
+public class AirportLocator {
+	private final Map<Integer, Airport> airports;
+	private final Map<String, String> countries;
 
-  public List<RelativeDistance> getClosestAirports(GeoPoint position, int maxAirports, long limitKm, boolean withIataCode)
-  {
-    List<RelativeDistance> result = new ArrayList<>();
+	public String getCountryCode(String countryName) {
+		return countries.get(countryName);
+	}
 
-    // Find the relative distances from the given position to the airports in the system, ordered
-    Set<RelativeDistance> sortedDistances = new TreeSet<>();
-    for (Entry<Integer, Airport> airportEntry : airports.entrySet())
-    {
-      if (!withIataCode || StringUtils.isNotBlank(airportEntry.getValue().getIataFaaCode()))
-      {
-        sortedDistances.add(new RelativeDistance(position, airportEntry.getValue()));
-      }
-    }
-    // @formatter:off
-    result = 
-      sortedDistances
-        .stream()
-        .limit(maxAirports)
-        .filter(sortedDistance -> sortedDistance.getDistance().getKilometers() < limitKm)
-        .collect(Collectors.toList())
-        ;
-    // @formatter:on
-    return result;
-  }
+	public List<RelativeDistance> getClosestAirports(GeoPoint position, int maxAirports, long limitKm,
+			boolean withIataCode) {
+		List<RelativeDistance> result = new ArrayList<>();
+
+		// Find the relative distances from the given position to the airports
+		// in the system, ordered
+		Set<RelativeDistance> sortedDistances = new TreeSet<>();
+		for (Entry<Integer, Airport> airportEntry : airports.entrySet()) {
+			if (!withIataCode || StringUtils.isNotBlank(airportEntry.getValue().getIataFaaCode())) {
+				sortedDistances.add(new RelativeDistance(position, airportEntry.getValue()));
+			}
+		}
+		// @formatter:off
+		result = sortedDistances.stream().limit(maxAirports)
+				.filter(sortedDistance -> sortedDistance.getDistance().getKilometers() < limitKm)
+				.collect(Collectors.toList());
+		// @formatter:on
+		return result;
+	}
 }

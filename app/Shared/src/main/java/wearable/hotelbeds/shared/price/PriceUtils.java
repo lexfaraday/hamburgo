@@ -53,14 +53,14 @@ public class PriceUtils {
         int random = rand.nextInt(2);
         if (random == 0) {
             try {
-                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 18:30"), DATE_FORMATER_HOUR.parse("14/10/2015 19:20"), "Rayanair", "PMI", "BCN", new BigDecimal("86.85")));
-                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 20:05"), DATE_FORMATER_HOUR.parse("14/10/2015 21:30"), "Air Europa", "BCN", "LON", new BigDecimal("86.85")));
+                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 18:30"), DATE_FORMATER_HOUR.parse("14/10/2015 19:20"), "RYN", "PMI", "BCN", new BigDecimal("86.85")));
+                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 20:05"), DATE_FORMATER_HOUR.parse("14/10/2015 21:30"), "AEU", "BCN", "LON", new BigDecimal("86.85")));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
         } else if (random == 1) {
             try {
-                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 18:30"), DATE_FORMATER_HOUR.parse("14/10/2015 19:20"), "Air Berlin", "PMI", "MAD", new BigDecimal("62")));
+                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 18:30"), DATE_FORMATER_HOUR.parse("14/10/2015 19:20"), "ABE", "PMI", "MAD", new BigDecimal("62")));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
