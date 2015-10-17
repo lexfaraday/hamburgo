@@ -18,12 +18,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 import test.backend.www.model.AirportLocator;
-import test.backend.www.model.GeoPoint;
-import test.backend.www.model.RelativeDistance;
 import test.backend.www.model.eventbrite.EventbriteService;
 import test.backend.www.model.eventbrite.domain.EventBean;
 import test.backend.www.model.hotelbeds.HotelbedsService;
@@ -34,12 +35,12 @@ import test.backend.www.model.sabre.SabrePricedItineraries.FlightSegment;
 import test.backend.www.model.sabre.SabrePricedItineraries.OriginDestinationOption;
 import test.backend.www.model.sabre.SabrePricedItineraries.PricedItinerary;
 import test.backend.www.model.sabre.SabreService;
+import test.backend.www.model.sita.SitaService;
+import test.backend.www.model.sita.domain.Airport;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Controller
-// Ej:
-// http://localhost:8080/journey/39.577251/2.633764/53.562139/9.956317/2015-10-22/2015-10-25/
 @Slf4j
 public class JourneyController {
 
@@ -57,9 +58,14 @@ public class JourneyController {
 	@Autowired
 	AirportLocator airportLocator;
 
+	@Autowired
+	SitaService sitaService;
+
 	@ResponseBody
 	@RequestMapping(value = "/journey/{origin_latitude}/{origin_longitude}/{event_id}/", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
+	// Ejemplo Frankfurt, Barcelona :
+	// http://localhost:8080/journey/50.031061/8.843783/17722113318/
 	public ResponseEntity<Object> journeysFromEvent(@PathVariable(value = "origin_latitude") String originLatitude,
 			@PathVariable(value = "origin_longitude") String originLongitude,
 			@PathVariable(value = "event_id") String eventId,
@@ -80,47 +86,64 @@ public class JourneyController {
 	@ResponseBody
 	@RequestMapping(value = "/journey/{origin_latitude}/{origin_longitude}/{destination_latitude}/{destination_longitude}/{from}/{to}/", produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseStatus(HttpStatus.OK)
+	// Ejemplo:
+	// http://localhost:8080/journey/39.577251/2.633764/53.562139/9.956317/2015-10-22/2015-10-25/
 	public ResponseEntity<Object> journeys(@PathVariable(value = "origin_latitude") String originLatitude,
 			@PathVariable(value = "origin_longitude") String originLongitude,
 			@PathVariable(value = "destination_latitude") String destinationLatitude,
 			@PathVariable(value = "destination_longitude") String destinationLongitude,
 			@PathVariable(value = "from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from,
 			@PathVariable(value = "to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to,
-			@RequestParam(value = "limitKm", required = false, defaultValue = "50") long limitKm) {
+			@RequestParam(value = "limitKm", required = false, defaultValue = "50") long limitKm)
+					throws JsonParseException, JsonMappingException, IOException {
 
 		return findJourneyData(originLatitude, originLongitude, destinationLatitude, destinationLongitude, from, to,
 				limitKm);
 	}
 
 	private ResponseEntity<Object> findJourneyData(String originLatitude, String originLongitude,
-			String destinationLatitude, String destinationLongitude, LocalDate from, LocalDate to, long limitKm) {
-		// Locate the airports closest to the origin
-		List<RelativeDistance> originAirports = airportLocator
-				.getClosestAirports(new GeoPoint(originLatitude, originLongitude), DEFAULT_MAX, limitKm, true);
+			String destinationLatitude, String destinationLongitude, LocalDate from, LocalDate to, long limitKm)
+					throws JsonParseException, JsonMappingException, IOException {
 
+		// Locate the airports closest to the origin
+		List<Airport> originAirportsSita = sitaService.findAirportsByGeoPos(originLatitude, originLongitude,
+				DEFAULT_MAX);
 		// Locate the airports closest to the destination
-		List<RelativeDistance> destinationAirports = airportLocator.getClosestAirports(
-				new GeoPoint(destinationLatitude, destinationLongitude), DEFAULT_MAX, limitKm, true);
+		List<Airport> destinationAirportsSita = sitaService.findAirportsByGeoPos(destinationLatitude,
+				destinationLongitude, DEFAULT_MAX);
+
+		// // Locate the airports closest to the origin
+		// List<RelativeDistance> originAirports = airportLocator
+		// .getClosestAirports(new GeoPoint(originLatitude, originLongitude),
+		// DEFAULT_MAX, limitKm, true);
+		//
+		// // Locate the airports closest to the destination
+		// List<RelativeDistance> destinationAirports =
+		// airportLocator.getClosestAirports(
+		// new GeoPoint(destinationLatitude, destinationLongitude), DEFAULT_MAX,
+		// limitKm, true);
 
 		SabrePricedItineraries sabrePricedItineraries = null;
 
-		for (RelativeDistance originDistance : originAirports) {
-			String country = originDistance.getAirport().getCountryCode();
-			String origin = originDistance.getAirport().getIataFaaCode();
-			for (RelativeDistance destinationDistance : destinationAirports) {
+		for (Airport originDistance : originAirportsSita) {
+			String country = airportLocator.getCountryCode(originDistance.getCountry());
+			String origin = originDistance.getCode();
+			for (Airport destinationDistance : destinationAirportsSita) {
 				try {
-					sabrePricedItineraries = sabreService.getFlights(country, origin,
-							destinationDistance.getAirport().getIataFaaCode(), from, to);
+					sabrePricedItineraries = sabreService.getFlights(country, origin, destinationDistance.getCode(),
+							from, to);
 					if (sabrePricedItineraries != null && sabrePricedItineraries.getPricedItineraries() != null) {
-						log.info("Found itinerary from {} to {}", origin,
-								destinationDistance.getAirport().getIataFaaCode());
+						log.info("Found itinerary from {} to {}", origin, destinationDistance.getCode());
 						break;
 					}
 				} catch (IOException e) {
-					log.debug("No itinerary from {} to {}", origin, destinationDistance.getAirport().getIataFaaCode());
+					log.info("No itinerary from {} to {}", origin, destinationDistance.getCode());
 				} catch (Exception e) {
 					log.error("Error", e);
 				}
+			}
+			if (sabrePricedItineraries != null) {
+				break;
 			}
 		}
 

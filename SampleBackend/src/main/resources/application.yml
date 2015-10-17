@@ -11,3 +11,5 @@ eventbrite:
   base_url: https://www.eventbriteapi.com/v3
 hotelbeds:
   base_url: https://api.test.hotelbeds.com/hotel-api/0.2
+sita:
+  base_url: https://airport.api.aero
