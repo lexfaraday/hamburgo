@@ -12,7 +12,6 @@ public class EventBean {
 	String capacity;
 	String currency;
 	String image;
-	String aspectRadio;
 	String latitude;
 	String longitude;
 }

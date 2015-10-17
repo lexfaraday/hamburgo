@@ -1,22 +1,18 @@
 package com.hotelbeds.travel.api.service.events;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
 import com.hotelbeds.travel.api.profiles.ApplicationProfile;
 import com.hotelbeds.travel.api.service.events.domain.EventBean;
 
@@ -43,9 +39,8 @@ public class EventBriteProvider {
 			jsonObjectResponse = (JsonObject) parser.parse(eventResponse);
 			throw new Exception();
 		} catch (Exception e) {
-			Gson gson = new Gson();
-			JsonReader reader = new JsonReader(new InputStreamReader(getClass().getResourceAsStream("/events/dummy-events.json")));
-			jsonObjectResponse = (JsonObject) gson.fromJson(reader, String.class);
+			eventResponse = IOUtils.toString(new InputStreamReader(getClass().getResourceAsStream("/events/dummy-events.json"))); 
+			jsonObjectResponse = (JsonObject) parser.parse(eventResponse);
 		}
 
 		if (jsonObjectResponse != null) {
@@ -64,7 +59,6 @@ public class EventBriteProvider {
 				eventBean.setCapacity(jsonObjectEvent.get("capacity").getAsString());
 				eventBean.setCurrency(jsonObjectEvent.get("currency").getAsString());
 				eventBean.setImage(jsonObjectEvent.get("logo").getAsJsonObject().get("url").getAsString());
-				eventBean.setAspectRadio(jsonObjectEvent.get("aspect_ratio").getAsString());
 				events.add(eventBean);
 			}
 		}
