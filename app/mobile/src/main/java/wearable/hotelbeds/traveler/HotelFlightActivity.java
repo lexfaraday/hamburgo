@@ -43,7 +43,7 @@ public class HotelFlightActivity extends AppCompatActivity {
     }
 
     private void loadR() {
-        mHotelFlightRecyclerView = (RecyclerView) findViewById(R.id.hotelsCardView);
+        mHotelFlightRecyclerView = (RecyclerView) findViewById(R.id.hotelFlightRecyclerView);
         mHotelFlightRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mHotelFlightRecyclerView.setLayoutManager(mLayoutManager);
