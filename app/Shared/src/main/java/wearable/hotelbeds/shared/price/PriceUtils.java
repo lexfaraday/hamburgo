@@ -53,20 +53,20 @@ public class PriceUtils {
         int random = rand.nextInt(2);
         if (random == 0) {
             try {
-                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 18:30"), DATE_FORMATER_HOUR.parse("14/10/2015 19:20"), "Rayanair", "PMI", "BCN"));
-                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 20:05"), DATE_FORMATER_HOUR.parse("14/10/2015 21:30"), "Air Europa", "BCN", "LON"));
+                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 18:30"), DATE_FORMATER_HOUR.parse("14/10/2015 19:20"), "RYN", "PMI", "BCN", new BigDecimal("86.85")));
+                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 20:05"), DATE_FORMATER_HOUR.parse("14/10/2015 21:30"), "AEU", "BCN", "LON", new BigDecimal("86.85")));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
         } else if (random == 1) {
             try {
-                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 18:30"), DATE_FORMATER_HOUR.parse("14/10/2015 19:20"), "Air Berlin", "PMI", "MAD"));
+                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 18:30"), DATE_FORMATER_HOUR.parse("14/10/2015 19:20"), "ABE", "PMI", "MAD", new BigDecimal("62")));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
         } else {
             try {
-                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 06:30"), DATE_FORMATER_HOUR.parse("14/10/2015 08:20"), "Vueling", "LON", "PMI"));
+                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 06:30"), DATE_FORMATER_HOUR.parse("14/10/2015 08:20"), "Vueling", "LON", "PMI", new BigDecimal("92.5")));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -84,6 +84,30 @@ public class PriceUtils {
             bookings.save(context);
         }
         return confirmData;
+    }
+
+    public static BookingsBean getBookings(Context context) {
+        return BookingsBean.load(context);
+    }
+
+    public static List<ConfirmDataBean> searchEventByName(Context context, String name) {
+        BookingsBean bookingBean = getBookings(context);
+        List<ConfirmDataBean> bookings = bookingBean.getConfirmDataBeans();
+        //TODO Make search (Si hay dos que coinciden se puede devolver lista)
+        List<ConfirmDataBean> possible = new ArrayList<>();
+        for (ConfirmDataBean book : bookings) {
+            if (book.getToken() != null && book.getToken().contains(name)) {
+                possible.add(book);
+            }
+            if (book.getPrice() != null && book.getPrice().getEvent() != null && book.getPrice().getEvent().getName() != null && book.getPrice().getEvent().getName().contains(name)) {
+                possible.add(book);
+            }
+        }
+        if (possible.size() > 0) {
+            return possible;
+        } else {
+            return bookings;
+        }
     }
 
 
