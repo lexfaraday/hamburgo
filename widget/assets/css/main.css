@@ -6,8 +6,8 @@
 
 html, body {
     font-family: 'Rajdhani', sans-serif;
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
 }
 
 *:active, *:focus {
@@ -51,8 +51,8 @@ img.voucher {
 
 .event.main h3 {
     width: 70%;
-    margin-left:30%;
-    color:#cc0b33;
+    margin-left: 30%;
+    color: #cc0b33;
     text-align: center;
 }
 
@@ -76,7 +76,7 @@ img.voucher {
     position: relative;
 }
 
-.event button.wallet-btn{
+.event button.wallet-btn {
     border-radius: 0;
     background-color: transparent;
     padding: 0;
@@ -86,13 +86,13 @@ img.voucher {
     width: 48%;
 }
 
-
 .mks {
-    margin:0 auto;
+    margin: 0 auto;
     margin-top: 7px;
     text-align: center;
-    display:block;
+    display: block;
 }
+
 .event button:hover {
     cursor: pointer;
 }
@@ -103,10 +103,10 @@ img.voucher {
 }
 
 .actions {
-    width:100%;
+    width: 100%;
     position: relative;
     clear: both;
-    height:40px;
+    height: 40px;
 }
 
 .actions a {
@@ -117,10 +117,10 @@ img.voucher {
 
 .actions button {
     position: absolute;
-    top:0;
-    width:auto;
-    right:0;
-    margin-top:5px;
+    top: 0;
+    width: auto;
+    right: 0;
+    margin-top: 5px;
 }
 
 .hvr-bubble-top:before {
@@ -167,7 +167,6 @@ img.voucher {
     padding: 2%;
 }
 
-
 .loading {
     position: fixed;
     top: 0;
@@ -183,10 +182,10 @@ img.voucher {
 }
 
 .loading i {
-    position:absolute;
-    top:40%;
-    margin-left:-40px;
-    color:#fff;
+    position: absolute;
+    top: 40%;
+    margin-left: -40px;
+    color: #fff;
 }
 
 .clearfix {
@@ -197,6 +196,7 @@ img.voucher {
     content: " ";
     display: table;
 }
+
 .clearfix:after {
     clear: both;
 }
