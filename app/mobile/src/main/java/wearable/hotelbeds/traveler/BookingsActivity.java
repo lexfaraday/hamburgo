@@ -40,7 +40,7 @@ public class BookingsActivity extends AppCompatActivity implements NavigationVie
 
         FloatingActionButton myFab = (FloatingActionButton) findViewById(R.id.addPax);
         myFab.setVisibility(View.GONE);
-        confirms = PriceUtils.getBookings(this);
+        confirms = (BookingsBean) getIntent().getExtras().getSerializable("bookings");
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
