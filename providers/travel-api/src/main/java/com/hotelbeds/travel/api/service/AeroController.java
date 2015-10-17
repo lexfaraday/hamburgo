@@ -2,6 +2,11 @@ package com.hotelbeds.travel.api.service;
 
 import java.io.IOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.xml.bind.JAXBException;
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,10 +18,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.xml.sax.SAXException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.hotelbeds.travel.api.profiles.ApplicationProfile;
-import com.hotelbeds.travel.api.service.domain.aero.AeroSearchRQ;
 import com.hotelbeds.travel.api.websocket.MessageFlow;
 
 @Controller
@@ -31,7 +36,10 @@ public class AeroController {
     private MessageFlow messageFlow;
 
     @Autowired
-    private AeroProvider aeroProvider;
+    private IATAProvider iataProvider;
+    
+    @Autowired
+    private SITAProvider sitaProvider;
 
     @RequestMapping(value = "")
     public String renderIndex(Model uiModel) {
@@ -47,9 +55,19 @@ public class AeroController {
     @ResponseBody
     public ResponseEntity<?> searchFlights() throws JsonProcessingException, IOException, ParseException {
         messageFlow.publish("Searching flights..");
-        return new ResponseEntity<String>(aeroProvider.searchFlights(new AeroSearchRQ()).toString(), HttpStatus.OK);
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-dd-M hh:mm:ss");
+        iataProvider.searchFlights(formatter.parse("2015-20-11 16:00:00") , formatter.parse("2015-25-11 20:00:00"), "CDG", "LHR");
+        return new ResponseEntity<String>("hh", HttpStatus.OK);
     }
     
+    @RequestMapping(value = "/flights/searchAirports", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+    @ResponseBody
+    public ResponseEntity<?> searchAirPorts() throws JsonProcessingException, IOException, ParseException, JAXBException, SAXException, ParserConfigurationException {
+        messageFlow.publish("Searching flights..");
+        sitaProvider.findAirportsByGeoPos("52.297097", "4.879903", "10");
+        return new ResponseEntity<String>("hh", HttpStatus.OK);
+    }
+    /*
     @RequestMapping(value = "/flights/book", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
     @ResponseBody
     public ResponseEntity<?> bookFlight() throws JsonProcessingException, IOException {
@@ -63,4 +81,5 @@ public class AeroController {
         messageFlow.publish("Checkin flights..");
         return new ResponseEntity<String>(aeroProvider.checkin(), HttpStatus.OK);
     }
+    */
 }

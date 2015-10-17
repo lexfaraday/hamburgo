@@ -5,6 +5,9 @@ import org.springframework.stereotype.Component;
 
 import com.hotelbeds.travel.api.profiles.domain.ProfileStruct;
 
+import lombok.Data;
+
+@Data
 @Component
 @ConfigurationProperties(value = "app")
 public class ApplicationProfile extends ProfileStruct {
@@ -15,17 +18,8 @@ public class ApplicationProfile extends ProfileStruct {
     
     String eventToken;
     String eventUrl;
+    String sitaKey;
+    String iataUrl;
+    String iataKey;
 	
-    public String getEventToken() {
-		return eventToken;
-	}
-	public void setEventToken(String eventToken) {
-		this.eventToken = eventToken;
-	}
-	public String getEventUrl() {
-		return eventUrl;
-	}
-	public void setEventUrl(String eventUrl) {
-		this.eventUrl = eventUrl;
-	}
 }

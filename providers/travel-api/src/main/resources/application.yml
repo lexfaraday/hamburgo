@@ -4,3 +4,6 @@ server:
 app: 
   eventToken: IRRMREVI67C3SSC3T2WR
   eventUrl:   https://www.eventbriteapi.com/v3/events/search/?token=
+  sitaKey:    3035d833bb6e531654a3cce03e6b1fde
+  iataUrl:    http://iata.api.mashery.com/kronos/api
+  iataKey:    83pgxr4xvxbnn3rw2a2r674t

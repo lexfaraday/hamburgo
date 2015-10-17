@@ -1,5 +1,5 @@
 
-package com.hotelbeds.travel.api.service.domain.aero.api;
+package com.hotelbeds.travel.api.service.domain.sita;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,11 +18,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "name",
     "city",
     "country",
+    "timezone",
     "lat",
     "lng",
     "terminal",
-    "gate",
-    "timezone"
+    "gate"
 })
 public class Airport {
 
@@ -34,16 +34,16 @@ public class Airport {
     private String city;
     @JsonProperty("country")
     private String country;
+    @JsonProperty("timezone")
+    private String timezone;
     @JsonProperty("lat")
     private Double lat;
     @JsonProperty("lng")
     private Double lng;
     @JsonProperty("terminal")
-    private String terminal;
+    private Object terminal;
     @JsonProperty("gate")
     private Object gate;
-    @JsonProperty("timezone")
-    private String timezone;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -130,6 +130,26 @@ public class Airport {
     /**
      * 
      * @return
+     *     The timezone
+     */
+    @JsonProperty("timezone")
+    public String getTimezone() {
+        return timezone;
+    }
+
+    /**
+     * 
+     * @param timezone
+     *     The timezone
+     */
+    @JsonProperty("timezone")
+    public void setTimezone(String timezone) {
+        this.timezone = timezone;
+    }
+
+    /**
+     * 
+     * @return
      *     The lat
      */
     @JsonProperty("lat")
@@ -173,7 +193,7 @@ public class Airport {
      *     The terminal
      */
     @JsonProperty("terminal")
-    public String getTerminal() {
+    public Object getTerminal() {
         return terminal;
     }
 
@@ -183,7 +203,7 @@ public class Airport {
      *     The terminal
      */
     @JsonProperty("terminal")
-    public void setTerminal(String terminal) {
+    public void setTerminal(Object terminal) {
         this.terminal = terminal;
     }
 
@@ -205,26 +225,6 @@ public class Airport {
     @JsonProperty("gate")
     public void setGate(Object gate) {
         this.gate = gate;
-    }
-
-    /**
-     * 
-     * @return
-     *     The timezone
-     */
-    @JsonProperty("timezone")
-    public String getTimezone() {
-        return timezone;
-    }
-
-    /**
-     * 
-     * @param timezone
-     *     The timezone
-     */
-    @JsonProperty("timezone")
-    public void setTimezone(String timezone) {
-        this.timezone = timezone;
     }
 
     @JsonAnyGetter

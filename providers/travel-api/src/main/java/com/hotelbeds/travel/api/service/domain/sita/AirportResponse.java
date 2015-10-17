@@ -1,5 +1,5 @@
 
-package com.hotelbeds.travel.api.service.domain.aero.api;
+package com.hotelbeds.travel.api.service.domain.sita;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,11 +20,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "authorisedAPI",
     "success",
     "airline",
-    "validCreditCards",
-    "paypal",
-    "outboundOptions"
+    "errorMessage",
+    "airports"
 })
-public class Shop {
+public class AirportResponse {
 
     @JsonProperty("processingDurationMillis")
     private Integer processingDurationMillis;
@@ -33,13 +32,11 @@ public class Shop {
     @JsonProperty("success")
     private Boolean success;
     @JsonProperty("airline")
-    private String airline;
-    @JsonProperty("validCreditCards")
-    private List<String> validCreditCards = new ArrayList<String>();
-    @JsonProperty("paypal")
-    private Boolean paypal;
-    @JsonProperty("outboundOptions")
-    private List<OutboundOption> outboundOptions = new ArrayList<OutboundOption>();
+    private Object airline;
+    @JsonProperty("errorMessage")
+    private Object errorMessage;
+    @JsonProperty("airports")
+    private List<Airport> airports = new ArrayList<Airport>();
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -109,7 +106,7 @@ public class Shop {
      *     The airline
      */
     @JsonProperty("airline")
-    public String getAirline() {
+    public Object getAirline() {
         return airline;
     }
 
@@ -119,68 +116,48 @@ public class Shop {
      *     The airline
      */
     @JsonProperty("airline")
-    public void setAirline(String airline) {
+    public void setAirline(Object airline) {
         this.airline = airline;
     }
 
     /**
      * 
      * @return
-     *     The validCreditCards
+     *     The errorMessage
      */
-    @JsonProperty("validCreditCards")
-    public List<String> getValidCreditCards() {
-        return validCreditCards;
+    @JsonProperty("errorMessage")
+    public Object getErrorMessage() {
+        return errorMessage;
     }
 
     /**
      * 
-     * @param validCreditCards
-     *     The validCreditCards
+     * @param errorMessage
+     *     The errorMessage
      */
-    @JsonProperty("validCreditCards")
-    public void setValidCreditCards(List<String> validCreditCards) {
-        this.validCreditCards = validCreditCards;
-    }
-
-    /**
-     * 
-     * @return
-     *     The paypal
-     */
-    @JsonProperty("paypal")
-    public Boolean getPaypal() {
-        return paypal;
-    }
-
-    /**
-     * 
-     * @param paypal
-     *     The paypal
-     */
-    @JsonProperty("paypal")
-    public void setPaypal(Boolean paypal) {
-        this.paypal = paypal;
+    @JsonProperty("errorMessage")
+    public void setErrorMessage(Object errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
     /**
      * 
      * @return
-     *     The outboundOptions
+     *     The airports
      */
-    @JsonProperty("outboundOptions")
-    public List<OutboundOption> getOutboundOptions() {
-        return outboundOptions;
+    @JsonProperty("airports")
+    public List<Airport> getAirports() {
+        return airports;
     }
 
     /**
      * 
-     * @param outboundOptions
-     *     The outboundOptions
+     * @param airports
+     *     The airports
      */
-    @JsonProperty("outboundOptions")
-    public void setOutboundOptions(List<OutboundOption> outboundOptions) {
-        this.outboundOptions = outboundOptions;
+    @JsonProperty("airports")
+    public void setAirports(List<Airport> airports) {
+        this.airports = airports;
     }
 
     @JsonAnyGetter
