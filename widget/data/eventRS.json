@@ -1,0 +1,8 @@
+events: [
+  {
+    name: 'World Travel Market 2015',
+    from: '02/11/2015',
+    to: '05/11/2015',
+    price: '150'
+  }
+]
