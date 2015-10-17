@@ -1,0 +1,39 @@
+prices: {
+  price: {
+    id: '1423423sdf23',
+    totalAmount: '26.65',
+    hotel:{
+      name: 'Er Palas',
+      prce: '56.56',
+      stars: 5,
+      reg: 'All included',
+      codHab: 'Double Standard',
+      images{
+        image{
+          url: 'http...'
+        }, 
+        image{
+          url: 'http...'
+        }
+      }
+      },
+    flydeparture: {
+      departureDate: 'dd/MM/yyyy hh:mm',
+      arrivalDate: 'dd/MM/yyyy hh:mm',
+      company: 'Air Berlin',
+      departureAirport: 'BCN',
+      arrivalAirport: 'PMI',
+      amount: '23.65'
+    },
+    flyarrival: {
+      departureDate: 'dd/MM/yyyy hh:mm',
+      arrivalDate: 'dd/MM/yyyy hh:mm',
+      company: 'Air Berlin',
+      departureAirport: 'BCN',
+      arrivalAirport: 'PMI',
+      amount: '23.65'
+    }
+  },
+  price: {
+  }
+}

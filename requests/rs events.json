@@ -1,0 +1,13 @@
+events: {
+  event: {
+    id: '1423423sdf23',
+    name: 'El nombre',
+    timeStart: 'dd/MM/yyyy hh:mm',
+    timeEnd: 'dd/MM/yyyy hh:mm',
+    price: '23.26',
+    imageUrl: 'eventImageURL',
+    description: 'Event description short'
+  },
+  event: {
+  }
+}
