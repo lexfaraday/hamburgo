@@ -11,9 +11,9 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import wearable.hotelbeds.shared.hotel.HotelInfo;
+import wearable.hotelbeds.shared.price.PriceInfoBean;
 
 /**
  * Created by lexfaraday on 08/10/15.
@@ -21,7 +21,7 @@ import wearable.hotelbeds.shared.hotel.HotelInfo;
 public class HotelsFlightsRecyclerViewAdapter extends RecyclerView
         .Adapter<HotelsFlightsRecyclerViewAdapter.HotelFlightHolder> {
     private static String LOG_TAG = "HotelsFlightsRecyclerViewAdapter";
-    private ArrayList<HotelInfo> mDataset;
+    private List<PriceInfoBean> mDataset;
     private static MyClickListener myClickListener;
 
     public static class HotelFlightHolder extends RecyclerView.ViewHolder
@@ -45,7 +45,7 @@ public class HotelsFlightsRecyclerViewAdapter extends RecyclerView
         @Override
         public void onClick(View v) {
             //myClickListener.onItemClick(getPosition(), v);
-           // Intent intent = new Intent(v.getContext(), HotelFlightActivity.class);
+            // Intent intent = new Intent(v.getContext(), HotelFlightActivity.class);
             myClickListener.onItemClick(getAdapterPosition(), v);
         }
     }
@@ -54,13 +54,13 @@ public class HotelsFlightsRecyclerViewAdapter extends RecyclerView
         HotelsFlightsRecyclerViewAdapter.myClickListener = myClickListener;
     }
 
-    public HotelsFlightsRecyclerViewAdapter(ArrayList<HotelInfo> myDataset) {
+    public HotelsFlightsRecyclerViewAdapter(List<PriceInfoBean> myDataset) {
         mDataset = myDataset;
     }
 
     @Override
     public HotelFlightHolder onCreateViewHolder(ViewGroup parent,
-                                               int viewType) {
+                                                int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.event_item, parent, false);
 
@@ -71,7 +71,7 @@ public class HotelsFlightsRecyclerViewAdapter extends RecyclerView
     @Override
     public void onBindViewHolder(HotelFlightHolder holder, int position) {
 
-        Uri uri = Uri.parse(mDataset.get(position).images.get(0));
+        Uri uri = Uri.parse(mDataset.get(position).getHotelInfo().getImages().get(0));
         Picasso.with(holder.image.getContext())
                 .load(uri)
                 .fit()
@@ -79,11 +79,11 @@ public class HotelsFlightsRecyclerViewAdapter extends RecyclerView
                         //.error(R.drawable.user_placeholder_error)
                 .into(holder.image);
 
-        holder.title.setText(mDataset.get(position).name);
-        holder.price.setText(mDataset.get(position).price + "€");
+        holder.title.setText(mDataset.get(position).getHotelInfo().getName());
+        holder.price.setText(mDataset.get(position).getHotelInfo().getPrice() + "€");
     }
 
-    public void addItem(HotelInfo dataObj, int index) {
+    public void addItem(PriceInfoBean dataObj, int index) {
         mDataset.add(dataObj);
         notifyItemInserted(index);
     }

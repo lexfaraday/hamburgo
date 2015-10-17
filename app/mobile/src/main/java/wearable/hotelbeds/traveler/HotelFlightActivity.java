@@ -11,8 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 
+import wearable.hotelbeds.shared.event.EventInfoBean;
 import wearable.hotelbeds.shared.event.EventUtils;
-import wearable.hotelbeds.shared.hotel.ProviderUtils;
 import wearable.hotelbeds.shared.price.PriceUtils;
 
 /**
@@ -26,6 +26,7 @@ public class HotelFlightActivity extends AppCompatActivity {
     private RecyclerView mHotelFlightRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private EventInfoBean event;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,9 @@ public class HotelFlightActivity extends AppCompatActivity {
         mHotelFlightRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mHotelFlightRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new HotelsFlightsRecyclerViewAdapter(ProviderUtils.generateHotels());
+        event = (EventInfoBean) getIntent().getExtras().getSerializable("event");
+
+        mAdapter = new HotelsFlightsRecyclerViewAdapter(PriceUtils.searchPrices(event, null));//TODO Put gps location
         mHotelFlightRecyclerView.setAdapter(mAdapter);
         RecyclerView.ItemDecoration itemDecoration =
                 new DividerItemDecorator(this, LinearLayoutManager.VERTICAL);

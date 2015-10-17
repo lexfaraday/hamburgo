@@ -17,6 +17,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.ArrayList;
+
+import wearable.hotelbeds.shared.event.EventInfoBean;
 import wearable.hotelbeds.shared.event.EventUtils;
 import wearable.hotelbeds.traveler.nav.MenuUtils;
 
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private static String LOG_TAG = "RecyclerViewActivity";
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
+    private ArrayList<EventInfoBean> events;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +44,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Log.i(LOG_TAG, "Pax added");
             }
         });
-
+        events = EventUtils.obtainAllEvent();
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new EventRecyclerViewAdapter(EventUtils.obtainAllEvent(), this);
+        mAdapter = new EventRecyclerViewAdapter(events, this);
         mRecyclerView.setAdapter(mAdapter);
         RecyclerView.ItemDecoration itemDecoration =
                 new DividerItemDecorator(this, LinearLayoutManager.VERTICAL);
@@ -75,6 +79,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                                                                  @Override
                                                                                  public void onItemClick(int position, View v) {
                                                                                      Intent intent = new Intent(v.getContext(), HotelFlightActivity.class);
+                                                                                     Bundle b = new Bundle();
+                                                                                     b.putSerializable("event", events.get(position));
+                                                                                     intent.putExtras(b);
                                                                                      startActivity(intent);
                                                                                  }
                                                                              });

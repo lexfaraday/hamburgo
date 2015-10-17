@@ -14,6 +14,8 @@ import java.util.Random;
 
 import wearable.hotelbeds.shared.event.EventInfoBean;
 import wearable.hotelbeds.shared.event.EventUtils;
+import wearable.hotelbeds.shared.hotel.HotelInfo;
+import wearable.hotelbeds.shared.hotel.ProviderUtils;
 
 /**
  * Created by Zavierazo on 08/10/2015.
@@ -32,11 +34,12 @@ public class PriceUtils {
         //TODO Si viene location null poner gps de evento hackaton :-)
         //Start Dummy
         try {
-            prices.add(new PriceInfoBean(1, new BigDecimal("653.5"), "Sunset Flower Palas", 4, dummyHotelUrls(), generateDummy(), generateDummy(), "Double", event));
-            prices.add(new PriceInfoBean(2, new BigDecimal("520"), "Supreme Haven Resort", 4, dummyHotelUrls(), generateDummy(), generateDummy(), "Apartment", event));
-            prices.add(new PriceInfoBean(3, new BigDecimal("465.2"), "Bronze Bay Hotel", 3, dummyHotelUrls(), generateDummy(), generateDummy(), "Single", event));
-            prices.add(new PriceInfoBean(4, new BigDecimal("752.5"), "Baroque", 5, dummyHotelUrls(), generateDummy(), generateDummy(), "Suite", event));
-            prices.add(new PriceInfoBean(5, new BigDecimal("219.85"), "Crescent", 2, dummyHotelUrls(), generateDummy(), generateDummy(), "Shared Room", event));
+            List<HotelInfo> hotels = ProviderUtils.generateHotels();
+            prices.add(new PriceInfoBean(1, new BigDecimal("653.5"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size()))));
+            prices.add(new PriceInfoBean(2, new BigDecimal("520"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size()))));
+            prices.add(new PriceInfoBean(3, new BigDecimal("465.2"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size()))));
+            prices.add(new PriceInfoBean(4, new BigDecimal("752.5"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size()))));
+            prices.add(new PriceInfoBean(5, new BigDecimal("219.85"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size()))));
         } catch (Exception e) {
             Log.e("Traveler", "Error al rellenar dummy " + e.getMessage());
         }
@@ -50,20 +53,20 @@ public class PriceUtils {
         int random = rand.nextInt(2);
         if (random == 0) {
             try {
-                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 18:30"), DATE_FORMATER_HOUR.parse("14/10/2015 19:20"), "Rayanair","PMI","BCN"));
-                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 20:05"), DATE_FORMATER_HOUR.parse("14/10/2015 21:30"), "Air Europa","BCN","LON"));
+                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 18:30"), DATE_FORMATER_HOUR.parse("14/10/2015 19:20"), "Rayanair", "PMI", "BCN"));
+                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 20:05"), DATE_FORMATER_HOUR.parse("14/10/2015 21:30"), "Air Europa", "BCN", "LON"));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
         } else if (random == 1) {
             try {
-                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 18:30"), DATE_FORMATER_HOUR.parse("14/10/2015 19:20"), "Air Berlin","PMI","MAD"));
+                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 18:30"), DATE_FORMATER_HOUR.parse("14/10/2015 19:20"), "Air Berlin", "PMI", "MAD"));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
         } else {
             try {
-                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 06:30"), DATE_FORMATER_HOUR.parse("14/10/2015 08:20"), "Vueling","LON","PMI"));
+                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 06:30"), DATE_FORMATER_HOUR.parse("14/10/2015 08:20"), "Vueling", "LON", "PMI"));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -83,11 +86,5 @@ public class PriceUtils {
         return confirmData;
     }
 
-    private static List<String> dummyHotelUrls() {
-        List<String> images = new ArrayList<>();
-        images.add("http://luxurycomm.com/wp-content/uploads/2015/07/vaciones-de-lujo-InterContinental.jpg");
-        images.add("http://www.mayfairhotelandspa.com/_images/_design/headers/rooftop2.jpg");
-        images.add("http://www.minihotelpms.com/wp-content/uploads/2013/01/hotel.jpg");
-        return images;
-    }
+
 }

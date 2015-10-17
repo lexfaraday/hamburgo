@@ -70,8 +70,8 @@ public class ConfirmActivity extends AppCompatActivity implements NavigationView
             } else {
                 price.setText(priceBean.getTotalAmount().setScale(2, BigDecimal.ROUND_UP).toString());
             }
-            String mHotel = priceBean.getHotelName() + " " + priceBean.getRoomInfo() + " ";
-            for (int i = 0; i < priceBean.getHotelStars(); i++) {
+            String mHotel = (priceBean.getHotelInfo().getName() + " " + priceBean.getHotelInfo().getCodHab() + " " + priceBean.getHotelInfo().getReg() + " ");
+            for (int i = 0; i < priceBean.getHotelInfo().getStars(); i++) {
                 mHotel += "*";
             }
             hotel.setText(mHotel);
@@ -102,7 +102,7 @@ public class ConfirmActivity extends AppCompatActivity implements NavigationView
 
             //MoreDetail
             List<String> points = new ArrayList<>();
-            points.add(priceBean.getHotelName());
+            points.add(priceBean.getHotelInfo().getName());
             addDetailedSection("Hotel", points);
         }
 
