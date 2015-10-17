@@ -37,11 +37,11 @@ public class EventBriteProvider {
 		try {
 			eventResponse = restTemplate.getForObject(url, String.class);
 			jsonObjectResponse = (JsonObject) parser.parse(eventResponse);
-			throw new Exception();
 		} catch (Exception e) {
 			eventResponse = IOUtils
 					.toString(new InputStreamReader(getClass().getResourceAsStream("/events/dummy-events.json")));
 			jsonObjectResponse = (JsonObject) parser.parse(eventResponse);
+			jsonObjectResponse = (JsonObject)jsonObjectResponse.getAsJsonArray().get(0);
 		}
 		return constructEventBean(jsonObjectResponse);
 	}
@@ -58,7 +58,6 @@ public class EventBriteProvider {
 		try {
 			eventResponse = restTemplate.getForObject(url, String.class);
 			jsonObjectResponse = (JsonObject) parser.parse(eventResponse);
-			throw new Exception();
 		} catch (Exception e) {
 			eventResponse = IOUtils
 					.toString(new InputStreamReader(getClass().getResourceAsStream("/events/dummy-events.json")));
