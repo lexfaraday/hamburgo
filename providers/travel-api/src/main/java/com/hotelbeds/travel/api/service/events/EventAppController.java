@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -44,5 +45,11 @@ public class EventAppController {
     public ResponseEntity<?> searchEvents() throws Exception {
         messageFlow.publish("Searching events..");
         return new ResponseEntity<String>(new Gson().toJson(eventBriteProvider.searchEvents()), HttpStatus.OK);
+    }
+    
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE })
+    public ResponseEntity<?> getEventById(@PathVariable String id) throws Exception {
+        messageFlow.publish("Searching event.. " + id);
+        return new ResponseEntity<String>(new Gson().toJson(eventBriteProvider.getEventById(id)), HttpStatus.OK);
     }
 }
