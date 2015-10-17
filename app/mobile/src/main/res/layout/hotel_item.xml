@@ -11,51 +11,25 @@
         android:layout_height="390dp"
         android:id="@+id/hotelRelative">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_alignParentTop="true"
-            android:scaleType="centerCrop" />
 
-        <TextView
-            android:id="@+id/titleEvent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView"
-            android:maxLines="2"
-            android:padding="8dp"
-            android:text="Title"
-            android:textColor="#222"
-            android:textStyle="bold"
-            android:textSize="22dp" />
-
-        <TextView
-            android:id="@+id/shortDescriptionEvent"
+        <HorizontalScrollView
+            android:id="@+id/hotelImages"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/titleEvent"
-            android:maxLines="3"
-            android:padding="8dp"
-            android:text="Short description"
-            android:textColor="#666"
-            android:textSize="14dp" />
-
-        <TextView
-            android:id="@+id/priceEvent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/shortDescriptionEvent"
-            android:padding="8dp"
-            android:text="103.99€"
-            android:textStyle="bold"
-            android:textColor="@android:color/holo_red_dark"
-            android:textSize="22dp"
-            android:layout_alignEnd="@id/shortDescriptionEvent"
-            />
-
-
-
+            android:layout_gravity="center"
+            android:fillViewport="true">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/hotelImagesLineal">
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_alignParentTop="true"
+                android:scaleType="centerCrop" />
+            </LinearLayout>
+        </HorizontalScrollView>
     </RelativeLayout>
 
         <include
