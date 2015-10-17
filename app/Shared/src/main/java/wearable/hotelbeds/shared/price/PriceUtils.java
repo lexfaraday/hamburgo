@@ -25,11 +25,11 @@ public class PriceUtils {
     public static final DateFormat DATE_FORMATER_HOUR = new SimpleDateFormat("dd/MM/yyyy hh:mm");
     public static final DateFormat FORMATER_HOUR = new SimpleDateFormat("hh:mm");
 
-    public static List<PriceInfoBean> searchPrices(String eventId, Location location) {
-        return searchPrices(EventUtils.searchEventById(eventId), location);
+    public static List<PriceInfoBean> searchPrices(String eventId, Location location, int adultCount) {
+        return searchPrices(EventUtils.searchEventById(eventId), location, adultCount);
     }
 
-    public static List<PriceInfoBean> searchPrices(EventInfoBean event, Location location) {
+    public static List<PriceInfoBean> searchPrices(EventInfoBean event, Location location, int adultCount) {
         List<PriceInfoBean> prices = new ArrayList<>();
         //TODO Si viene location null poner gps de evento hackaton :-)
         //Start Dummy
