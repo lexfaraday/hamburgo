@@ -6,9 +6,11 @@ import android.util.Log;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import wearable.hotelbeds.shared.event.EventInfoBean;
 import wearable.hotelbeds.shared.event.EventUtils;
@@ -19,6 +21,7 @@ import wearable.hotelbeds.shared.event.EventUtils;
 public class PriceUtils {
     public static final DateFormat DATE_FORMATER = new SimpleDateFormat("dd/MM/yyyy");
     public static final DateFormat DATE_FORMATER_HOUR = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+    public static final DateFormat FORMATER_HOUR = new SimpleDateFormat("hh:mm");
 
     public static List<PriceInfoBean> searchPrices(String eventId, Location location) {
         return searchPrices(EventUtils.searchEventById(eventId), location);
@@ -29,16 +32,45 @@ public class PriceUtils {
         //TODO Si viene location null poner gps de evento hackaton :-)
         //Start Dummy
         try {
-            prices.add(new PriceInfoBean(event, 1, new BigDecimal("653.5"), "Sunset Flower Palas", 4, dummyHotelUrls(), DATE_FORMATER_HOUR.parse("14/10/2015 18:30"), DATE_FORMATER_HOUR.parse("17/10/2015 06:00"), "Double", "Rayanair", "Air Europa"));
-            prices.add(new PriceInfoBean(event, 2, new BigDecimal("520"), "Supreme Haven Resort", 4, dummyHotelUrls(), DATE_FORMATER_HOUR.parse("14/10/2015 14:20"), DATE_FORMATER_HOUR.parse("17/10/2015 08:10"), "Apartment", "Vueling", "Air Europa"));
-            prices.add(new PriceInfoBean(event, 3, new BigDecimal("465.2"), "Bronze Bay Hotel", 3, dummyHotelUrls(), DATE_FORMATER_HOUR.parse("14/10/2015 13:45"), DATE_FORMATER_HOUR.parse("17/10/2015 09:40"), "Single", "Air Europa", "Air Europa"));
-            prices.add(new PriceInfoBean(event, 4, new BigDecimal("752.5"), "Baroque", 5, dummyHotelUrls(), DATE_FORMATER_HOUR.parse("13/10/2015 20:00"), DATE_FORMATER_HOUR.parse("17/10/2015 07:45"), "Suite", "Air Berlin", "Vueling"));
-            prices.add(new PriceInfoBean(event, 5, new BigDecimal("219.85"), "Crescent", 2, dummyHotelUrls(), DATE_FORMATER_HOUR.parse("13/10/2015 18:30"), DATE_FORMATER_HOUR.parse("17/10/2015 05:20"), "Shared Room", "Vueling", "Air Europa"));
+            List<FlyBean> flys = generateDummy();
+            prices.add(new PriceInfoBean(1, new BigDecimal("653.5"), "Sunset Flower Palas", 4, dummyHotelUrls(), flys, flys, "Double", event));
+            prices.add(new PriceInfoBean(2, new BigDecimal("520"), "Supreme Haven Resort", 4, dummyHotelUrls(), flys, flys, "Apartment", event));
+            prices.add(new PriceInfoBean(3, new BigDecimal("465.2"), "Bronze Bay Hotel", 3, dummyHotelUrls(), flys, flys, "Single", event));
+            prices.add(new PriceInfoBean(4, new BigDecimal("752.5"), "Baroque", 5, dummyHotelUrls(), flys, flys, "Suite", event));
+            prices.add(new PriceInfoBean(5, new BigDecimal("219.85"), "Crescent", 2, dummyHotelUrls(), flys, flys, "Shared Room", event));
         } catch (Exception e) {
             Log.e("Traveler", "Error al rellenar dummy " + e.getMessage());
         }
         //End Dummy
         return prices;
+    }
+
+    private static List<FlyBean> generateDummy() {
+        List<FlyBean> flys = new ArrayList<>();
+        Random rand = new Random();
+        int random = rand.nextInt(2);
+        if (random == 0) {
+            try {
+                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 18:30"), DATE_FORMATER_HOUR.parse("14/10/2015 19:20"), "Rayanair"));
+                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 20:05"), DATE_FORMATER_HOUR.parse("14/10/2015 21:30"), "Air Europa"));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        } else if (random == 1) {
+            try {
+                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 18:30"), DATE_FORMATER_HOUR.parse("14/10/2015 19:20"), "Air Berlin"));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 06:30"), DATE_FORMATER_HOUR.parse("14/10/2015 08:20"), "Vueling"));
+                flys.add(new FlyBean(DATE_FORMATER_HOUR.parse("14/10/2015 16:05"), DATE_FORMATER_HOUR.parse("14/10/2015 17:40"), "EasyJet"));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        return flys;
     }
 
     public static ConfirmDataBean confirmBooking(Context context, PriceInfoBean price) {

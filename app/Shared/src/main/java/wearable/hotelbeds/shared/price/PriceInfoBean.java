@@ -2,7 +2,6 @@ package wearable.hotelbeds.shared.price;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 
 import wearable.hotelbeds.shared.event.EventInfoBean;
@@ -16,29 +15,25 @@ public class PriceInfoBean implements Serializable {
     private String hotelName;
     private int hotelStars;
     private List<String> hotelImages;
-    private Date flyOut;
-    private Date flyIn;
+    private List<FlyBean> flyDeparture;
+    private List<FlyBean> flyArrival;
     private String roomInfo;
-    private String flyOutAerolineName;
-    private String flyInAerolineName;
     private EventInfoBean event;
 
     public PriceInfoBean() {
 
     }
 
-    public PriceInfoBean(EventInfoBean event, int id, BigDecimal totalAmount, String hotelName, int hotelStars, List<String> hotelImages, Date flyOut, Date flyIn, String roomInfo, String flyOutAerolineName, String flyInAerolineName) {
-        this.event = event;
+    public PriceInfoBean(int id, BigDecimal totalAmount, String hotelName, int hotelStars, List<String> hotelImages, List<FlyBean> flyDeparture, List<FlyBean> flyArrival, String roomInfo, EventInfoBean event) {
         this.id = id;
         this.totalAmount = totalAmount;
         this.hotelName = hotelName;
         this.hotelStars = hotelStars;
         this.hotelImages = hotelImages;
-        this.flyOut = flyOut;
-        this.flyIn = flyIn;
+        this.flyDeparture = flyDeparture;
+        this.flyArrival = flyArrival;
         this.roomInfo = roomInfo;
-        this.flyOutAerolineName = flyOutAerolineName;
-        this.flyInAerolineName = flyInAerolineName;
+        this.event = event;
     }
 
     public EventInfoBean getEvent() {
@@ -81,20 +76,28 @@ public class PriceInfoBean implements Serializable {
         this.hotelStars = hotelStars;
     }
 
-    public Date getFlyOut() {
-        return flyOut;
+    public List<String> getHotelImages() {
+        return hotelImages;
     }
 
-    public void setFlyOut(Date flyOut) {
-        this.flyOut = flyOut;
+    public void setHotelImages(List<String> hotelImages) {
+        this.hotelImages = hotelImages;
     }
 
-    public Date getFlyIn() {
-        return flyIn;
+    public List<FlyBean> getFlyDeparture() {
+        return flyDeparture;
     }
 
-    public void setFlyIn(Date flyIn) {
-        this.flyIn = flyIn;
+    public void setFlyDeparture(List<FlyBean> flyDeparture) {
+        this.flyDeparture = flyDeparture;
+    }
+
+    public List<FlyBean> getFlyArrival() {
+        return flyArrival;
+    }
+
+    public void setFlyArrival(List<FlyBean> flyArrival) {
+        this.flyArrival = flyArrival;
     }
 
     public String getRoomInfo() {
@@ -103,29 +106,5 @@ public class PriceInfoBean implements Serializable {
 
     public void setRoomInfo(String roomInfo) {
         this.roomInfo = roomInfo;
-    }
-
-    public String getFlyOutAerolineName() {
-        return flyOutAerolineName;
-    }
-
-    public void setFlyOutAerolineName(String flyOutAerolineName) {
-        this.flyOutAerolineName = flyOutAerolineName;
-    }
-
-    public String getFlyInAerolineName() {
-        return flyInAerolineName;
-    }
-
-    public void setFlyInAerolineName(String flyInAerolineName) {
-        this.flyInAerolineName = flyInAerolineName;
-    }
-
-    public List<String> getHotelImages() {
-        return hotelImages;
-    }
-
-    public void setHotelImages(List<String> hotelImages) {
-        this.hotelImages = hotelImages;
     }
 }
