@@ -32,12 +32,11 @@ public class PriceUtils {
         //TODO Si viene location null poner gps de evento hackaton :-)
         //Start Dummy
         try {
-            List<FlyBean> flys = generateDummy();
-            prices.add(new PriceInfoBean(1, new BigDecimal("653.5"), "Sunset Flower Palas", 4, dummyHotelUrls(), flys, flys, "Double", event));
-            prices.add(new PriceInfoBean(2, new BigDecimal("520"), "Supreme Haven Resort", 4, dummyHotelUrls(), flys, flys, "Apartment", event));
-            prices.add(new PriceInfoBean(3, new BigDecimal("465.2"), "Bronze Bay Hotel", 3, dummyHotelUrls(), flys, flys, "Single", event));
-            prices.add(new PriceInfoBean(4, new BigDecimal("752.5"), "Baroque", 5, dummyHotelUrls(), flys, flys, "Suite", event));
-            prices.add(new PriceInfoBean(5, new BigDecimal("219.85"), "Crescent", 2, dummyHotelUrls(), flys, flys, "Shared Room", event));
+            prices.add(new PriceInfoBean(1, new BigDecimal("653.5"), "Sunset Flower Palas", 4, dummyHotelUrls(), generateDummy(), generateDummy(), "Double", event));
+            prices.add(new PriceInfoBean(2, new BigDecimal("520"), "Supreme Haven Resort", 4, dummyHotelUrls(), generateDummy(), generateDummy(), "Apartment", event));
+            prices.add(new PriceInfoBean(3, new BigDecimal("465.2"), "Bronze Bay Hotel", 3, dummyHotelUrls(), generateDummy(), generateDummy(), "Single", event));
+            prices.add(new PriceInfoBean(4, new BigDecimal("752.5"), "Baroque", 5, dummyHotelUrls(), generateDummy(), generateDummy(), "Suite", event));
+            prices.add(new PriceInfoBean(5, new BigDecimal("219.85"), "Crescent", 2, dummyHotelUrls(), generateDummy(), generateDummy(), "Shared Room", event));
         } catch (Exception e) {
             Log.e("Traveler", "Error al rellenar dummy " + e.getMessage());
         }

@@ -99,56 +99,36 @@
                                 android:text="Fly"
                                 android:textColor="@color/title"/>
 
-                            <ImageView
-                                android:id="@+id/imagetakein"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:layout_below="@+id/fly_in_section_label"
-                                android:layout_gravity="center"
-                                android:layout_margin="5dp"
-                                android:src="@drawable/airplane_takeoff" />
 
-                            <TextView
-                                android:id="@+id/takein"
+
+
+                            <LinearLayout android:id="@+id/flydeparture_div"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/fly_in_section_label"
-                                android:layout_toRightOf="@+id/imagetakein"
-                                android:text="Air Berlin 16/10/2015 06:40"
-                                android:textColor="#404040"
-                                android:textSize="@dimen/text_size" />
+                                android:orientation="vertical">
 
 
-                            <ImageView
-                                android:id="@+id/imagetakeout"
-                                android:layout_width="25dp"
-                                android:layout_height="25dp"
-                                android:layout_below="@+id/takein"
-                                android:layout_margin="5dp"
-                                android:src="@drawable/airplane_takein" />
 
-                            <TextView
-                                android:id="@+id/takeout"
+
+                            </LinearLayout>
+
+                            <LinearLayout android:id="@+id/flyarrival_div"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_below="@+id/takein"
-                                android:layout_marginLeft="2dp"
-                                android:layout_toEndOf="@+id/imagetakeout"
-                                android:text="Vueling 17/10/2015 20:10"
-                                android:textColor="#404040"
-                                android:textSize="@dimen/text_size" />
+                                android:layout_below="@+id/flydeparture_div"
+                                android:orientation="vertical">
 
 
 
-
-
+                            </LinearLayout>
 
                             <TextView
                                 android:id="@+id/price"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="2dp"
-                                android:layout_below="@+id/takeout"
+                                android:layout_below="@+id/flyarrival_div"
                                 android:layout_toStartOf="@+id/imageprice"
                                 android:text="20"
                                 android:textColor="#404040"
@@ -157,7 +137,7 @@
                                 android:id="@+id/imageprice"
                                 android:layout_width="25dp"
                                 android:layout_height="25dp"
-                                android:layout_below="@+id/takeout"
+                                android:layout_below="@+id/flyarrival_div"
                                 android:layout_margin="5dp"
                                 android:src="@drawable/price"
                                 android:layout_alignParentEnd="true" />

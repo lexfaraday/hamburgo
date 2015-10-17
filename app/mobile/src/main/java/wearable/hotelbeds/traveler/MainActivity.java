@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Log.i(LOG_TAG, "Pax added");
             }
         });
-        
+
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
@@ -98,7 +98,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public boolean onQueryTextChange(String query) {
                 Log.i(LOG_TAG, "Searching... " + query);
-                changeAdapter(query);//TODO para hacer este tipo de busqueda la respuesta tiene que ser muy rapida o sobre un objeto ya instanciado
+                if (query != null && query.length() >= 3) {
+                    changeAdapter(query);//TODO para hacer este tipo de busqueda la respuesta tiene que ser muy rapida o sobre un objeto ya instanciado
+                }
                 return false;
             }
 

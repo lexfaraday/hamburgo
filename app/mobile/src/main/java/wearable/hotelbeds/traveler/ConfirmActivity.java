@@ -1,6 +1,5 @@
 package wearable.hotelbeds.traveler;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -9,17 +8,17 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.squareup.picasso.Picasso;
 
 import java.math.BigDecimal;
 
 import wearable.hotelbeds.shared.price.ConfirmDataBean;
+import wearable.hotelbeds.shared.price.FlyBean;
 import wearable.hotelbeds.shared.price.PriceInfoBean;
 import wearable.hotelbeds.shared.price.PriceUtils;
 import wearable.hotelbeds.traveler.nav.MenuUtils;
@@ -31,12 +30,12 @@ public class ConfirmActivity extends AppCompatActivity implements NavigationView
     private TextView event;
     private TextView price;
     private TextView hotel;
-    private TextView flyOut;
-    private TextView flyIn;
     private TextView flySection;
     private PriceInfoBean priceBean;
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
+    private LinearLayout departureFlys;
+    private LinearLayout arrivalFlys;
 
 
     @Override
@@ -46,9 +45,9 @@ public class ConfirmActivity extends AppCompatActivity implements NavigationView
         event = (TextView) findViewById(R.id.event);
         price = (TextView) findViewById(R.id.price);
         hotel = (TextView) findViewById(R.id.hotel);
-        flyOut = (TextView) findViewById(R.id.takeout);
-        flyIn = (TextView) findViewById(R.id.takein);
         flySection = (TextView) findViewById(R.id.fly_in_section_label);
+        departureFlys = (LinearLayout) findViewById(R.id.flydeparture_div);
+        arrivalFlys = (LinearLayout) findViewById(R.id.flyarrival_div);
 
         //Load info
         priceBean = (PriceInfoBean) getIntent().getExtras().getSerializable("price");
@@ -65,16 +64,28 @@ public class ConfirmActivity extends AppCompatActivity implements NavigationView
             }
             hotel.setText(mHotel);
             flySection.setText("Fly " + PriceUtils.DATE_FORMATER.format(priceBean.getFlyDeparture().get(0).getDeparture()) + "-" + PriceUtils.DATE_FORMATER.format(priceBean.getFlyArrival().get(0).getArrival()));
-
-            //flyIn.setText(priceBean.getFlyOutAerolineName() + " " + PriceUtils.FORMATER_HOUR.format(priceBean.getFlyOut()));
-            //flyOut.setText(priceBean.getFlyInAerolineName() + " " + PriceUtils.FORMATER_HOUR.format(priceBean.getFlyIn()));
+            if (priceBean.getFlyDeparture() != null && priceBean.getFlyDeparture().size() > 0) {
+                for (FlyBean fly : priceBean.getFlyDeparture()) {
+                    View v = LayoutInflater.from(this).inflate(R.layout.fly_departure_element, null);
+                    TextView text = (TextView) v.findViewById(R.id.text);
+                    text.setText(fly.getCompany() + " " + PriceUtils.FORMATER_HOUR.format(fly.getDeparture()) + "-" + PriceUtils.FORMATER_HOUR.format(fly.getArrival()));
+                    departureFlys.addView(v);
+                }
+            }
+            if (priceBean.getFlyArrival() != null && priceBean.getFlyArrival().size() > 0) {
+                for (FlyBean fly : priceBean.getFlyArrival()) {
+                    View v = LayoutInflater.from(this).inflate(R.layout.fly_arrival_element, null);
+                    TextView text = (TextView) v.findViewById(R.id.text);
+                    text.setText(fly.getCompany() + " " + PriceUtils.FORMATER_HOUR.format(fly.getDeparture()) + "-" + PriceUtils.FORMATER_HOUR.format(fly.getArrival()));
+                    arrivalFlys.addView(v);
+                }
+            }
         }
-
 
         //Menu
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, mToolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.setDrawerListener(mDrawerToggle);
@@ -86,19 +97,9 @@ public class ConfirmActivity extends AppCompatActivity implements NavigationView
 
     }
 
-    private View insertPhoto(String path) {
-        Uri uri = Uri.parse(path);
-        View cell = getLayoutInflater().inflate(R.layout.horizontal_image_cell, null);
-        ImageView imageView = (ImageView) cell.findViewById(R.id.image);
-        Picasso.with(imageView.getContext()).load(uri).resize(0, imageView.getLayoutParams().height).into(imageView);
-        return cell;
-    }
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -126,10 +127,6 @@ public class ConfirmActivity extends AppCompatActivity implements NavigationView
     public void btnConfirmGP(View v) {
         Log.i(TAG, "Confirmacion pulsada");
         ConfirmDataBean confirmBean = PriceUtils.confirmBooking(this, priceBean);
-    }
-
-    public void btnCancel(View v) {
-        finish();
     }
 
 }
