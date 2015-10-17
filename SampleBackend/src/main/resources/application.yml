@@ -5,6 +5,8 @@ spring:
     initialize: false
 server:
   context-path:
+iata:
+  base_url: http://iata.api.mashery.com/kronos/api
 sabre:
   base_url: https://api.test.sabre.com
 eventbrite:

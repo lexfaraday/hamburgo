@@ -9,6 +9,8 @@ hotel: {
   checkout: '05/11/2015',
   name: 'Novotel London ExCeL',
   category: '4EST',
+  amount:'300',
+  currency: 'eur',
   cancellationPolicies: [
     {
       "amount": "35,370",
