@@ -1,6 +1,6 @@
 /*
  * Sabre Inc. All rights reserved.
- * 
+ *
  * THE SOFTWARE, SAMPLE CODES AND ANY COMPILED PROGRAMS CREATED USING THE
  * SOFTWARE ARE FURNISHED "AS IS" WITHOUT WARRANTY OF ANY KIND, INCLUDING BUT
  * NOT LIMITED TO THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
@@ -40,108 +40,93 @@ import java.net.URLConnection;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 
-public class DSCommHandler
-{
+public class DSCommHandler {
 
-  public String getAuthToken(String apiEndPoint, String encodedCliAndSecret)
-  {
+	public String getAuthToken(String apiEndPoint, String encodedCliAndSecret) {
 
-    // receives : apiEndPoint (https://api.test.sabre.com)
-    // encodedCliAndSecret : base64Encode( base64Encode(V1:[user]:[group]:[domain]) + ":" + base64Encode([secret]) )
-    String strRet = null;
+		// receives : apiEndPoint (https://api.test.sabre.com)
+		// encodedCliAndSecret : base64Encode(
+		// base64Encode(V1:[user]:[group]:[domain]) + ":" +
+		// base64Encode([secret]) )
+		String strRet = null;
 
-    try
-    {
+		try {
 
-      URL urlConn = new URL(apiEndPoint + "/v2/auth/token");
-      URLConnection conn = urlConn.openConnection();
+			URL urlConn = new URL(apiEndPoint + "/v2/auth/token");
+			URLConnection conn = urlConn.openConnection();
 
-      conn.setDoInput(true);
-      conn.setDoOutput(true);
-      conn.setUseCaches(false);
+			conn.setDoInput(true);
+			conn.setDoOutput(true);
+			conn.setUseCaches(false);
 
-      conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-      conn.setRequestProperty("Authorization", "Basic " + encodedCliAndSecret);
-      conn.setRequestProperty("Accept", "application/json");
+			conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+			conn.setRequestProperty("Authorization", "Basic " + encodedCliAndSecret);
+			conn.setRequestProperty("Accept", "application/json");
 
-      // send request
-      DataOutputStream dataOut = new DataOutputStream(conn.getOutputStream());
-      dataOut.writeBytes("grant_type=client_credentials");
-      dataOut.flush();
-      dataOut.close();
+			// send request
+			DataOutputStream dataOut = new DataOutputStream(conn.getOutputStream());
+			dataOut.writeBytes("grant_type=client_credentials");
+			dataOut.flush();
+			dataOut.close();
 
-      // get response
-      BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-      String strChunk = "";
-      StringBuilder sb = new StringBuilder();
-      while (null != ((strChunk = rd.readLine())))
-        sb.append(strChunk);
+			// get response
+			BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			String strChunk = "";
+			StringBuilder sb = new StringBuilder();
+			while (null != (strChunk = rd.readLine())) {
+				sb.append(strChunk);
+			}
 
-      // parse the token
-      JSONObject respParser = new JSONObject(sb.toString());
-      strRet = respParser.getString("access_token");
+			// parse the token
+			JSONObject respParser = new JSONObject(sb.toString());
+			strRet = respParser.getString("access_token");
 
-    }
-    catch (MalformedURLException e)
-    {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-    catch (IOException e)
-    {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-    catch (JSONException e)
-    {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-    return strRet;
+		return strRet;
 
-  }
+	}
 
-  @SuppressWarnings("deprecation")
-  public String sendRequest(String payLoad, String authToken)
-  {
-    URLConnection conn = null;
-    String strRet = null;
-    try
-    {
-      URL urlConn = new URL(payLoad);
+	@SuppressWarnings("deprecation")
+	public String sendRequest(String payLoad, String authToken) throws IOException {
+		URLConnection conn = null;
+		String strRet = null;
+		try {
+			URL urlConn = new URL(payLoad);
 
-      conn = null;
-      conn = urlConn.openConnection();
+			conn = null;
+			conn = urlConn.openConnection();
 
-      conn.setDoInput(true);
-      conn.setDoOutput(true);
-      conn.setUseCaches(false);
+			conn.setDoInput(true);
+			conn.setDoOutput(true);
+			conn.setUseCaches(false);
 
-      conn.setRequestProperty("Authorization", "Bearer " + authToken);
-      conn.setRequestProperty("Accept", "application/json");
+			conn.setRequestProperty("Authorization", "Bearer " + authToken);
+			conn.setRequestProperty("Accept", "application/json");
 
-      DataInputStream dataIn = new DataInputStream(conn.getInputStream());
-      String strChunk = "";
-      StringBuilder sb = new StringBuilder("");
-      while (null != ((strChunk = dataIn.readLine())))
-        sb.append(strChunk);
+			DataInputStream dataIn = new DataInputStream(conn.getInputStream());
+			String strChunk = "";
+			StringBuilder sb = new StringBuilder("");
+			while (null != (strChunk = dataIn.readLine())) {
+				sb.append(strChunk);
+			}
 
-      strRet = sb.toString();
+			strRet = sb.toString();
 
-    }
-    catch (MalformedURLException e)
-    {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-    catch (IOException e)
-    {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-      System.out.println("IOException: " + conn.getHeaderField(0));
-    }
-    return strRet;
-  }
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return strRet;
+	}
 
 }

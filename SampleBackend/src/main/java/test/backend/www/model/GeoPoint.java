@@ -15,6 +15,11 @@ public class GeoPoint
     this(Coordinate.latitudeFromDecimalDegrees(latitude), Coordinate.longitudeFromDecimalDegrees(longitude));
   }
 
+  public GeoPoint(String latitude, String longitude)
+  {
+    this(Double.parseDouble(latitude), Double.parseDouble(longitude));
+  }
+
   public Distance distanceTo(GeoPoint anotherPosition)
   {
     // haversine formula (https://en.wikipedia.org/wiki/Haversine_formula)
