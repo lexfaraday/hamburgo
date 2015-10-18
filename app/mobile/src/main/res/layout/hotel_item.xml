@@ -31,19 +31,25 @@
         </LinearLayout>
 
 
+        <LinearLayout
+            android:id="@+id/flydeparture_div"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hotelRelative"
+            android:orientation="vertical">
 
 
-            <LinearLayout
-                android:id="@+id/departureRelative"
-                android:layout_width="fill_parent"
-                android:layout_height="400dp"
-                android:orientation="horizontal"
-                android:layout_below="@id/hotelRelative"
-                android:layout_alignParentStart="true">
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/flyarrival_div"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/flydeparture_div"
+            android:orientation="vertical">
 
 
-
-            </LinearLayout>
+        </LinearLayout>
 
 
 

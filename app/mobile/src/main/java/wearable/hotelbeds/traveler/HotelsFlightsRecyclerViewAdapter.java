@@ -55,7 +55,7 @@ public class HotelsFlightsRecyclerViewAdapter extends RecyclerView
     @Override
     public void onBindViewHolder(HotelFlightHolder holder, int position) {
 
-        Log.i("asfasdfa","entra");
+        Log.i("asfasdfa", "entra");
         Uri uri = Uri.parse(mDataset.get(position).getHotelInfo().getImages().get(0));
         Picasso.with(holder.image.getContext())
                 .load(uri)
@@ -64,7 +64,7 @@ public class HotelsFlightsRecyclerViewAdapter extends RecyclerView
                         //.error(R.drawable.user_placeholder_error)
                 .into(holder.image);
 
-        departureFlys = (LinearLayout) holder.itemView.findViewById(R.id.departureRelative);
+        departureFlys = (LinearLayout) holder.itemView.findViewById(R.id.flydeparture_div);
         departureFlys.removeAllViews();
         for (FlyBean fly : mDataset.get(position).getFlyArrival()) {
             View v = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.fly_departure_element_element, null);
@@ -73,16 +73,17 @@ public class HotelsFlightsRecyclerViewAdapter extends RecyclerView
             departureFlys.addView(v);
         }
 
-
+        arrivalFlys = (LinearLayout) holder.itemView.findViewById(R.id.flyarrival_div);
+        arrivalFlys.removeAllViews();
         for (FlyBean fly : mDataset.get(position).getFlyDeparture()) {
             View v = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.fly_arrival_element_avail, null);
             TextView text = (TextView) v.findViewById(R.id.text);
             text.setText(fly.getCompany() + " " + fly.getDepartureAirport() + "-" + fly.getArrivalAirport() + " " + PriceUtils.FORMATER_HOUR.format(fly.getDeparture()));
-            departureFlys.addView(v);
+            arrivalFlys.addView(v);
         }
 
         View v = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.price_element, null);
-        departureFlys.addView(v);
+        arrivalFlys.addView(v);
     }
 
     public void setOnItemClickListener(MyClickListener myClickListener) {
