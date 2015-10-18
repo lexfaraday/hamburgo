@@ -121,15 +121,22 @@ public class ConfirmActivity extends Activity implements DelayedConfirmationView
         intent.putExtra(WearActionReceiver.NOTIFICATION_ID_STRING, notificationId);
         intent.putExtra(WearActionReceiver.WEAR_ACTION, WearActionReceiver.OPEN_ON_PHONE);
 
+        Intent intentWear = new Intent(this, WearActionReceiver.class);
+        intentWear.putExtra(WearActionReceiver.NOTIFICATION_ID_STRING, notificationId);
+        intentWear.putExtra(WearActionReceiver.WEAR_ACTION, WearActionReceiver.OPEN_ON_WEAR);
+
         // Create pending intent and wrap our intent
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, WearActionReceiver.OPEN_ON_PHONE, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntentWear = PendingIntent.getBroadcast(this, WearActionReceiver.OPEN_ON_WEAR, intentWear, PendingIntent.FLAG_UPDATE_CURRENT);
         //Building notification layout
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.ic_launcher)
                         .setContentTitle("Booking Confirmed!")
                         .setContentText("Your booking reference is " + confirmation.getToken())
-                        .addAction(R.drawable.ic_smartphone_black_24dp, "Open on Phone", pendingIntent);
+                        .addAction(R.drawable.ic_smartphone_black_24dp, "Open on Phone", pendingIntent)
+                        .addAction(R.drawable.ic_watch_black_24dp, "Open", pendingIntentWear);
+        ;
 
         // instance of the NotificationManager service
         NotificationManagerCompat notificationManager =
