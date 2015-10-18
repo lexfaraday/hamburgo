@@ -129,8 +129,8 @@ public class ConfirmActivity extends AppCompatActivity implements NavigationView
                 for (VisaBean visa : priceBean.getVisas()) {
                     TextView text = (TextView) findViewById(R.id.docinfo);
                     text.setText(text.getText() + " " + visa.getTypeDocument());
-                    visaPoints.add(visa.getTypeDocument());
-                    visaPoints.add(visa.getDescription());
+                    visaPoints.add("Frankfurt visa");
+                    visaPoints.add("This visa is a new visa to protect our passengers, please don't forget to but it.!!!");
                 }
             }
 
