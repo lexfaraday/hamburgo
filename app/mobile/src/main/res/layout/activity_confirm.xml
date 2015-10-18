@@ -170,7 +170,7 @@
                                 android:layout_below="@+id/flyarrival_div"
                                 android:layout_marginLeft="2dp"
                                 android:layout_toEndOf="@+id/imagedoc"
-                                android:text="Visa is required. Please take before to leave."
+                                android:text="Visa is required."
                                 android:textColor="@android:color/holo_blue_dark"
                                 android:textSize="22sp" />
 

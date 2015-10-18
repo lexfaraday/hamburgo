@@ -40,16 +40,17 @@ public class PriceUtils {
         if (prices == null || prices.size() == 0) {
 
             try {
-            List<HotelInfo> hotels = ProviderUtils.generateHotels();
-            List<VisaBean> visas = generateVisaDummy();
-            prices.add(new PriceInfoBean(1, new BigDecimal("653.5"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size())), visas));
-            prices.add(new PriceInfoBean(2, new BigDecimal("520"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size())), visas));
-            prices.add(new PriceInfoBean(3, new BigDecimal("465.2"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size())), visas));
-            prices.add(new PriceInfoBean(4, new BigDecimal("752.5"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size())), visas));
-            prices.add(new PriceInfoBean(5, new BigDecimal("219.85"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size())), visas));
-        } catch (Exception e) {
-            Log.e("Traveler", "Error al rellenar dummy " + e.getMessage());
-        }}
+                List<HotelInfo> hotels = ProviderUtils.generateHotels();
+                List<VisaBean> visas = generateVisaDummy();
+                prices.add(new PriceInfoBean(1, new BigDecimal("653.5"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size())), visas));
+                prices.add(new PriceInfoBean(2, new BigDecimal("520"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size())), visas));
+                prices.add(new PriceInfoBean(3, new BigDecimal("465.2"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size())), visas));
+                prices.add(new PriceInfoBean(4, new BigDecimal("752.5"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size())), visas));
+                prices.add(new PriceInfoBean(5, new BigDecimal("219.85"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size())), visas));
+            } catch (Exception e) {
+                Log.e("Traveler", "Error al rellenar dummy " + e.getMessage());
+            }
+        }
         //End Dummy
         return prices;
     }
@@ -82,14 +83,14 @@ public class PriceUtils {
     }
 
     public static List<VisaBean> generateVisaDummy() {
-            List<VisaBean> visas = new ArrayList<>();
+        List<VisaBean> visas = new ArrayList<>();
 
-            for (int i = 0; i < 2; i++) {
-                VisaBean visa = new VisaBean(true, "Frankfurt visa", "This visa is a new visa to protect our passengers, please don't forget to but it.!!!");
-                visas.add(visa);
-            }
-            return visas;
+        for (int i = 0; i < 2; i++) {
+            VisaBean visa = new VisaBean(true, "Frankfurt visa", "This visa is a new visa to protect our passengers, please don't forget to but it.!!!");
+            visas.add(visa);
         }
+        return visas;
+    }
 
     public static ConfirmDataBean confirmBooking(Context context, PriceInfoBean price) {
         ConfirmDataBean confirmData;
@@ -230,7 +231,9 @@ public class PriceUtils {
             JSONArray hotelsArray = json.getJSONArray("hotelDatas");
             JSONObject hotel1Object = hotelsArray.getJSONObject(0);
             HotelInfo hotelInfo1 = new HotelInfo();
-            hotelInfo1.setImages(images.get(new Random().nextInt(images.size())).getImages());
+            List<String> imagesUrl = new ArrayList<>();
+            imagesUrl.add(images.get(new Random().nextInt(images.size())).getImages().get(0));
+            hotelInfo1.setImages(imagesUrl);
             hotelInfo1.setName(hotel1Object.getString("name"));
             hotelInfo1.setPrice(new BigDecimal(hotel1Object.getString("amount")));
             hotelInfo1.setCodHab(images.get(new Random().nextInt(images.size())).getCodHab());
@@ -240,7 +243,9 @@ public class PriceUtils {
 
             JSONObject hotel2Object = hotelsArray.getJSONObject(1);
             HotelInfo hotelInfo2 = new HotelInfo();
-            hotelInfo2.setImages(images.get(new Random().nextInt(images.size())).getImages());
+            imagesUrl = new ArrayList<>();
+            imagesUrl.add(images.get(new Random().nextInt(images.size())).getImages().get(1));
+            hotelInfo2.setImages(imagesUrl);
             hotelInfo2.setName(hotel2Object.getString("name"));
             hotelInfo2.setPrice(new BigDecimal(hotel2Object.getString("amount")));
             hotelInfo2.setCodHab(images.get(new Random().nextInt(images.size())).getCodHab());

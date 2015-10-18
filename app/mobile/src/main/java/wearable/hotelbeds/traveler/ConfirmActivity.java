@@ -152,7 +152,7 @@ public class ConfirmActivity extends AppCompatActivity implements NavigationView
 
             }
 
-            addDetailedSection("Required Documents", points);
+            addDetailedSection("Required Documents", visaPoints);
         }
 
         //Menu

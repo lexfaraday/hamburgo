@@ -3,20 +3,20 @@
     android:orientation="vertical" android:layout_width="fill_parent"
     android:layout_height="match_parent">
     <ImageView
-        android:id="@+id/priceElement"
+        android:id="@+id/imagestars"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_gravity="right"
+        android:layout_gravity="center"
         android:layout_margin="5dp"
-        android:layout_alignParentRight="true"
-        android:src="@drawable/price" />
+        android:src="@drawable/hotel" />
+
     <TextView
-        android:id="@+id/price"
+        android:id="@+id/hotel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:textSize="28sp"
-        android:layout_toLeftOf="@+id/priceElement"
-        android:textColor="@android:color/holo_red_dark"
-        android:text="236" />
+        android:layout_marginLeft="2dp"
+        android:layout_toEndOf="@+id/imagestars"
+        android:text="Hilton Palas DBL-ST *****"
+        android:textColor="#404040"
+        android:textSize="@dimen/text_size" />
 </RelativeLayout>

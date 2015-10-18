@@ -1,22 +1,20 @@
 package wearable.hotelbeds.traveler;
 
 import android.net.Uri;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Random;
 
 import wearable.hotelbeds.shared.price.FlyBean;
 import wearable.hotelbeds.shared.price.PriceInfoBean;
@@ -56,16 +54,28 @@ public class HotelsFlightsRecyclerViewAdapter extends RecyclerView
     public void onBindViewHolder(HotelFlightHolder holder, int position) {
 
         Log.i("asfasdfa", "entra");
-        Uri uri = Uri.parse(mDataset.get(position).getHotelInfo().getImages().get(0));
+        Uri uri = Uri.parse(mDataset.get(position).getHotelInfo().getImages().get(new Random().nextInt(mDataset.get(position).getHotelInfo().getImages().size())));
         Picasso.with(holder.image.getContext())
                 .load(uri)
                 .fit()
                         //.placeholder(R.drawable.user_placeholder)
                         //.error(R.drawable.user_placeholder_error)
                 .into(holder.image);
+        LinearLayout hotelRelative = (LinearLayout) holder.itemView.findViewById(R.id.hotelRelative);
+
 
         departureFlys = (LinearLayout) holder.itemView.findViewById(R.id.flydeparture_div);
         departureFlys.removeAllViews();
+        View hotelName = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.hotel_item_element, null);
+        TextView name = (TextView) hotelName.findViewById(R.id.hotel);
+        String mHotel = (mDataset.get(position).getHotelInfo().getName() + " " + mDataset.get(position).getHotelInfo().getCodHab() + " " + mDataset.get(position).getHotelInfo().getReg() + " ");
+        for (int i = 0; i < mDataset.get(position).getHotelInfo().getStars(); i++) {
+            mHotel += "*";
+        }
+        name.setText(mHotel);
+        departureFlys.addView(hotelName);
+
+
         for (FlyBean fly : mDataset.get(position).getFlyArrival()) {
             View v = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.fly_departure_element_element, null);
             TextView text = (TextView) v.findViewById(R.id.text);
@@ -82,7 +92,10 @@ public class HotelsFlightsRecyclerViewAdapter extends RecyclerView
             arrivalFlys.addView(v);
         }
 
+
         View v = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.price_element, null);
+        TextView price = (TextView) v.findViewById(R.id.price);
+        price.setText(mDataset.get(position).getTotalAmount().setScale(2, BigDecimal.ROUND_UP).toString());
         arrivalFlys.addView(v);
     }
 

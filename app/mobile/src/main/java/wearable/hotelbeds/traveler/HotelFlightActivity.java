@@ -12,8 +12,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.View;
 
+import java.util.List;
+
 import wearable.hotelbeds.shared.event.EventInfoBean;
-import wearable.hotelbeds.shared.event.EventUtils;
+import wearable.hotelbeds.shared.price.PriceInfoBean;
 import wearable.hotelbeds.shared.price.PriceUtils;
 
 /**
@@ -27,6 +29,7 @@ public class HotelFlightActivity extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private EventInfoBean event;
+    private List<PriceInfoBean> prices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +53,8 @@ public class HotelFlightActivity extends AppCompatActivity {
         mHotelFlightRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         // 3. An adapter
         event = (EventInfoBean) getIntent().getExtras().getSerializable("event");
-        mAdapter = new HotelsFlightsRecyclerViewAdapter(PriceUtils.searchPrices(event, null, 1));//TODO Put gps location
+        prices = PriceUtils.searchPrices(event, null, 1);
+        mAdapter = new HotelsFlightsRecyclerViewAdapter(prices);//TODO Put gps location
         mHotelFlightRecyclerView.setAdapter(mAdapter);
         // 5. set item animator to DefaultAnimator
         mHotelFlightRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -64,7 +68,7 @@ public class HotelFlightActivity extends AppCompatActivity {
             public void onItemClick(int position, View v) {
                 Intent intent = new Intent(v.getContext(), ConfirmActivity.class);
                 Bundle b = new Bundle();
-                b.putSerializable("price", PriceUtils.searchPrices(EventUtils.obtainAllEvent().get(0), null, 1).get(0));
+                b.putSerializable("price", prices.get(position));
                 intent.putExtras(b);
                 startActivity(intent);
             }
