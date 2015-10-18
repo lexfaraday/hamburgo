@@ -73,7 +73,7 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
                     String recognized = results.get(0);
                     try {
                         List<EventInfoBean> events = EventUtils.searchEventByName(recognized);
-                        if (events != null && events.size() > 1) {
+                        if (events != null && events.size() > 0) {
                             eventFound = true;
                             Intent intent = new Intent(this, SimpleListActivity.class);
                             Bundle b = new Bundle();
@@ -84,15 +84,6 @@ public class MainActivity extends Activity implements GoogleApiClient.Connection
                             intent.putExtras(b);
                             mGoogleApiClient.disconnect();
                             startActivityForResult(intent, ACTIVITY_ID_LIST);
-                        } else if (events != null && events.size() == 1) {
-                            //Podemos pasar directamente a mostrar precios
-                            Intent intent = new Intent(this, GridActivity.class);
-                            Bundle b = new Bundle();
-                            b.putSerializable("event0", events.get(0));
-                            b.putParcelable("location", mCurrentLocation);
-                            intent.putExtras(b);
-                            mGoogleApiClient.disconnect();
-                            startActivityForResult(intent, ACTIVITY_ID_PRICE);
                         }
                     } catch (Exception e) {
                         Log.e("Traveler", e.getMessage());

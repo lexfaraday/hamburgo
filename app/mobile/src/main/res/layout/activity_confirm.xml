@@ -19,8 +19,8 @@
             android:id="@+id/mode_detail_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/toolbar"
             android:layout_alignParentEnd="true"
+            android:layout_below="@+id/toolbar"
             android:layout_margin="5dp"
             android:clickable="true"
             android:onClick="btnShowMoreInfo"
@@ -153,6 +153,27 @@
 
                             </LinearLayout>
 
+
+                            <ImageView
+                                android:id="@+id/imagedoc"
+                                android:layout_width="25dp"
+                                android:layout_height="25dp"
+                                android:layout_alignStart="@id/flyarrival_div"
+                                android:layout_below="@+id/flyarrival_div"
+                                android:layout_margin="5dp"
+                                android:src="@drawable/ic_warning_black_24dp" />
+
+                            <TextView
+                                android:id="@+id/docinfo"
+                                android:layout_width="180dp"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/flyarrival_div"
+                                android:layout_marginLeft="2dp"
+                                android:layout_toEndOf="@+id/imagedoc"
+                                android:text="Visa is required. Please take before to leave."
+                                android:textColor="@android:color/holo_blue_dark"
+                                android:textSize="22sp" />
+
                             <TextView
                                 android:id="@+id/price"
                                 android:layout_width="wrap_content"
@@ -161,8 +182,8 @@
                                 android:layout_marginLeft="2dp"
                                 android:layout_toStartOf="@+id/imageprice"
                                 android:text="20"
-                                android:textColor="#404040"
-                                android:textSize="@dimen/text_size" />
+                                android:textColor="@android:color/holo_red_dark"
+                                android:textSize="28sp" />
 
                             <ImageView
                                 android:id="@+id/imageprice"

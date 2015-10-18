@@ -14,15 +14,20 @@ public class FlyBean implements Serializable {
     private String departureAirport;
     private String arrivalAirport;
     private BigDecimal amount;
+    private String flightNumber;
 
+    public FlyBean() {
 
-    public FlyBean(Date departure, Date arrival, String company, String departureAirport, String arrivalAirport, BigDecimal amount) {
+    }
+
+    public FlyBean(Date departure, Date arrival, String company, String departureAirport, String arrivalAirport, BigDecimal amount, String flightNumber) {
         this.departure = departure;
         this.arrival = arrival;
         this.company = company;
         this.departureAirport = departureAirport;
         this.arrivalAirport = arrivalAirport;
         this.amount = amount;
+        this.flightNumber = flightNumber;
     }
 
     public Date getDeparture() {
@@ -71,5 +76,13 @@ public class FlyBean implements Serializable {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public String getFlightNumber() {
+        return flightNumber;
+    }
+
+    public void setFlightNumber(String flightNumber) {
+        this.flightNumber = flightNumber;
     }
 }
