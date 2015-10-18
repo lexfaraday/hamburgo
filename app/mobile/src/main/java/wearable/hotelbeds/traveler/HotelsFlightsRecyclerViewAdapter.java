@@ -67,7 +67,7 @@ public class HotelsFlightsRecyclerViewAdapter extends RecyclerView
         departureFlys = (LinearLayout) holder.itemView.findViewById(R.id.departureRelative);
         departureFlys.removeAllViews();
         for (FlyBean fly : mDataset.get(position).getFlyArrival()) {
-            View v = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.fly_departure_element, null);
+            View v = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.fly_departure_element_element, null);
             TextView text = (TextView) v.findViewById(R.id.text);
             text.setText(fly.getCompany() + " " + fly.getDepartureAirport() + "-" + fly.getArrivalAirport() + " " + PriceUtils.FORMATER_HOUR.format(fly.getDeparture()));
             departureFlys.addView(v);
@@ -75,11 +75,14 @@ public class HotelsFlightsRecyclerViewAdapter extends RecyclerView
 
 
         for (FlyBean fly : mDataset.get(position).getFlyDeparture()) {
-            View v = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.fly_arrival_element, null);
+            View v = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.fly_arrival_element_avail, null);
             TextView text = (TextView) v.findViewById(R.id.text);
             text.setText(fly.getCompany() + " " + fly.getDepartureAirport() + "-" + fly.getArrivalAirport() + " " + PriceUtils.FORMATER_HOUR.format(fly.getDeparture()));
             departureFlys.addView(v);
         }
+
+        View v = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.price_element, null);
+        departureFlys.addView(v);
     }
 
     public void setOnItemClickListener(MyClickListener myClickListener) {

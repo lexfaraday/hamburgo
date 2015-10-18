@@ -6,16 +6,16 @@
         android:id="@+id/imagetakein"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:layout_below="@+id/fly_in_section_label"
+        android:layout_below="@+id/hotelRelative"
         android:layout_gravity="center"
         android:layout_margin="5dp"
-        android:src="@drawable/airplane_takein" />
+        android:src="@drawable/airplane_takeoff" />
 
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/fly_in_section_label"
+        android:layout_below="@+id/hotelRelative"
         android:layout_toRightOf="@+id/imagetakein"
         android:text="Air Berlin 16/10/2015 06:40"
         android:textColor="#404040"
