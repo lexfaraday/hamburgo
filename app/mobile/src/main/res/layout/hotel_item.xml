@@ -7,37 +7,85 @@
     android:layout_margin="8dp">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="390dp"
-        android:id="@+id/hotelRelative">
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
-
-        <HorizontalScrollView
-            android:id="@+id/hotelImages"
+        <LinearLayout
+            android:id="@+id/hotelRelative"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fillViewport="true">
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/hotelImagesLineal">
+            android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="200dp"
-                android:layout_alignParentTop="true"
                 android:scaleType="centerCrop" />
-            </LinearLayout>
-        </HorizontalScrollView>
-    </RelativeLayout>
 
-        <include
-            android:id="@+id/flightsCardView"
-            layout="@layout/flight_item"
-            android:layout_height="wrap_content"
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/flightRelative"
             android:layout_width="fill_parent"
-            android:layout_below="@id/hotelRelative"
-            />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/hotelRelative">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="25dp"
+                android:textColor="@android:color/holo_orange_light"
+                style="?android:attr/listSeparatorTextViewStyle"/>
+
+            <!--ROW-->
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/departureRelative"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="top"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageprice"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_margin="5dp"
+                        android:src="@drawable/price" />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/arrivalRelative"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:gravity="top"
+                    android:orientation="vertical">
+
+
+                    <ImageView
+                        android:id="@+id/imageprice2"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_margin="5dp"
+                        android:src="@drawable/price" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+            <!--END ROW-->
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </android.support.v7.widget.CardView>

@@ -27,44 +27,13 @@ import wearable.hotelbeds.shared.price.PriceUtils;
  */
 public class HotelsFlightsRecyclerViewAdapter extends RecyclerView
         .Adapter<HotelsFlightsRecyclerViewAdapter.HotelFlightHolder> {
+
     private static String LOG_TAG = "HotelsFlightsRecyclerViewAdapter";
     private List<PriceInfoBean> mDataset;
-    private static MyClickListener myClickListener;
     private LinearLayout arrivalFlys;
     private LinearLayout departureFlys;
 
-    public static class HotelFlightHolder extends RecyclerView.ViewHolder
-            implements View
-            .OnClickListener {
-        TextView title;
-        TextView shortDescription;
-        TextView price;
-        ImageView image;
-        LinearLayout hotelImagesLineal;
-
-
-        public HotelFlightHolder(View itemView) {
-            super(itemView);
-            title = (TextView) itemView.findViewById(R.id.titleEvent);
-            shortDescription = (TextView) itemView.findViewById(R.id.shortDescriptionEvent);
-            price = (TextView) itemView.findViewById(R.id.priceEvent);
-            image = (ImageView) itemView.findViewById(R.id.imageView);
-            hotelImagesLineal=(LinearLayout) itemView.findViewById(R.id.hotelImagesLineal);
-            Log.i(LOG_TAG, "Adding Listener");
-            itemView.setOnClickListener(this);
-        }
-
-        @Override
-        public void onClick(View v) {
-            //myClickListener.onItemClick(getPosition(), v);
-            // Intent intent = new Intent(v.getContext(), HotelFlightActivity.class);
-            myClickListener.onItemClick(getAdapterPosition(), v);
-        }
-    }
-
-    public void setOnItemClickListener(MyClickListener myClickListener) {
-        HotelsFlightsRecyclerViewAdapter.myClickListener = myClickListener;
-    }
+    private static MyClickListener myClickListener;
 
     public HotelsFlightsRecyclerViewAdapter(List<PriceInfoBean> myDataset) {
         mDataset = myDataset;
@@ -77,29 +46,26 @@ public class HotelsFlightsRecyclerViewAdapter extends RecyclerView
                 .inflate(R.layout.hotel_item, parent, false);
 
         HotelFlightHolder dataObjectHolder = new HotelFlightHolder(view);
+
+        Log.i("asfasdfa", "HOOOOOO");
+
         return dataObjectHolder;
     }
 
     @Override
     public void onBindViewHolder(HotelFlightHolder holder, int position) {
 
+        Log.i("asfasdfa","entra");
         Uri uri = Uri.parse(mDataset.get(position).getHotelInfo().getImages().get(0));
-
-        View cell = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.horizontal_image_cell, null);
-        ImageView imageView = (ImageView) cell.findViewById(R.id.image);
-
-
         Picasso.with(holder.image.getContext())
                 .load(uri)
-                //.fit()
-                .resize(0, imageView.getLayoutParams().height)
+                .fit()
                         //.placeholder(R.drawable.user_placeholder)
                         //.error(R.drawable.user_placeholder_error)
-                .into(imageView);
-        holder.hotelImagesLineal.addView(cell);
+                .into(holder.image);
 
         departureFlys = (LinearLayout) holder.itemView.findViewById(R.id.departureRelative);
-
+        departureFlys.removeAllViews();
         for (FlyBean fly : mDataset.get(position).getFlyArrival()) {
             View v = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.fly_departure_element, null);
             TextView text = (TextView) v.findViewById(R.id.text);
@@ -107,9 +73,8 @@ public class HotelsFlightsRecyclerViewAdapter extends RecyclerView
             departureFlys.addView(v);
         }
 
-
         arrivalFlys = (LinearLayout) holder.itemView.findViewById(R.id.arrivalRelative);
-
+        arrivalFlys.removeAllViews();
         for (FlyBean fly : mDataset.get(position).getFlyDeparture()) {
             View v = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.fly_arrival_element, null);
             TextView text = (TextView) v.findViewById(R.id.text);
@@ -118,19 +83,37 @@ public class HotelsFlightsRecyclerViewAdapter extends RecyclerView
         }
     }
 
-    public void addItem(PriceInfoBean dataObj, int index) {
-        mDataset.add(dataObj);
-        notifyItemInserted(index);
-    }
-
-    public void deleteItem(int index) {
-        mDataset.remove(index);
-        notifyItemRemoved(index);
+    public void setOnItemClickListener(MyClickListener myClickListener) {
+        HotelsFlightsRecyclerViewAdapter.myClickListener = myClickListener;
     }
 
     @Override
     public int getItemCount() {
         return mDataset.size();
+    }
+
+
+    public static class HotelFlightHolder extends RecyclerView.ViewHolder implements View
+            .OnClickListener {
+        TextView title;
+        TextView shortDescription;
+        TextView price;
+        ImageView image;
+        LinearLayout hotelImagesLineal;
+
+        public HotelFlightHolder(View itemView) {
+            super(itemView);
+            image = (ImageView) itemView.findViewById(R.id.imageView);
+            Log.i(LOG_TAG, "Adding Listener");
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            //myClickListener.onItemClick(getPosition(), v);
+            // Intent intent = new Intent(v.getContext(), HotelFlightActivity.class);
+            myClickListener.onItemClick(getAdapterPosition(), v);
+        }
     }
 
     public interface MyClickListener {

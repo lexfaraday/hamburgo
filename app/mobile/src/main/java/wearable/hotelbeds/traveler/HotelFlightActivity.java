@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -23,7 +24,6 @@ public class HotelFlightActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle mDrawerToggle;
 
-    private RecyclerView mHotelFlightRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private EventInfoBean event;
@@ -44,17 +44,16 @@ public class HotelFlightActivity extends AppCompatActivity {
     }
 
     private void loadR() {
-        mHotelFlightRecyclerView = (RecyclerView) findViewById(R.id.hotelFlightRecyclerView);
+        RecyclerView mHotelFlightRecyclerView = (RecyclerView) findViewById(R.id.hotelFlightRecyclerView);
         mHotelFlightRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(this);
-        mHotelFlightRecyclerView.setLayoutManager(mLayoutManager);
+        // 2. set layoutManger
+        mHotelFlightRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        // 3. An adapter
         event = (EventInfoBean) getIntent().getExtras().getSerializable("event");
-
         mAdapter = new HotelsFlightsRecyclerViewAdapter(PriceUtils.searchPrices(event, null));//TODO Put gps location
         mHotelFlightRecyclerView.setAdapter(mAdapter);
-        RecyclerView.ItemDecoration itemDecoration =
-                new DividerItemDecorator(this, LinearLayoutManager.VERTICAL);
-        mHotelFlightRecyclerView.addItemDecoration(itemDecoration);
+        // 5. set item animator to DefaultAnimator
+        mHotelFlightRecyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
     @Override
