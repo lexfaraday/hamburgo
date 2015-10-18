@@ -6,6 +6,7 @@ import java.util.List;
 
 import wearable.hotelbeds.shared.event.EventInfoBean;
 import wearable.hotelbeds.shared.hotel.HotelInfo;
+import wearable.hotelbeds.shared.visa.VisaBean;
 
 /**
  * Created by Zavierazo on 08/10/2015.
@@ -17,18 +18,20 @@ public class PriceInfoBean implements Serializable {
     private List<FlyBean> flyDeparture;
     private List<FlyBean> flyArrival;
     private EventInfoBean event;
+    private List<VisaBean> visas;
 
     public PriceInfoBean() {
 
     }
 
-    public PriceInfoBean(int id, BigDecimal totalAmount, List<FlyBean> flyDeparture, List<FlyBean> flyArrival, EventInfoBean event, HotelInfo hotelInfo) {
+    public PriceInfoBean(int id, BigDecimal totalAmount, List<FlyBean> flyDeparture, List<FlyBean> flyArrival, EventInfoBean event, HotelInfo hotelInfo, List<VisaBean> visas) {
         this.id = id;
         this.totalAmount = totalAmount;
         this.flyDeparture = flyDeparture;
         this.flyArrival = flyArrival;
         this.event = event;
         this.hotelInfo = hotelInfo;
+        this.visas = visas;
     }
 
 
@@ -78,5 +81,13 @@ public class PriceInfoBean implements Serializable {
 
     public void setEvent(EventInfoBean event) {
         this.event = event;
+    }
+
+    public List<VisaBean> getVisas() {
+        return visas;
+    }
+
+    public void setVisas(List<VisaBean> visas) {
+        this.visas = visas;
     }
 }

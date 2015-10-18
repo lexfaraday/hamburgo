@@ -29,7 +29,6 @@
                 android:layout_below="@+id/toolbar"
                 android:scrollbars="vertical" />
 
-
         </RelativeLayout>
 
 

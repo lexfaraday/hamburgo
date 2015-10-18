@@ -19,6 +19,7 @@ import wearable.hotelbeds.shared.event.EventInfoBean;
 import wearable.hotelbeds.shared.event.EventUtils;
 import wearable.hotelbeds.shared.hotel.HotelInfo;
 import wearable.hotelbeds.shared.hotel.ProviderUtils;
+import wearable.hotelbeds.shared.visa.VisaBean;
 
 /**
  * Created by Zavierazo on 08/10/2015.
@@ -37,17 +38,18 @@ public class PriceUtils {
         List<PriceInfoBean> prices = getFromJSONResponse(FAKE_JSON_RESP);
         //Start Dummy
         if (prices == null || prices.size() == 0) {
+
             try {
-                List<HotelInfo> hotels = ProviderUtils.generateHotels();
-                prices.add(new PriceInfoBean(1, new BigDecimal("653.5"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size()))));
-                prices.add(new PriceInfoBean(2, new BigDecimal("520"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size()))));
-                prices.add(new PriceInfoBean(3, new BigDecimal("465.2"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size()))));
-                prices.add(new PriceInfoBean(4, new BigDecimal("752.5"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size()))));
-                prices.add(new PriceInfoBean(5, new BigDecimal("219.85"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size()))));
-            } catch (Exception e) {
-                Log.e("Traveler", "Error al rellenar dummy " + e.getMessage());
-            }
-        }
+            List<HotelInfo> hotels = ProviderUtils.generateHotels();
+            List<VisaBean> visas = generateVisaDummy();
+            prices.add(new PriceInfoBean(1, new BigDecimal("653.5"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size())), visas));
+            prices.add(new PriceInfoBean(2, new BigDecimal("520"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size())), visas));
+            prices.add(new PriceInfoBean(3, new BigDecimal("465.2"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size())), visas));
+            prices.add(new PriceInfoBean(4, new BigDecimal("752.5"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size())), visas));
+            prices.add(new PriceInfoBean(5, new BigDecimal("219.85"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size())), visas));
+        } catch (Exception e) {
+            Log.e("Traveler", "Error al rellenar dummy " + e.getMessage());
+        }}
         //End Dummy
         return prices;
     }
@@ -78,6 +80,16 @@ public class PriceUtils {
         }
         return flys;
     }
+
+    public static List<VisaBean> generateVisaDummy() {
+            List<VisaBean> visas = new ArrayList<>();
+
+            for (int i = 0; i < 2; i++) {
+                VisaBean visa = new VisaBean(true, "Frankfurt visa", "This visa is a new visa to protect our passengers, please don't forget to but it.!!!");
+                visas.add(visa);
+            }
+            return visas;
+        }
 
     public static ConfirmDataBean confirmBooking(Context context, PriceInfoBean price) {
         ConfirmDataBean confirmData;

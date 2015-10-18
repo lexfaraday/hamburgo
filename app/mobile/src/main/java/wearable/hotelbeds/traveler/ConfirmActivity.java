@@ -28,6 +28,7 @@ import wearable.hotelbeds.shared.price.ConfirmDataBean;
 import wearable.hotelbeds.shared.price.FlyBean;
 import wearable.hotelbeds.shared.price.PriceInfoBean;
 import wearable.hotelbeds.shared.price.PriceUtils;
+import wearable.hotelbeds.shared.visa.VisaBean;
 import wearable.hotelbeds.traveler.nav.MenuUtils;
 
 public class ConfirmActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -122,6 +123,17 @@ public class ConfirmActivity extends AppCompatActivity implements NavigationView
 
             }
 
+
+            List<String> visaPoints = new ArrayList<>();
+            if (priceBean.getVisas() != null && !priceBean.getVisas().isEmpty()) {
+                for (VisaBean visa : priceBean.getVisas()) {
+                    TextView text = (TextView) findViewById(R.id.docinfo);
+                    text.setText(text.getText() + " " + visa.getTypeDocument());
+                    visaPoints.add(visa.getTypeDocument());
+                    visaPoints.add(visa.getDescription());
+                }
+            }
+
             //MoreDetail
             List<String> points = new ArrayList<>();
             points.add(priceBean.getHotelInfo().getName() + " of " + priceBean.getHotelInfo().getStars() + " stars. " + priceBean.getHotelInfo().getCodHab() + " with " + priceBean.getHotelInfo().getReg() + ".");
@@ -139,6 +151,8 @@ public class ConfirmActivity extends AppCompatActivity implements NavigationView
                 addDetailedSection("Event", points);
 
             }
+
+            addDetailedSection("Required Documents", points);
         }
 
         //Menu
