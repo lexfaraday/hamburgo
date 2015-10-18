@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark_grey"
-    app:rectLayout="@layout/rect_activity_main"
-    app:roundLayout="@layout/round_activity_main"
-    tools:context=".MainActivity"
+    app:rectLayout="@layout/rect_activity_qr"
+    app:roundLayout="@layout/round_activity_qr"
+    tools:context=".QrActivity"
     tools:deviceIds="wear"></android.support.wearable.view.WatchViewStub>

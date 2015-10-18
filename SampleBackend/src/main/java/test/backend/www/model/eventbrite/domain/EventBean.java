@@ -7,6 +7,7 @@ public class EventBean {
 	String title;
 	String description;
 	String id;
+	String price;
 	String startDate;
 	String endDate;
 	String capacity;

@@ -75,7 +75,9 @@ public class EventbriteService {
 		eventBean.setCapacity(getJsonValue(jsonObjectEvent, "capacity", null));
 		eventBean.setCurrency(getJsonValue(jsonObjectEvent, "currency", null));
 		eventBean.setImage(getJsonValue(jsonObjectEvent, "logo", "url"));
+		eventBean.setPrice("Free");
 		String venueId = getJsonValue(jsonObjectEvent, "venue_id", null);
+		// String currency = getJsonValue(jsonObjectEvent, "currency", null);
 		if (StringUtils.isNotBlank(venueId)) {
 			eventBean.setVenue(getVenueById(getJsonValue(jsonObjectEvent, "venue_id", null)));
 		}

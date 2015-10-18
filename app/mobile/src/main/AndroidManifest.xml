@@ -8,6 +8,7 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -56,6 +57,9 @@
         <activity
             android:name=".BookingsActivity"
             android:label="@string/title_activity_bookings"></activity>
+        <activity
+            android:name=".WebActivity"
+            android:label="@string/title_activity_web"></activity>
         <activity
             android:name=".HotelFlightActivity"
             android:label="@string/title_activity_hotel_flight"

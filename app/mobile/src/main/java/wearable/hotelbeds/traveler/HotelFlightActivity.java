@@ -50,7 +50,12 @@ public class HotelFlightActivity extends AppCompatActivity {
         mHotelFlightRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         // 3. An adapter
         event = (EventInfoBean) getIntent().getExtras().getSerializable("event");
+<<<<<<< HEAD
         mAdapter = new HotelsFlightsRecyclerViewAdapter(PriceUtils.searchPrices(event, null));//TODO Put gps location
+=======
+
+        mAdapter = new HotelsFlightsRecyclerViewAdapter(PriceUtils.searchPrices(event, null, 1));//TODO Put gps location
+>>>>>>> origin/master
         mHotelFlightRecyclerView.setAdapter(mAdapter);
         // 5. set item animator to DefaultAnimator
         mHotelFlightRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -64,7 +69,7 @@ public class HotelFlightActivity extends AppCompatActivity {
             public void onItemClick(int position, View v) {
                 Intent intent = new Intent(v.getContext(), ConfirmActivity.class);
                 Bundle b = new Bundle();
-                b.putSerializable("price", PriceUtils.searchPrices(EventUtils.obtainAllEvent().get(0), null).get(0));
+                b.putSerializable("price", PriceUtils.searchPrices(EventUtils.obtainAllEvent().get(0), null, 1).get(0));
                 intent.putExtras(b);
                 startActivity(intent);
             }

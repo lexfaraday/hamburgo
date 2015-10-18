@@ -1,5 +1,7 @@
 package wearable.hotelbeds.traveler;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -32,6 +34,7 @@ import wearable.hotelbeds.traveler.nav.MenuUtils;
 public class ConfirmActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private static String TAG = "ConfirmActivity";
+    private static int CONFIRM_ACTIVITY_ID = 0;
 
     private TextView event;
     private TextView price;
@@ -210,8 +213,18 @@ public class ConfirmActivity extends AppCompatActivity implements NavigationView
 
     public void btnConfirmMIS(View v) {
         Log.i(TAG, "Confirmacion MakeItSocial pulsada");
-        ConfirmDataBean confirmBean = PriceUtils.confirmBooking(this, priceBean);
-        showAsConfirmed();
+        Intent intent = new Intent(v.getContext(), WebActivity.class);
+        startActivityForResult(intent, CONFIRM_ACTIVITY_ID);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CONFIRM_ACTIVITY_ID && resultCode == Activity.RESULT_OK) {
+            if (data != null && data.getExtras() != null && data.getExtras().getBoolean("confirmed")) {
+                ConfirmDataBean confirmBean = PriceUtils.confirmBooking(this, priceBean);
+                showAsConfirmed();
+            }
+        }
     }
 
     public void btnConfirmGP(View v) {
@@ -221,6 +234,11 @@ public class ConfirmActivity extends AppCompatActivity implements NavigationView
     }
 
     public void showAsConfirmed() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         buttons.setVisibility(View.GONE);
         qr.setVisibility(View.VISIBLE);
         qr.animate().alpha(1).scaleY(1);

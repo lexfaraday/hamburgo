@@ -1,0 +1,6 @@
+event: {
+  id: 'query', --Search by event id. 
+  latitude: '1123123',
+  longitude: '1123123' ,
+  adultCount: 1
+}

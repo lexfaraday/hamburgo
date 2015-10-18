@@ -1,0 +1,43 @@
+events: [{
+  name: 'World Travel Market 2015',
+  from: '02/11/2015',
+  to: '05/11/2015',
+  price: '150',
+  currency: 'eur',
+  voucher: '/assets/img/qr.jpg'
+}],
+hotel: {
+  checkin: '02/11/2015',
+  checkout: '05/11/2015',
+  name: 'Novotel London ExCeL',
+  category: '4EST',
+  amount:'300',
+  currency: 'eur',
+  cancellationPolicies: [
+    {
+      "amount": "35,370",
+      "from": "25/10/2015"
+    }
+  ],
+  locata:'0000011100'
+},
+flights: {
+  departure: {
+    date: '01/11/2015',
+    hour: '06:00',
+    company: 'EasyJet',
+    destination: 'PMI-LON',
+    amount:'50',
+    currency: 'eur',
+    locata:'1111111'
+  },
+  arrival: {
+    date: '06/11/2015',
+    hour: '20:30',
+    company: 'Ryanair',
+    destination: 'LON-PMI',
+    amount:'45',
+    currency: 'eur',
+    locata:'22222222'
+  }
+}

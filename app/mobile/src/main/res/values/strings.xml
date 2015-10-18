@@ -4,6 +4,7 @@
     <string name="title_activity_confirmation">Hovee - Confirm</string>
     <string name="title_activity_hotel_flight">Hovee - Hotel&amp;Flight</string>
     <string name="title_activity_bookings">Hovee - Bookings</string>
+    <string name="title_activity_web">Hovee - Make It Social</string>
     <string name="nav_item_home">Home</string>
     <string name="nav_item_bookings">Bookings</string>
     <string name="action_search">Search</string>

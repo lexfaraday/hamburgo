@@ -49,7 +49,7 @@ public class GridActivity extends Activity {
     }
 
     private void loadPrices() {
-        List<PriceInfoBean> prices = PriceUtils.searchPrices(event, (Location) getIntent().getExtras().getParcelable("location"));
+        List<PriceInfoBean> prices = PriceUtils.searchPrices(event, (Location) getIntent().getExtras().getParcelable("location"), 1);
         mPages = new ArrayList<SimpleRow>();
         SimpleRow row1 = new SimpleRow();
         for (PriceInfoBean price : prices) {

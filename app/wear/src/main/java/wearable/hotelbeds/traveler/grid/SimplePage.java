@@ -35,13 +35,13 @@ public class SimplePage {
             } else {
                 mPrice = infoBean.getTotalAmount().setScale(2, BigDecimal.ROUND_UP).toString() + " €";
             }
-            mCalendar = PriceUtils.DATE_FORMATER.format(infoBean.getFlyOut()) + " - " + PriceUtils.DATE_FORMATER.format(infoBean.getFlyIn());
-            mHotel = infoBean.getHotelName() + " " + infoBean.getRoomInfo() + " ";
-            for (int i = 0; i < infoBean.getHotelStars(); i++) {
+            mCalendar = PriceUtils.DATE_FORMATER.format(infoBean.getFlyDeparture().get(0).getDeparture()) + " - " + PriceUtils.DATE_FORMATER.format(infoBean.getFlyArrival().get(0).getDeparture());
+            mHotel = infoBean.getHotelInfo().getName() + " " + infoBean.getHotelInfo().getCodHab() + " " + infoBean.getHotelInfo().getReg() + " ";
+            for (int i = 0; i < infoBean.getHotelInfo().getStars(); i++) {
                 mHotel += "*";
             }
-            mFlyOut = infoBean.getFlyOutAerolineName() + " " + PriceUtils.DATE_FORMATER_HOUR.format(infoBean.getFlyOut());
-            mFlyIn = infoBean.getFlyInAerolineName() + " " + PriceUtils.DATE_FORMATER_HOUR.format(infoBean.getFlyIn());
+            mFlyOut = infoBean.getFlyDeparture().get(0).getCompany() + " " + PriceUtils.DATE_FORMATER_HOUR.format(infoBean.getFlyDeparture().get(0).getDeparture());
+            mFlyIn = infoBean.getFlyArrival().get(0).getCompany() + " " + PriceUtils.DATE_FORMATER_HOUR.format(infoBean.getFlyArrival().get(0).getDeparture());
         }
     }
 
