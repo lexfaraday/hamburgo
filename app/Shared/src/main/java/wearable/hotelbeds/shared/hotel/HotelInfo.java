@@ -15,6 +15,10 @@ public class HotelInfo implements Serializable {
     private String codHab;
     private List<String> images;
 
+    public HotelInfo() {
+
+    }
+
     public HotelInfo(String name, BigDecimal price, List<String> images, int stars, String reg, String codHab) {
         this.name = name;
         this.price = price;
