@@ -73,13 +73,12 @@ public class HotelsFlightsRecyclerViewAdapter extends RecyclerView
             departureFlys.addView(v);
         }
 
-        arrivalFlys = (LinearLayout) holder.itemView.findViewById(R.id.arrivalRelative);
-        arrivalFlys.removeAllViews();
+
         for (FlyBean fly : mDataset.get(position).getFlyDeparture()) {
             View v = LayoutInflater.from(holder.itemView.getContext()).inflate(R.layout.fly_arrival_element, null);
             TextView text = (TextView) v.findViewById(R.id.text);
             text.setText(fly.getCompany() + " " + fly.getDepartureAirport() + "-" + fly.getArrivalAirport() + " " + PriceUtils.FORMATER_HOUR.format(fly.getDeparture()));
-            arrivalFlys.addView(v);
+            departureFlys.addView(v);
         }
     }
 

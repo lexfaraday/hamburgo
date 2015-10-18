@@ -165,7 +165,7 @@
 
                             <TextView
                                 android:id="@+id/docinfo"
-                                android:layout_width="220dp"
+                                android:layout_width="180dp"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/flyarrival_div"
                                 android:layout_marginLeft="2dp"
@@ -183,7 +183,7 @@
                                 android:layout_toStartOf="@+id/imageprice"
                                 android:text="20"
                                 android:textColor="@android:color/holo_red_dark"
-                                android:textSize="34sp" />
+                                android:textSize="28sp" />
 
                             <ImageView
                                 android:id="@+id/imageprice"

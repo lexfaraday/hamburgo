@@ -35,8 +35,9 @@ public class PriceUtils {
     public static List<PriceInfoBean> searchPrices(EventInfoBean event, Location location, int adultCount) {
         List<PriceInfoBean> prices = getFromJSONResponse(FAKE_JSON_RESP);
         //Start Dummy
-<<<<<<< HEAD
-        try {
+        if (prices == null || prices.size() == 0) {
+
+            try {
             List<HotelInfo> hotels = ProviderUtils.generateHotels();
             List<VisaBean> visas = generateVisaDummy();
             prices.add(new PriceInfoBean(1, new BigDecimal("653.5"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size())), visas));
@@ -46,20 +47,7 @@ public class PriceUtils {
             prices.add(new PriceInfoBean(5, new BigDecimal("219.85"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size())), visas));
         } catch (Exception e) {
             Log.e("Traveler", "Error al rellenar dummy " + e.getMessage());
-=======
-        if (prices == null || prices.size() == 0) {
-            try {
-                List<HotelInfo> hotels = ProviderUtils.generateHotels();
-                prices.add(new PriceInfoBean(1, new BigDecimal("653.5"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size()))));
-                prices.add(new PriceInfoBean(2, new BigDecimal("520"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size()))));
-                prices.add(new PriceInfoBean(3, new BigDecimal("465.2"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size()))));
-                prices.add(new PriceInfoBean(4, new BigDecimal("752.5"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size()))));
-                prices.add(new PriceInfoBean(5, new BigDecimal("219.85"), generateDummy(), generateDummy(), event, hotels.get(new Random().nextInt(hotels.size()))));
-            } catch (Exception e) {
-                Log.e("Traveler", "Error al rellenar dummy " + e.getMessage());
-            }
->>>>>>> origin/master
-        }
+        }}
         //End Dummy
         return prices;
     }
@@ -92,14 +80,14 @@ public class PriceUtils {
     }
 
     public static List<VisaBean> generateVisaDummy() {
-        List<VisaBean> visas = new ArrayList<>();
+            List<VisaBean> visas = new ArrayList<>();
 
-        for (int i = 0; i<2; i++) {
-            VisaBean visa = new VisaBean(true, "Frankfurt visa", "This visa is a new visa to protect our passengers, please don't forget to but it.!!!");
-            visas.add(visa);
+            for (int i = 0; i < 2; i++) {
+                VisaBean visa = new VisaBean(true, "Frankfurt visa", "This visa is a new visa to protect our passengers, please don't forget to but it.!!!");
+                visas.add(visa);
+            }
+            return visas;
         }
-        return visas;
-    }
 
     public static ConfirmDataBean confirmBooking(Context context, PriceInfoBean price) {
         ConfirmDataBean confirmData;

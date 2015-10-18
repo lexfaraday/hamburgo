@@ -1,9 +1,11 @@
 package wearable.hotelbeds.shared.visa;
 
+import java.io.Serializable;
+
 /**
  * Created by lexfaraday on 18/10/15.
  */
-public class VisaBean {
+public class VisaBean implements Serializable {
     boolean required;
     String typeDocument;
     String description;

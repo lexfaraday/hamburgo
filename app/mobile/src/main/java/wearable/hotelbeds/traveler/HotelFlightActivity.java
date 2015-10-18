@@ -50,12 +50,7 @@ public class HotelFlightActivity extends AppCompatActivity {
         mHotelFlightRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         // 3. An adapter
         event = (EventInfoBean) getIntent().getExtras().getSerializable("event");
-<<<<<<< HEAD
-        mAdapter = new HotelsFlightsRecyclerViewAdapter(PriceUtils.searchPrices(event, null));//TODO Put gps location
-=======
-
         mAdapter = new HotelsFlightsRecyclerViewAdapter(PriceUtils.searchPrices(event, null, 1));//TODO Put gps location
->>>>>>> origin/master
         mHotelFlightRecyclerView.setAdapter(mAdapter);
         // 5. set item animator to DefaultAnimator
         mHotelFlightRecyclerView.setItemAnimator(new DefaultItemAnimator());
