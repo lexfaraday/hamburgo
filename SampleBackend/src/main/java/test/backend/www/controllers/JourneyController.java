@@ -35,6 +35,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 import test.backend.www.model.AirportLocator;
+import test.backend.www.model.FlightJourneyData;
 import test.backend.www.model.FlightOfferData;
 import test.backend.www.model.HotelData;
 import test.backend.www.model.OfferData;
@@ -129,8 +130,8 @@ public class JourneyController {
 		List<Airport> destinationAirportsSita = sitaService.findAirportsByGeoPos(destinationLatitude,
 				destinationLongitude, DEFAULT_MAX);
 
-		FlightOfferData first = null;
-		FlightOfferData second = null;
+		FlightJourneyData first = null;
+		FlightJourneyData second = null;
 
 		SabrePricedItineraries sabrePricedItineraries = null;
 
@@ -170,41 +171,53 @@ public class JourneyController {
 				processItineraries(sabrePricedItineraries);
 			}
 
-			FlightOfferData firstTemp = null;
-			FlightOfferData secondTemp = null;
+			FlightJourneyData firstTemp = null;
+			FlightJourneyData secondTemp = null;
 			for (Airport originDistance : originAirportsSita) {
 				String origin = originDistance.getCode();
 				for (Airport destinationDistance : destinationAirportsSita) {
 					Date fromDate = Date.from(from.atStartOfDay(ZoneId.systemDefault()).toInstant());
 					Date toDate = Date.from(to.atStartOfDay(ZoneId.systemDefault()).toInstant());
-					AirShoppingRS airShoppingRS = iataService.searchFlights(fromDate, toDate, origin,
+					AirShoppingRS goingAirShoppingRS = iataService.searchFlights(fromDate, origin,
 							destinationDistance.getCode());
-					if (airShoppingRS != null && airShoppingRS.getOffersGroup() != null
-							&& airShoppingRS.getOffersGroup().getAirlineOffers() != null
-							&& airShoppingRS.getOffersGroup().getAirlineOffers().size() > 0) {
-						log.info("{}", airShoppingRS);
-						AirlineOffer firstOffer = airShoppingRS.getOffersGroup().getAirlineOffers().get(0)
+					AirShoppingRS comingAirShoppingRS = iataService.searchFlights(toDate, destinationDistance.getCode(),
+							origin);
+					if (goingAirShoppingRS != null && goingAirShoppingRS.getOffersGroup() != null
+							&& goingAirShoppingRS.getOffersGroup().getAirlineOffers() != null
+							&& goingAirShoppingRS.getOffersGroup().getAirlineOffers().size() > 0) {
+						log.info("{}", goingAirShoppingRS);
+						AirlineOffer firstOffer = goingAirShoppingRS.getOffersGroup().getAirlineOffers().get(0)
 								.getAirlineOffer().get(0);
-						firstTemp = getOfferData(firstOffer);
+						FlightOfferData going = getOfferData(
+								goingAirShoppingRS.getOffersGroup().getAirlineOffers().get(0).getAirlineOffer().get(0));
+						FlightOfferData coming = getOfferData(comingAirShoppingRS.getOffersGroup().getAirlineOffers()
+								.get(0).getAirlineOffer().get(0));
+						firstTemp = new FlightJourneyData(going, coming, going.getPrice().add(coming.getPrice()),
+								going.getCurrency());
 						if (firstTemp != null
 								&& (first == null || first.getPrice().compareTo(firstTemp.getPrice()) > 0)) {
 							first = firstTemp;
-
 						}
-						if (airShoppingRS.getOffersGroup().getAirlineOffers().size() > 1) {
-							AirlineOffer secondOffer = airShoppingRS.getOffersGroup().getAirlineOffers().get(1)
-									.getAirlineOffer().get(0);
-							secondTemp = getOfferData(secondOffer);
+						if (goingAirShoppingRS.getOffersGroup().getAirlineOffers().size() > 1) {
+							FlightOfferData goingTwo = getOfferData(goingAirShoppingRS.getOffersGroup()
+									.getAirlineOffers().get(1).getAirlineOffer().get(0));
+							FlightOfferData comingTwo = getOfferData(comingAirShoppingRS.getOffersGroup()
+									.getAirlineOffers().get(1).getAirlineOffer().get(0));
+							secondTemp = new FlightJourneyData(goingTwo, comingTwo,
+									goingTwo.getPrice().add(comingTwo.getPrice()), goingTwo.getCurrency());
 							if (secondTemp != null
 									&& (second == null || second.getPrice().compareTo(secondTemp.getPrice()) > 0)) {
 								second = secondTemp;
 							}
 
-						} else if (airShoppingRS.getOffersGroup().getAirlineOffers().get(0).getAirlineOffer()
+						} else if (goingAirShoppingRS.getOffersGroup().getAirlineOffers().get(0).getAirlineOffer()
 								.size() > 1) {
-							AirlineOffer secondOffer = airShoppingRS.getOffersGroup().getAirlineOffers().get(0)
-									.getAirlineOffer().get(1);
-							secondTemp = getOfferData(secondOffer);
+							FlightOfferData goingTwo = getOfferData(goingAirShoppingRS.getOffersGroup()
+									.getAirlineOffers().get(0).getAirlineOffer().get(1));
+							FlightOfferData comingTwo = getOfferData(comingAirShoppingRS.getOffersGroup()
+									.getAirlineOffers().get(0).getAirlineOffer().get(1));
+							secondTemp = new FlightJourneyData(goingTwo, comingTwo,
+									goingTwo.getPrice().add(comingTwo.getPrice()), goingTwo.getCurrency());
 							if (secondTemp != null
 									&& (second == null || second.getPrice().compareTo(secondTemp.getPrice()) > 0)) {
 								second = secondTemp;
@@ -229,15 +242,22 @@ public class JourneyController {
 					Hotel cheapestHotel = availabilityRS.getHotels().getHotels().get(0);
 					log.info("Cheapest hotel: {}: {}{}", cheapestHotel.getName(), cheapestHotel.getMinRate(),
 							cheapestHotel.getCurrency());
-					result.setHoteldata(new HotelData(cheapestHotel.getName(), cheapestHotel.getMinRate().toString(),
-							cheapestHotel.getCurrency(),
-							DateTimeFormatter.ISO_DATE.format(availabilityRS.getHotels().getCheckIn()),
-							DateTimeFormatter.ISO_DATE.format(availabilityRS.getHotels().getCheckOut()),
-							cheapestHotel.getCategoryName()));
+					result.getHotelDatas()
+							.add(new HotelData(cheapestHotel.getName(), cheapestHotel.getMinRate().toString(),
+									cheapestHotel.getCurrency(),
+									DateTimeFormatter.ISO_DATE.format(availabilityRS.getHotels().getCheckIn()),
+									DateTimeFormatter.ISO_DATE.format(availabilityRS.getHotels().getCheckOut()),
+									cheapestHotel.getCategoryName()));
 					if (availabilityRS.getHotels().getHotels().size() > 1) {
 						Hotel priciestHotel = availabilityRS.getHotels().getHotels().get(1);
 						log.info("Priciest hotel: {}: {}{}", priciestHotel.getName(), priciestHotel.getMaxRate(),
 								priciestHotel.getCurrency());
+						result.getHotelDatas()
+								.add(new HotelData(priciestHotel.getName(), priciestHotel.getMinRate().toString(),
+										priciestHotel.getCurrency(),
+										DateTimeFormatter.ISO_DATE.format(availabilityRS.getHotels().getCheckIn()),
+										DateTimeFormatter.ISO_DATE.format(availabilityRS.getHotels().getCheckOut()),
+										priciestHotel.getCategoryName()));
 					}
 
 				}
@@ -256,26 +276,28 @@ public class JourneyController {
 		OriginDestination originDestination = (OriginDestination) firstOffer.getPricedOffer().getAssociations().get(0)
 				.getApplicableFlight().getOriginDestinationReferences().get(0);
 		Flight carriers = (Flight) originDestination.getFlightReferences().getValue().get(0);
-		ListOfFlightSegmentType listOfFlightSegmentType = (ListOfFlightSegmentType) carriers.getSegmentReferences()
+		ListOfFlightSegmentType goingListOfFlightSegmentType = (ListOfFlightSegmentType) carriers.getSegmentReferences()
 				.getValue().get(0);
-		int duration = listOfFlightSegmentType.getFlightDetail().getFlightDuration().getValue().getHours() * 60
-				+ listOfFlightSegmentType.getFlightDetail().getFlightDuration().getValue().getMinutes();
-		Departure departure = listOfFlightSegmentType.getDeparture();
-		FlightArrivalType arrival = listOfFlightSegmentType.getArrival();
-		String flightID = listOfFlightSegmentType.getMarketingCarrier().getName() + "-"
-				+ listOfFlightSegmentType.getMarketingCarrier().getFlightNumber().getValue();
-		String departureAirport = departure.getAirportCode().getValue();
-		String arrivalAirport = listOfFlightSegmentType.getArrival().getAirportCode().getValue();
+		int duration = goingListOfFlightSegmentType.getFlightDetail().getFlightDuration().getValue().getHours() * 60
+				+ goingListOfFlightSegmentType.getFlightDetail().getFlightDuration().getValue().getMinutes();
+		Departure goingDeparture = goingListOfFlightSegmentType.getDeparture();
+		FlightArrivalType goingArrival = goingListOfFlightSegmentType.getArrival();
+		String flightID = goingListOfFlightSegmentType.getMarketingCarrier().getName() + "-"
+				+ goingListOfFlightSegmentType.getMarketingCarrier().getFlightNumber().getValue();
+		String departureAirport = goingDeparture.getAirportCode().getValue();
+		String arrivalAirport = goingListOfFlightSegmentType.getArrival().getAirportCode().getValue();
 		CurrencyAmountOptType firstPrice = firstOffer.getTotalPrice().getDetailCurrencyPrice().getTotal();
 		FlightOfferData flightOfferData = new FlightOfferData(
-				listOfFlightSegmentType.getMarketingCarrier().getFlightNumber().getValue(),
-				listOfFlightSegmentType.getMarketingCarrier().getName(),
-				firstPrice.getValue().divide(new BigDecimal(100)), firstPrice.getCode(), departureAirport,
-				arrivalAirport, departure.getDate().toGregorianCalendar().getTime(),
-				arrival.getDate().toGregorianCalendar().getTime());
-		log.info("IATA:{}", flightOfferData);
-		log.debug("From {} to {}: Flight {}, duration {}.Price: {}{}", new Object[] { departureAirport, arrivalAirport,
-				flightID, duration, firstPrice.getValue(), firstPrice.getCode() });
+				goingListOfFlightSegmentType.getMarketingCarrier().getFlightNumber().getValue(),
+				goingListOfFlightSegmentType.getMarketingCarrier().getName(), departureAirport, arrivalAirport,
+				goingDeparture.getDate().toGregorianCalendar().getTime(),
+				goingArrival.getDate().toGregorianCalendar().getTime());
+		log.info("IATA going :{}", flightOfferData);
+		log.debug("Going grom {} to {}: Flight {}, duration {}.Price: {}{}", new Object[] { departureAirport,
+				arrivalAirport, flightID, duration, firstPrice.getValue(), firstPrice.getCode() });
+		//
+		flightOfferData.setCurrency(firstPrice.getCode());
+		flightOfferData.setPrice(firstPrice.getValue().divide(new BigDecimal(100)));
 		return flightOfferData;
 	}
 
@@ -285,37 +307,64 @@ public class JourneyController {
 		}
 	}
 
-	private FlightOfferData logItinerary(String name, PricedItinerary pricedItinerary) {
+	private FlightJourneyData logItinerary(String name, PricedItinerary pricedItinerary) {
 		log.info("{} itinerary:{} {}",
 				new Object[] { name, pricedItinerary.getAirItineraryPricingInfo().getItinTotalFare().getTotalFare()
 						.getAmount(),
 				pricedItinerary.getAirItineraryPricingInfo().getItinTotalFare().getTotalFare().getCurrencyCode() });
-		OriginDestinationOption originDestinationOption = pricedItinerary.getAirItinerary()
+		OriginDestinationOption goingOriginDestinationOption = pricedItinerary.getAirItinerary()
 				.getOriginDestinationOptions().getOriginDestinationOptions().get(0);
-		log.info("Total time: {}", originDestinationOption.getElapsedTime());
-		FlightSegment flightSegment = originDestinationOption.getFlightSegments().get(0);
-		log.debug("{}-{}: {}-{}",
-				new Object[] { flightSegment.getMarketingAirline().getCode(), flightSegment.getFlightNumber(),
-						flightSegment.getDepartureAirport().getLocationCode(),
-						flightSegment.getArrivalAirport().getLocationCode() });
-
-		FlightOfferData flightOfferData = new FlightOfferData(flightSegment.getFlightNumber(),
-				flightSegment.getMarketingAirline().getCode(),
-				pricedItinerary.getAirItineraryPricingInfo().getItinTotalFare().getTotalFare().getAmount(),
-				pricedItinerary.getAirItineraryPricingInfo().getItinTotalFare().getTotalFare().getCurrencyCode(),
-				flightSegment.getDepartureAirport().getLocationCode(),
-				flightSegment.getArrivalAirport().getLocationCode(),
-				Date.from(
-						LocalDateTime.parse(flightSegment.getDepartureDateTime(), DateTimeFormatter.ISO_LOCAL_DATE_TIME)
-								.atOffset(ZoneOffset
-										.ofHours(Integer.parseInt(flightSegment.getDepartureTimeZone().getGmtOffset())))
+		FlightSegment goingFlightSegment = goingOriginDestinationOption.getFlightSegments().get(0);
+		log.info("Total time going: {}", goingOriginDestinationOption.getElapsedTime());
+		log.debug("Going: {}-{}: {}-{}",
+				new Object[] { goingFlightSegment.getMarketingAirline().getCode(), goingFlightSegment.getFlightNumber(),
+						goingFlightSegment.getDepartureAirport().getLocationCode(),
+						goingFlightSegment.getArrivalAirport().getLocationCode() });
+		FlightOfferData goingFlightOfferData = new FlightOfferData(goingFlightSegment.getFlightNumber(),
+				goingFlightSegment.getMarketingAirline().getCode(),
+				goingFlightSegment.getDepartureAirport().getLocationCode(),
+				goingFlightSegment.getArrivalAirport().getLocationCode(),
+				Date.from(LocalDateTime
+						.parse(goingFlightSegment.getDepartureDateTime(), DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+						.atOffset(ZoneOffset
+								.ofHours(Integer.parseInt(goingFlightSegment.getDepartureTimeZone().getGmtOffset())))
 						.toInstant()),
-				Date.from(LocalDateTime.parse(flightSegment.getArrivalDateTime(), DateTimeFormatter.ISO_LOCAL_DATE_TIME)
-						.atOffset(
-								ZoneOffset.ofHours(Integer.parseInt(flightSegment.getArrivalTimeZone().getGmtOffset())))
+				Date.from(LocalDateTime
+						.parse(goingFlightSegment.getArrivalDateTime(), DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+						.atOffset(ZoneOffset
+								.ofHours(Integer.parseInt(goingFlightSegment.getArrivalTimeZone().getGmtOffset())))
 						.toInstant()));
-		log.info("Sabre: {}", flightOfferData);
-		return flightOfferData;
+
+		OriginDestinationOption comingOriginDestinationOption = pricedItinerary.getAirItinerary()
+				.getOriginDestinationOptions().getOriginDestinationOptions().get(1);
+		FlightSegment comingFlightSegment = comingOriginDestinationOption.getFlightSegments().get(0);
+		log.info("Total time coming: {}", comingOriginDestinationOption.getElapsedTime());
+		log.debug("Coming: {}-{}: {}-{}",
+				new Object[] { comingFlightSegment.getMarketingAirline().getCode(),
+						comingFlightSegment.getFlightNumber(),
+						comingFlightSegment.getDepartureAirport().getLocationCode(),
+						comingFlightSegment.getArrivalAirport().getLocationCode() });
+
+		FlightOfferData comingFlightOfferData = new FlightOfferData(comingFlightSegment.getFlightNumber(),
+				comingFlightSegment.getMarketingAirline().getCode(),
+				comingFlightSegment.getDepartureAirport().getLocationCode(),
+				comingFlightSegment.getArrivalAirport().getLocationCode(),
+				Date.from(LocalDateTime
+						.parse(comingFlightSegment.getDepartureDateTime(), DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+						.atOffset(ZoneOffset
+								.ofHours(Integer.parseInt(comingFlightSegment.getDepartureTimeZone().getGmtOffset())))
+						.toInstant()),
+				Date.from(LocalDateTime
+						.parse(comingFlightSegment.getArrivalDateTime(), DateTimeFormatter.ISO_LOCAL_DATE_TIME)
+						.atOffset(ZoneOffset
+								.ofHours(Integer.parseInt(comingFlightSegment.getArrivalTimeZone().getGmtOffset())))
+						.toInstant()));
+
+		FlightJourneyData flightJourneyData = new FlightJourneyData(goingFlightOfferData, comingFlightOfferData,
+				pricedItinerary.getAirItineraryPricingInfo().getItinTotalFare().getTotalFare().getAmount(),
+				pricedItinerary.getAirItineraryPricingInfo().getItinTotalFare().getTotalFare().getCurrencyCode());
+		log.info("Sabre: {}", flightJourneyData);
+		return flightJourneyData;
 
 	}
 }

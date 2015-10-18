@@ -1,31 +1,66 @@
 {
   "flights" : [ {
-    "flightNumber" : "5378",
-    "airline" : "IB",
+    "going" : {
+      "flightNumber" : "5378",
+      "airline" : "IB",
+      "departureAirport" : "FRA",
+      "arrivalAirport" : "BCN",
+      "arrival" : "2015-11-10T09:15:00.000+0000",
+      "departure" : "2015-11-10T11:20:00.000+0000",
+      "price" : null,
+      "currency" : null
+    },
+    "coming" : {
+      "flightNumber" : "5380",
+      "airline" : "IB",
+      "departureAirport" : "BCN",
+      "arrivalAirport" : "FRA",
+      "arrival" : "2015-11-12T16:10:00.000+0000",
+      "departure" : "2015-11-12T18:35:00.000+0000",
+      "price" : null,
+      "currency" : null
+    },
     "price" : 85.85,
-    "currency" : "EUR",
-    "departureAirport" : "FRA",
-    "arrivalAirport" : "BCN",
-    "arrival" : "2015-11-10T09:15:00.000+0000",
-    "departure" : "2015-11-10T11:20:00.000+0000"
+    "currency" : "EUR"
   }, {
-    "flightNumber" : "1124",
-    "airline" : "Kronos Air",
-    "price" : 1234.16,
-    "currency" : "EUR",
-    "departureAirport" : "FRA",
-    "arrivalAirport" : "BCN",
-    "arrival" : "2015-11-09T23:00:00.000+0000",
-    "departure" : "2015-11-09T23:00:00.000+0000"
+    "going" : {
+      "flightNumber" : "1124",
+      "airline" : "Kronos Air",
+      "departureAirport" : "FRA",
+      "arrivalAirport" : "BCN",
+      "arrival" : "2015-11-09T23:00:00.000+0000",
+      "departure" : "2015-11-09T23:00:00.000+0000",
+      "price" : 1234.16,
+      "currency" : "EUR"
+    },
+    "coming" : {
+      "flightNumber" : "1125",
+      "airline" : "Kronos Air",
+      "departureAirport" : "BCN",
+      "arrivalAirport" : "FRA",
+      "arrival" : "2015-11-11T23:00:00.000+0000",
+      "departure" : "2015-11-11T23:00:00.000+0000",
+      "price" : 1103.16,
+      "currency" : "EUR"
+    },
+    "price" : 2337.32,
+    "currency" : "EUR"
   } ],
-  "hoteldata" : {
+  "hotelDatas" : [ {
     "name" : "Ramblanova",
     "amount" : "154.000",
     "currency" : "EUR",
     "checkin" : "2015-11-10",
     "checkout" : "2015-11-12",
     "category" : "APARTMENT 1ST CATEGORY"
-  },
+  }, {
+    "name" : "Holiday Inn Express Bcn 22@",
+    "amount" : "123.080",
+    "currency" : "EUR",
+    "checkin" : "2015-11-10",
+    "checkout" : "2015-11-12",
+    "category" : "3 STARS"
+  } ],
   "event" : {
     "title" : "November Happy Hour",
     "description" : " \nNovember Happy Hour  \nWednesday, November 11, 2015, 20:00, Hilton Barcelona Hotel, Avinguda Diagonal, 589-591   \nAre you interested in networking in the English language community? Would you like to meet the ASB Board, find out what's going on in the English speaking community or get the latest information on all the new events the ASB is planning? Then come to our monthly Happy Hour. All are welcome! \nASB Members: FREE ASB Friends: FREE \nRegister to Win  \nWe'll have anther door prize this month and all you have to do to be eligible to win is: \n1) Register for the event by 16:00, November 11th and your name will automatically be added to the drawing. \n2) Show up - because if your name is drawn and you're not there, then you can't win!  \nWin a Prize! \nHow? Just register & show up. Yep, it's that easy. \nWe look forward to seeing you there! \n  \nThe American Society of Barcelona www.amersoc.com \ntel: 93.368.4689  \n     \n__________________________________________________________________________  \nProud Partners with: \n \n  \n  \n  \n  \n   \n  \n  \n",

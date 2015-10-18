@@ -9,9 +9,9 @@ import test.backend.www.model.eventbrite.domain.EventBean;
 @Data
 public class OfferData {
 
-	List<FlightOfferData> flights = new ArrayList<>();
+	List<FlightJourneyData> flights = new ArrayList<>();
 
-	HotelData hoteldata;
+	List<HotelData> hotelDatas = new ArrayList<>();
 
 	EventBean event;
 

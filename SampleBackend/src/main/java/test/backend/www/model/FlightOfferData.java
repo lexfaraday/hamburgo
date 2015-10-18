@@ -9,10 +9,12 @@ import lombok.Data;
 public class FlightOfferData {
 	private final String flightNumber;
 	private final String airline;
-	private final BigDecimal price;
-	private final String currency;
 	private final String departureAirport;
 	private final String arrivalAirport;
 	private final Date arrival;
 	private final Date departure;
+
+	private BigDecimal price;
+	private String currency;
+
 }

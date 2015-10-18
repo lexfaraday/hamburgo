@@ -19,8 +19,7 @@ public class IataService {
 		client = new NdcClient(baseUrl, key);
 	}
 
-	public AirShoppingRS searchFlights(Date depDate, Date arrDate, String origin, String destination)
-			throws ParseException {
+	public AirShoppingRS searchFlights(Date depDate, String origin, String destination) throws ParseException {
 
 		AirShoppingRQBuilder builder = new AirShoppingRQBuilder();
 
